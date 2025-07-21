@@ -5646,6 +5646,45 @@ label GIFT_1:
                     NHS "Let's see what else there is."
 
                     jump giftshop
+
+        label gift_LWJgd:
+
+            if seen_LWJgd == False:
+
+                $ seen_LWJgd = True
+
+                WWX "Is this a textbook? 'The Definitive Guide to the Anatomy, Behaviour, and Habitat Use of Leporidae'."
+
+                NHS "What are Lepeordi...Leperidi...those? Some kind of yao?"
+
+                JC "No idea. There's no diagrams or illustrations or anything."
+
+                WWX "{i}'Leporids ferment fiber in the cecum and then expel the contents as cecotropes, which are reingested. The cecotropes are then absorbed in the small intestine to utilize the nutrients. The dental formula of leporids is—'{/i}"
+
+                NHS "Noooo, stop before I fall asleep, Wei-xiong."
+
+                JC "At least you could use it as a pillow if you fall asleep reading it, it's thick enough..."
+
+                WWX "You could also cut a hole in the pages and hide a {i}different{/i} book in it, it's thick enough for that too!"
+
+                JC "Why the hell would anyone do that!"
+
+                NHS "Ohhhhh, you could! Hmm..."
+            
+        NHS "So, Jiang-xiong, do you want to buy The Definitive Guide to the Anatomy, Behaviour, and Habitat Use of Leporidae?"
+
+        menu:
+            "Yes":
+
+                $ giftbought = "LWJgd"
+
+                jump giftbought
+
+            "No":
+
+                NHS "Let's see what else there is."
+
+                jump giftshop
         
         label giftbought:
 
@@ -6018,6 +6057,41 @@ label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
 
         show LWJ right angy
         hide LWJ with moveoutleft
+    
+    elif giftbought == "LWJgd": 
+
+        $ wangxian += 1
+
+        show WWX talk
+
+        WWX "It's a book! You like books, right?"
+
+        LWJ "...Mn. The Definitive Guide to the Anatomy, Behaviour, and Habitat Use of Leporidae...?"
+        
+        LWJ "..."
+
+        LWJ "Ah."
+
+        show WWX grin
+
+        WWX "Yeah, it's a book about bunnies!"
+        
+        show WWX cheeky
+        
+        WWX "Except written in the most boring, stuffy, Lan way possible. Which I figure makes it perfect for you!"
+
+        LWJ "Hmm."
+
+        show WWX talk:
+            ease 0.3 xoffset -100
+
+        WWX "You like it, don't you?"
+
+        LWJ "..."
+
+        show WWX grin
+
+        WWX "You do! I knew you would, you like my present sooooo much! Is it 'cause of the bunnies, or 'cause it's the most boring textbook I've ever read? I bet it's both, it takes a real talented writer to make even bunnies boring, you know, and..."        
 
     else:
         LWJ "..."
@@ -6027,9 +6101,9 @@ label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
         show LWJ right at offscreenleft
         with move
 
-    show WWX grin
+        show WWX grin
 
-    WWX "Awww, hate to see you leave, love to watch you go!"
+        WWX "Awww, hate to see you leave, love to watch you go!"
 
     jump WBA_end
 
