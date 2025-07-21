@@ -268,6 +268,9 @@ label start_real:
     menu:
         "Just admit you want it to be you.":
             $ wangxian += 1
+
+            ## maybe add a sangcheng point here and a chengxian point with the other choice to introduce help mode?
+
             show JC angy
 
             JC "Ugh, Lan Zhan Lan Zhan Lan Zhan...Why are you always talking about him!"
@@ -3191,47 +3194,28 @@ label WBA_start:
     hide bar
     with Dissolve(0.5)
 
-    show WQ right at right
     show JC left at left
     show WWX left talk at center
-    
-    WWX "You sure you really want to come with us, Wen-guniang?"
-
-    show WQ talk
-
-    WQ "I am. I'm sure it will be educational."
-
-    WWX "Not sure why you need an education in eradicating water ghouls. Does Qishan even have any lakes?"
-
-    show WQ hmm
-
-    WQ "It has some."
-
-    show JC talk
-
-    JC "Let's not get ahead of ourselves. We don't even know if Zewu-jun will let us go along."
-
-    show WWX grin
-
-    WWX "I'm sure he can be convinced."
-
-    scene bg gates
-    with cutfast
 
     show LWJ left at left
     show LXC left at midleft
     with None
-    
+   
     WWX "There he is! Zewu-jun! Wangji-xiong!"
-    
-    show WQ right at right
+   
     show WWX right at center
     show JC right at midright
     with moveinright
 
     show LXC talk
 
-    LXC "Wei-gongzi. And Jiang-gongzi, Wen-guniang."
+    if xicheng < 3:
+        LXC "Wei-gongzi. And Jiang-gongzi."
+
+    else:
+        show LXC smile
+        LXC "Jiang-gongzi. Wei-gongzi."
+        show LXC -smile
 
     show WWX talk
 
@@ -3259,7 +3243,101 @@ label WBA_start:
 
     LWJ "..."
 
+    show WQ right at right
+    with moveinright
+
+    WWX "Look, Jiang Cheng! It's Wen-guniang! Should we invite her too?"
+
+    menu:
+        "I'll go.":
+            JC "Let me handle it. You'll just embarrass our sect."
+
+            WWX "Just trying to make you look good in comparison, sShidi!"
+
+            show JC angy
+
+            JC "Like I need your help!"
+
+            show JC -angy
+
+            JC "Um, Wen-guniang. Hello."
+
+            show WWX smile
+
+            JC "How are your—we're going to—the water ghouls are—the weather is—studies going?"
+
+            WWX "Yeah, you're right. You definitely don't need my help at all!"
+
+            show JC rage
+
+            JC "Shut up, Wei Wuxian!"
+
+            show JC -rage
+
+            WWX "It's okay. I've got you!"
+
+        "Go ask her yourself.":
+
+            JC "If you want Wen-guniang to join so badly, ask her yourself!"
+
+            WWX "I was just trying to wingman you, but.."
+
+            show WWX grin
+
+            WWX "If you insist!"
+
+            WWX "Hey! Hey, Wen-guniang! Hey! Want to come catch water ghouls with us??"
+
+            JC "You are embarrassing to know."
+
+            WWX "At least you admit to knowing me!"
+
+        "Pass.":
+
+            JC "Who wants her to come anyway."
+
+            WWX "Aww, Jiang Cheng! I think Wen-guniang would really help out."
+
+            JC "You just want a bigger crowd to show off to."
+
+            show WWX smile
+
+            WWX "Hey, it's not my fault that I'm so charismatic and charming and everyone wants to be my friend!"
+
+            JC "Ugh."
+
+    WWX "Hey! Hey, Wen-guniang! Hey! Want to come catch water ghouls with us??"
+
+    JC "You are embarrassing to know."
+
+    WWX "At least you admit to knowing me!"
+
+    menu:
+
+        "You don't need to come.":
+
+            JC "It's just a night hunt, Wen Qing. It's not that serious."
+            $ chengqing -= 1
+           
+        "We need all of the help we can get.":
+
+            JC "With this joker dragging us down, we need all of the help we can get."
+ 
+        "We could use a doctor.":
+   
+            JC "I think we'd all feel better having a doctor with us, just in case."
+            $ chengqing += 1
+
+        "You could visit the apothecary while we're in town.":
+
+            JC "I heard that there's an apothecary in Caiyi. You could visit while we're there if you're interested."
+            $ chengqing += 1
+            $ WQApothecary_flag = True
+
+
     show WQ talk
+
+    WQ "I see."
 
     WQ "Zewu-jun, if I may, I too would like to join you all."
 
@@ -3310,6 +3388,7 @@ label WBA_start:
 
             $ chengqing += 1
 
+
         "Don't speak up":
             LXC "As I understand, Wen-guniang does not cultivate with the sword. Perhaps it will be safer if you stay behind."
 
@@ -3328,6 +3407,33 @@ label WBA_start:
             LXC "Hm. Very well, then perhaps Wen-guniang might join us as well."
 
             show WQ smile
+
+            WQ "Thank you, Zewu-jun."
+
+
+        "Say she shouldn't come":
+
+            show JC hands
+            show WQ angy
+
+            JC "Zewu-jun, are you sure that it's wise to let the enemy see our battle strategies?"
+            $ chengqing -= 1
+
+            LXC "Wen-guniang is an honored guest of the Lan Sect."
+
+            show WQ hmm
+
+            show JC angy
+
+            LXC "And Gusu Lan has nothing to hide."
+
+            WWX "Zewu-jun, Wen-guniang is a skilled healer. There might be some villagers in the area who could have been injured by the ghouls."
+
+            WWX "She might be able to provide medical aid to them."  
+     
+            show LXC -frown
+
+            LXC "Hm. Very well, then perhaps Wen-guniang might join us as well."
 
             WQ "Thank you, Zewu-jun."
 
