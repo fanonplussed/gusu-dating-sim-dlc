@@ -6957,6 +6957,15 @@ label CSC_1:
     stop music fadeout 1.0
     play music "audio/CSC_1.mp3" fadein 1.0
 
+    scene bg indoors
+    with timepass2
+
+    stop music fadeout 1.0
+    play music "audio/CSC_1.mp3" fadein 1.0
+
+    let "{vspace=260}It is, of course, entirely possible for Wei Wuxian to get into more trouble, and so the next day finds these four young masters hauled up for punishment. Thankfully, they have the day after the punishment set aside for rest and reflection."
+
+    scene bg indoors
     show bar
     show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Five days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
