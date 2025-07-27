@@ -5947,8 +5947,6 @@ label GIFT_1:
 
                 SHOPK "A rare find, young masters!"
 
-                show WWX grin
-
                 WWX "Wow, there are people in Gusu actually trying new things? No one tell Old Man Lan!"
            
             NHS "So, Jiang-xiong, do you want to buy this tattered old journal?"
