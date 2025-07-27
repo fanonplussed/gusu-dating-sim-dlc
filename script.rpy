@@ -1,6 +1,6 @@
 label start: ## this bit exists to help with playtesting
 
-    jump start_real
+    ## jump start_real
     ## we can skip directly to start_real when shipping the game, or comment it out for playtesting
 
     "This let's us quickly skip to a specific point in the story"
@@ -57,7 +57,16 @@ label start: ## this bit exists to help with playtesting
                     jump WBA_2
                 
                 "WBA_3":
-                    jump WBA_3  
+                    jump WBA_3
+
+                "LET_1":
+                    jump LET_1
+
+                "LET_2":
+                    jump LET_2
+
+                "GIFT_1":
+                    jump GIFT_1
                 
                 "WBA_end":
                     jump WBA_end
@@ -95,6 +104,9 @@ label start: ## this bit exists to help with playtesting
                 "LT":
                     jump LT
                 
+                "LT_canon":
+                    jump LT_canon
+                
                 "LT_NHS":
                     jump LT_NHS
                 
@@ -107,8 +119,26 @@ label start: ## this bit exists to help with playtesting
                 "LT_MY":
                     jump LT_MY
                 
-                "LT_canon":
-                    jump LT_canon
+                "LT_NMJ":
+                    jump LT_NMJ
+        
+        "Help mode?":
+            menu:
+                "help mode on":
+
+                    $ helpmode = True
+
+                    "Help mode turned on"
+
+                    jump start
+
+                "help mode off":
+
+                    $ helpmode = False
+
+                    "Help mode turned off"
+
+                    jump start
     
     jump end
 
@@ -1002,9 +1032,9 @@ label MY_1:
     hide bar
     with Dissolve(0.5)
 
-    show WWX left at left
-    show NHS right at midleft
-    show JC right at center
+    show JC right at midright
+    show WWX left at midleft
+    show NHS left at left
 
     show WWX talk
 
@@ -1022,13 +1052,15 @@ label MY_1:
 
     NHS "Hah, Wei-xiong, I can't believe you dared to—"
 
+    MY "Er-gongzi, I've been waiting for you."
+
     show MY right at right
     with moveinright
 
-    MY "Er-gongzi, I've been waiting for you."
+    show JC left at center
+    with move
 
-    show JC left -talk
-    show NHS left talkfan:
+    show NHS left fan:
         ease 0.1 yoffset -50
         ease 0.1 yoffset 0
 
@@ -1101,7 +1133,7 @@ label MY_1:
 
     WWX "Oh, hey, I think I've got some of Nie-xiong's books with me. He probably needs them if he wants to study. Right, Nie-xiong?"
 
-    show NHS right pout
+    show NHS pout
 
     NHS "What book—"
 
@@ -1114,6 +1146,7 @@ label MY_1:
     WWX "Yeah, from my rooms! We'll just head over to my rooms to get them. We'll come back right after!"
 
     show MY talk
+    show WWX -grin
 
     MY "If you'll permit me to accompany you both—"
 
@@ -1210,7 +1243,7 @@ label MY_1:
 
             hide MY
             hide NHS
-            with moveoutright
+            with moveoutleft
 
             NHS "{size=-9}Nooooooooooooo...."
     
@@ -1242,13 +1275,15 @@ label WQ_1:
 
     WWX "Didn't you hear Old Man Lan? He said no one's allowed to enter the back hills without good reason...and our reasons are excellent!"
 
+    WWX "We're going fishing!"
+
     show JC smile
 
-    JC "Hah, I don't think he's going to accept 'trying to catch fish for dinner so we don't die of a meat deficiency' as a good reason."
+    JC "Hah, I don't think he's going to accept \"trying to catch fish for dinner so we don't die of a meat deficiency\" as a good reason."
 
     show NHS talk
 
-    NHS "Don't worry, Jiang-xiong, no one else comes here anyway! It'll be fine as long as we don't get caught! It—"
+    NHS "It'll be fine as long as we don't get caught! It—"
 
     show NHS left fan
 
@@ -1291,20 +1326,32 @@ label WQ_1:
 
     show JC -talk
 
-    JC "Eh, his form could use some work."
+    menu:
 
-    show NHS right pout
+        "Not bad":
 
-    NHS "You say that about everyone!"
+            JC "Yeah, he’s pretty good now when he’s shooting at rocks.  The real test is how he’ll do against something that will fight back."
+            
+        "The Wen sect’s archery skills are notoriously bad":
 
-    show JC hands
+            show JC hands
 
-    JC "That's because it's true! The Jiang sect weapons training is clearly superior. Right, Wei Wuxian?"
+            JC "The Jiang sect weapons training is clearly superior. Right, Wei Wuxian?"
 
-    show WWX grin
+            $ chengxian += 1
 
-    WWX "Totally! Our Jiang sect forms are better for sure!"
+            show WWX grin
 
+            WWX "Totally! Our Jiang sect forms are better for sure!"
+
+        "Maybe in 100 years":
+
+            JC "Eh, his form could use some work."
+
+            show NHS right pout
+
+            NHS "You say that about everyone!"
+ 
     show WWX left talk
 
     WWX "I'm gonna go show Wen Ning how it's done!"
@@ -1324,7 +1371,7 @@ label WQ_1:
     NHS "I didn't escape to the back hills for more weapons training. Let's leave them to it."
 
     menu:
-        "Leave them to it":
+        "Leave with Nie Huaisang":
             $ sangcheng += 1
 
             show JC talk
@@ -1334,6 +1381,17 @@ label WQ_1:
             show NHS smile
 
             NHS "Yes! Jiang-xiong, you're sure you can catch enough fish for the both of us, right?"
+
+            menu: ## dialogue
+
+                "Of course!":
+                    pass
+
+                "Attempt the impossible!":
+                    pass
+
+                "Just watch me break all of these fishes' legs!":
+                    pass
 
             JC "Damn right—"
             
@@ -1355,6 +1413,19 @@ label WQ_1:
 
             NHS "But if I don't manage to catch any, then..."
 
+            menu: ## dialogue
+            
+                "Lucky for you, I'm the Grandmaster of River Fishing!":
+                    pass
+
+                "If it's Nie-xiong asking...":
+                    pass
+
+                "If I have to":
+                    pass
+
+            show JC blush
+
             JC "Fine, fine, I'll make sure to catch enough for you too."
 
             show NHS smile
@@ -1367,7 +1438,7 @@ label WQ_1:
             show NHS right -smile at midleft
             with move
 
-            show JC -smile
+            show JC -blush
 
             JC "Right, let's find a good stream for—"
 
@@ -1411,7 +1482,7 @@ label WQ_1:
 
         "Join Wei Wuxian and Wen Ning":
 
-            show JC angy
+            show JC hands
 
             JC "Argh, I can't just—"
 
@@ -1424,10 +1495,10 @@ label WQ_1:
     show WWX left at midright
     with None
 
-    show JC left angy at midleft
+    show JC left angy at midleft zorder 3
     with moveinleft
 
-    JC "Wei Wuxian, what the hell are you doing?"
+    JC "Wei Wuxian!"
 
     show WN:
         ease 0.1 yoffset -50
@@ -1437,277 +1508,132 @@ label WQ_1:
 
     WN "Jiang...Jiang-gongzi! Greet...Greetings..."
 
-    show WWX grin
+    show NHS left pout at left
+    with moveinleft
 
-    WWX "Correcting Wen Ning's form, of course!"
-
-    show JC hands
-
-    JC "By standing behind him and moving him like a puppet? You think he's a doll for you to play with???"
-
-    WN "I...I don't mind, Jiang-gongzi, I..."
-
-    show WWX talk
-
-    WWX "I've told you before, this is the easiest way to show people the correct posture—"
-
-    show JC angy
-
-    JC "And I've told {i}you{/i} before, the easiest way isn't always the best! Whenever you teach things your way, the disciples go back to doing it wrong again after you leave!"
-
-    WN "Oh! Um...I..."
+    NHS "{size=-9}...run…so…fast, Jiang-xiong!{/size} Wait up!"
 
     show WWX grin
-
-    WWX "Ah, Jiang Cheng, you're just jealous that the disciples like learning from me best!"
-
-    show JC rage
-
-    JC "I am not!"
-
-    show JC angy
-
-    JC "They just like slacking off, and you always let them!"
-
-    show WWX -grin
-
-    WWX "Whereas you make everyone do the same drill over and over until they're basically sleepwalking."
-
-    WN "Er, maybe..."
-
-    show JC hands
-
-    JC "Yes, because that's how you make sure they know the fundamentals, instead of making them do weird party tricks—"
-
-    show WWX talk
-
-    WWX "It's not party tricks, it's special training! If all they can do are drills, when they face a real opponent, they'll—"
-    
-    show NHS left at left
-    with moveinleft 
-
-    NHS "Ai, Jiang-xiong, Wei-xiong, I can see you're both having fun, but you're going to scare all the fish away."
-
-    show JC right:
-        ease 0.1 yoffset -50
-        ease 0.1 yoffset 0
-
-    show WWX:
-        ease 0.1 yoffset -50
-        ease 0.1 yoffset 0
 
     WWX "Oh, Nie-xiong! Are you here to teach Wen Ning too?"
 
     show NHS fan
 
     NHS "Who, me? Oh no, no, I can't possibly teach anyone anything."
+    
+    show WQ left hmm at left
+    with moveinleft
 
-    show NHS talkfan
+    show NHS right:
+        ease 0.1 xoffset 800
 
-    NHS "It sounds like you both are great teachers though! And I think if you can't decide who's better, you should let your student decide!"
+    show WWX right:
+        ease 0.1 xoffset -300
 
-    show JC talk
+    show JC right:
+        ease 0.1 xoffset 50
 
-    JC "What student—"
+    WQ "What is going on here???"
 
-    show NHS smile
+    $ WQ_1_flag = True
 
-    NHS "Wen-gongzi, of course!"
+    show WN smile
 
-    show WN:
-        ease 0.1 yoffset -50
-        ease 0.1 yoffset 0
+    WN "Jie!"
 
-    WN "Um!!!"
+    show JC blush
 
-    show WWX left grin
+    JC "Oh, Wen-guniang! Greetings!"
 
-    WWX "Makes sense! So, Wen Ning, do you wanna learn archery from me, the fun and creative teacher, or from that boring drill master over there?"
+    show WWX grin
 
-    show WN:
-        ease 0.5 xoffset 50
+    WWX "Wen-guniang, hi! We're teaching your brother archery!"
 
-    WN "Ummmmmmmmmmmm..."
+    WQ "A-Ning already knows how to use a bow."
 
-    show JC left hands
+    WN "Jie, Jiang-gongzi and Wei-gongzi said they'd teach me how to shoot better!"
 
-    JC "Hang on, I didn't agree to teach anyone anything!"
+    show WQ -hmm
 
-    show WWX right
+    WQ "Hmm."
 
-    WWX "Aha, so you admit your way of teaching is inferior—"
+    show WQ sustalk
+
+    WQ "I don't think our sect leader would appreciate you teaching him a different sect's technique." 
+
+    show WN -smile
+
+    WN "Jie!"
 
     menu:
-        "Prove your way of teaching is better":
-            $ chengqing += 2
-            $ WQ_1_flag = True
+        "Wen Ning has potential!":
 
-            show JC rage
+            JC "Wen Ning has a lot of potential, but even he can't improve without some help." 
 
-            JC "It is not inferior!"
+            $ chengqing += 1
 
-            show JC angy
+            WQ "He has all of the help he needs from his family.  Good day, Jiang-gongzi.  Nie-gongzi."
 
-            JC "Fundamentals are important, damn it, even if {i}you{/i} want to pretend they don't matter."
+        "Can't we all get along?":
 
-            show JC at midright
-            with move
+            JC "You don't think that all of the sects can learn something from each other?  Isn't that the point of these lectures– to foster good relations between us?"
 
-            show WWX left:
-                ease 0.1 xoffset -400
+            $ chengqing += 1
 
-            JC "Fine! I'll show you!"
+            WQ "The Wens weren't even invited to participate in these lectures.  Don't pretend like you want to play nice.  Stay away from my brother."
 
-            WN "Um, I...I think fun..."
+        "But Wen Ning wants to learn from us.":
 
-            show WWX talk
+            JC "Don't you think you're interfering a little too much?  The kid wants to learn from us."
 
-            WWX "Oh, you want the fun tutor? Hah, I knew—"
+            WQ "Don't presume to tell me what is best for my family, Jiang-gongzi.  We can take care of ourselves."
 
-            WN "I think fun...fundamentals are important too. Thank...thank you, Jiang-gongzi."
+            show NHS fan
 
-            JC "Damn right they are. Now show me how you hold your bow when—"
+            NHS "That much is apparent."
 
-            show WQ left hmm at left
-            with moveinleft
-
-            show NHS right:
-                ease 0.1 xoffset 300
-
-            show WWX right:
-                ease 0.1 xoffset -300
-
-            show JC right:
-                ease 0.1 xoffset 50
-
-            WQ "What is going on here???"
-
-            show WN smile
-
-            WN "Jie!"
-
-            show JC blush
-
-            JC "Oh, Wen-guniang! Greetings!"
-
-            show WWX grin
-
-            WWX "Wen-guniang, hi! We're teaching your brother archery!"
-
-            WQ "Is that what all the commotion was? Teaching?"
-
-            WN "Jie, Jiang-gongzi and Wei-gongzi said they'd teach me how to shoot better!"
-
-            show WQ -hmm
-
-            WQ "Hmm."
-
-            show WQ smile
-
-            WQ "I see. Thank you both for your generosity. However, the hour grows late, and I think we should both be heading back to the dorms."
-
-            show WQ talk
-
-            WQ "Let's go, A-Ning"
+            WQ "Come on, A-Ning.  Let's go."
 
             show WQ right
             hide WQ with moveoutleft
 
-            WN "Oh. Oh, okay. Good...Goodbye, Jiang-gongzi, Wei-gongzi, Nie-gongzi."
-
             hide WN with moveoutleft
 
-            show WWX talk
+            WWX "Well, that went well."
 
-            WWX "...I guess it did get late, huh."
-
-            show NHS left pout
-
-            NHS "Oh no, does that mean we won't have time to catch fish for dinner???"
+            JC "Shut up, Wei Wuxian."
 
             jump LWJ_2
-        
-        "Decline to teach Wen Ning":
 
-            show JC rage
+        "But your sect leader is Wen Rouhan…":
 
-            JC "It is not inferior! But Jiang forms are for the Jiang sect only!"
+            JC "Fine! Your sect is all evil anyway!" 
 
-            show WWX talk
+            $ chengqing -= 2
 
-            WWX "Hey, I wasn't going to show Wen Ning any of the core Jiang techniques!"
+            $ WenHate_flag = True
 
-            show JC angy
-
-            JC "You damn well better not! If you get carried away and forget—"
-
-            WWX "I won't, I won't, I promise."
-
-            show WWX left
-
-            WWX "Look, I'll teach you a game I make the juniors play sometimes, it's great for training your reflexes!"
-
-            WN "Um...Um, okay, thank—"
-
-            show WQ left hmm at left
-            with moveinleft
-
-            show NHS right:
-                ease 0.1 xoffset 300
-
-            show WWX right:
-                ease 0.1 xoffset 50
-
-            show JC right:
-                ease 0.1 xoffset 350
-
-            WQ "What is going on here???"
-
-            show WN smile
-
-            WN "Jie!"
-
-            show JC blush
-
-            JC "Oh, Wen-guniang! Greetings!"
-
-            show WWX grin
-
-            WWX "Wen-guniang, hi! I'm teaching your brother archery!"
-
-            WQ "Is that what all the commotion was? Teaching?"
-
-            WN "Jie, Wei-gongzi said he'd teach me how to shoot better!"
-
-            show WQ -hmm
-
-            WQ "Hmm."
-
-            show WQ smile
-
-            WQ "I see. Thank you for your generosity. However, the hour grows late, and I think we should both be heading back to the dorms."
-
-            show WQ talk
-
-            WQ "Let's go, A-Ning"
-
-            show WQ right
-            hide WQ with moveoutleft
-
-            WN "Oh. Oh, okay. Good...Goodbye, Jiang-gongzi, Wei-gongzi, Nie-gongzi."
-
-            hide WN with moveoutleft
-
-            show WWX talk
-
-            WWX "...I guess it did get late, huh."
-
-            show NHS left pout
-
-            NHS "Oh no, does that mean we won't have time to catch fish for dinner???"
+            WQ "I see.  If you'll excuse me, Jiang-gongzi.  I have to go do some evil on the other side of the mountain." 
 
             jump LWJ_2
-    
+
+    ##wrap up exchange for the good dialog options
+
+    show WQ right
+    hide WQ with moveoutleft
+
+    WN "Oh. Oh, okay. Good...Goodbye, Jiang-gongzi, Wei-gongzi, Nie-gongzi."
+
+    hide WN with moveoutleft
+
+    show WWX talk
+
+    WWX "...I guess it did get late, huh."
+
+    show NHS left pout
+
+    NHS "Oh no, does that mean we won't have time to catch fish for dinner???"
+
     jump LWJ_2
 
 label LWJ_2:
@@ -2222,8 +2148,10 @@ label WQ_2:
 
     NHS "Someone's coming!"
 
-    show NHS right fan at right
-    with move
+    if sangcheng > 3:  ## hiding behind JC
+
+        show NHS right fan at right
+        with move
 
     NHS "If it's Meng Yao, you have to—"
 
@@ -2249,8 +2177,6 @@ label WQ_2:
 
     NHS "SHHHH don't say their names so loudly!"
 
-    show WQ -hmm
-
     WQ "...Are you expecting them to leap out of the trees and attack you?"
 
     NHS "YES."
@@ -2269,185 +2195,337 @@ label WQ_2:
 
     show NHS talkfan
 
-    NHS "Oh hah, that reminds me, Wei Wuxian said the same thing about you, Wen-guniang! Imagine that!"
+    NHS "Oh."
+
+    if sangcheng <= 3:
+        show NHS left fan
+        pause 0.5
+        show NHS right fan
+        pause 0.5
+
+    else:
+        show NHS fan:
+            ease 0.5 xoffset 100
+
+    NHS "Ohh…."
+
+    NHS "Speaking of {i}missions{/i}, I need to go… do a… thing.  Over there!"
+
+    hide NHS with moveoutright
+
+    show JC rage
+
+    JC "Nie Huaisang!"
+
+    show WQ hmm right
+    pause 0.5
+    show WQ hmm left
+    pause 0.5
+
+    show WQ sustalk left at midleft
+    with move
+
+    WQ "Actually, Jiang-gongzi, I wanted to speak with you anyway." 
+
+    show JC -rage
 
     show WQ hmm
 
-    WQ "...I can't fathom why Wei-gongzi would say such a thing."
+    JC "You did?"
 
     menu:
-        "It's because Wei Wuxian is full of nonsense":
-            show JC talk
-
-            JC "Probably because Wei Wuxian is full of nonsense. Ignore him."
-
-            show WQ talk
-            
-            WQ "I try my best. Besides, I'm only scary to people who keep trying to involve my brother in foolishness."
-
-            if WQ_1_flag == True:
-               
-                WQ "Speaking of, Jiang-gongzi, I wanted to thank you for helping my brother with his archery. I understand he came to look for you and Wei Wuxian personally, after you found him in the back hills?"
-
-                JC "Oh, yes. I, er, didn't expect him to, honestly."
-
-                WQ "He seems to think quite highly of your style of teaching. Which seems to involve a lot of drilling of basics and shouting, as I'm given to understand."
-
-                show JC blush
-
-                JC "Er..."
-
-                show WQ smile
-
-                WQ "A style of teaching I approve of myself."
-
-                show WQ -smile
-
-                WQ "That said, if he does so again, you may inform him that I've told you to send him straight back to our rooms instead."
-
-                show JC talk
-
-                JC "Um, sure, but actually I didn't mind—"
-
-            else:
-                show WQ -talk
-
-                WQ "Speaking of, Jiang-gongzi, did my brother go to the Jiang dormitories to ask Wei Wuxian to teach him archery, after you met him in the back hills?"
-
-                JC "Oh, yeah, he did."
-
-                WQ "If he does so again, I'd appreciate it if you sent him back to our rooms at once. And please discourage Wei Wuxian from trying to do anything like that again."
-
-        "I hope it's true and you're terrorising him":
-            show JC talk
-
-            JC "I hope it's true and your mission is to terrorise him."
-
-            $ chengqing += 1
-            show WQ smile
-
-            WQ "Well, if I have Jiang-gongzi's approval..."
+        "Of course you did":
 
             show JC smile
 
-            JC "Absolutely. It'll be good for him."
+            JC "Yeah, I'm not surprised. I'm a pretty important person."
 
-            show WQ talk
+            $ chengqing -= 1
+            
+            show WQ sustalk left
 
-            WQ "In any case, I'm only scary to people who keep trying to involve my brother in foolishness."
+            WQ "Charming."
 
-            if WQ_1_flag == True:
-                WQ "Speaking of, Jiang-gongzi, I wanted to thank you for helping my brother with his archery. I understand he came to look for you and Wei Wuxian personally, after you found him in the back hills?"
+            show WQ -talk
 
-                show JC -smile
+        "Is this a trick?":
 
-                JC "Oh, yes. I, er, didn't expect him to, honestly."
+            $ WenHate_flag = True
 
-                WQ "He seems to think quite highly of your style of teaching. Which seems to involve a lot of drilling of basics and shouting, as I'm given to understand."
+            show JC rage
 
-                show JC blush
+            JC "Why, so you can involve me in whatever schemes you Wens are plotting?"
 
-                JC "Er..."
+            $ chengqing = 0
 
-                show WQ smile
+            show WQ angy
 
-                WQ "A style of teaching I approve of myself."
+            WQ "I see. Then you'll have no problem with staying away from my brother."
 
-                show WQ -smile
+            JC "Gladly!"
 
-                WQ "That said, if he does so again, you may inform him that I've told you to send him straight back to our rooms instead."
+            WQ "Excellent."
 
-                show JC talk
+            jump LXC_2
 
-                JC "Um, sure, but actually I didn't mind—"
+        "Go on...":
 
-            else:
-                show WQ -talk
+            JC "Okay." 
 
-                WQ "Speaking of, Jiang-gongzi, did my brother go to the Jiang dormitories to ask Wei Wuxian to teach him archery, after you met him in the back hills?"
+            show JC smile
 
-                show JC -smile
+            JC "What did you need, Wen-guniang?"
 
-                JC "Right, yeah, he did."
+            WQ "My brother tells me that you and Wei-gongzi have become quite friendly."
 
-                WQ "If he does so again, I'd appreciate it if you sent him back to our rooms at once. And please discourage Wei Wuxian from trying to teach him anything like that again."
+            menu:
+                "We're friends!":
+                    JC "Yeah, Wen Ning is pretty great." 
+                    
+                    $ chengqing =+1
 
-    WQ "While my brother is studying weapons cultivation, unlike me, he's only here as my ward and is too young to participate in the lectures. So please don't get him in trouble by involving him in things he's not prepared for."
+                    show WQ smile
+                    pause 0.5
 
-    show NHS talk
+                "He's okay.":
 
-    NHS "Oh, does Wen-guniang not train with the sword at all? Or the bow?"
+                    show JC talk
+                    JC "We've talked with Wen Qionglin a couple of times."
 
-    WQ "No. As a physician, I've sworn not to cultivate with any weapon."
+                "I wish we weren't.":
+                    show JC roll
 
+                    JC "Yeah, he keeps hanging around us. It's pretty annoying."
+                    $ chengqing -= 1
+
+                    show WQ angy
+                    pause 0.5
+
+    show WQ sustalk
+
+    WQ "That being the case, I'd like to ask you a favor."
+
+    show WQ hmm
+
+    WQ "Please stop."
+                    
     show JC talk
+                    
+    JC "Stop what?"
+                    
+    show WQ sustalk
+                    
+    WQ "I don't know what you and Wei-gongzi think you're doing, but leave A-Ning out of it."
 
-    JC "What, no combat training at all?"
+    JC "What makes you think we're {i}planning{/i} anything?"
+                    
+    JC "Wei Wuxian can't even plan how to get to class on time."
 
-    show WQ talk
+    show WQ angy
 
-    WQ "None. It is a matter of principle."
+    WQ "I don't want my brother involved. Do you understand me?"
 
-    show NHS talkfan
+    show JC angy
 
-    NHS "I want to adopt this principle too!"
+    JC "Hey, you guys are the ones who brought him here. If anyone involved him in anything, it was you."
 
+    WQ "I'm just trying to protect him."
+
+    JC "From who? Us?"
+
+    show WQ hmm right
+    pause 0.5
+    show WQ hmm left
+    pause 0.5
+
+    ## ?add WQ line or change sprite
+
+    show JC hands
+
+    JC "Why are you so suspicious anyway?  Did we really do anything to make you distrust us so much?"
+
+    show WQ rage
+
+    WQ "What have any of you done to make me {i}trust{/i} you?"
+
+    show JC rage
+
+    JC "I could say the same about you!  Why are you always creeping around in the back hills anyway!" 
+
+    WQ "Who says I'm doing anything other than trying to get away from everyone whispering about us!"  
+
+    WQ "Every time you've seen me in the back hills, it's because {i}you're there too{/i}. Now who's being overly suspicious!"  
+
+    JC "You–!"
+                    
     menu:
-        "Hah, sure":
-            show JC left smile
+        "That's different!":
+                            
+            JC "You're a Wen!  We know that you're up to no good back here!"
+                            
+            $ WenHate_flag = True
+            $ chengqing -= 1
 
-            JC "Hah, sure. Just try explaining that to your Da-ge."
+            show WQ sustalk
 
-            show NHS pout
+            WQ "Prove it."
 
-            NHS "Hey, I could be a physician too! Don't you think I'll make a good physician?"
+            WQ "Goodbye, Jiang-gongzi.  Remember to stay away from my brother."
+                            
+            hide WQ with moveoutleft
 
-            show JC talk
+            show JC angy
 
-            JC "Sure, you will. A better physician than a warrior, anyway."
+            JC "Fuck."
 
-            $ sangcheng += 1
+            jump LXC_2
 
-            show NHS talk
+        "We were fishing!":
 
-            NHS "Exactly!"
+            show JC angy
 
-            show WQ hmm
+            JC "We were just out here fishing, okay!"
 
-            WQ "...I'm not so sure about that..."
+            show WQ angy
 
-            show NHS talkfan
+            WQ "Which is against the rules of Cloud Recesses.  Whereas I was looking for medicinal herbs and took a wrong turn."
 
-            NHS "Wen-guniang, you're an inspiration! I'll write to Da-ge at once saying I've found my new role model!"
+            show JC hands
 
-            WQ "..."
-        
-        "It's no joke":
-            JC "Sounds like it's no joke though. I didn't know you had to forswear weapons training to be a physician."
+            JC "You took a wrong turn?  The same one every day this week?!"
 
-            show WQ talk
+            show JC angy
 
-            WQ "I didn't have to. But I chose to do so regardless, to honour my physician's oath of healing."
+            show WQ sustalk
 
-            JC "It must be really important to you, to choose to do something so...serious. And possibly dangerous."
+            WQ "These mountain paths are very confusing.  It could happen to anyone."
 
+            JC "Right."
+
+            show WQ angy
+
+            WQ "Anyway, my point still stands.  Please stay away from my brother and we'll stay away from you."
+
+            WQ "Good day, Jiang-gongzi."
+                                
+            hide WQ with moveoutleft
+
+        "Maybe you have a point…":
+
+            show JC hands
+
+            JC "Okay, I get it.  We're all breaking the rules, so we'll keep it quiet from Lan-xiansheng if you do the same."
+
+            JC "The bruises on Wei Wuxian's knees will get bruises if he's made to kneel for any more punishments."
+                                
             $ chengqing += 1
 
             show WQ smile
+            pause 0.5
+            show WQ sustalk
 
-            WQ "It {i}is{/i} that important to me, yes. But the danger is not so great; I can keep myself safe even without traditional weapons, you know."
+            WQ "Agreed.  As a doctor, I try to prevent others from feeling pain."
 
-            show NHS talk
+            WQ "Even if they are as troublesome as Wei-gongzi."
 
-            NHS "So can I!"
+            show WQ hmm
 
-            show JC left
+            show JC smile
+            pause 0.5
+            show JC angy
 
-            JC "...Can you?"
+            JC "Troublesome is one word for it.  Impossible is another."
 
-            NHS "Yeah, I can run away from danger {i}real fast.{i}"
+            show WQ sustalk
 
-            JC "..."
+            WQ "Indeed."
+
+            WQ "Please remember what I said about not involving my brother in any of that trouble."
+
+            show WQ hmm
+
+            show JC -angy
+
+            JC "Right…"
+
+            WQ "Good day, Jiang-gongzi."
+
+            hide WQ with moveoutleft
+
+            ##collective ending for good and neutral paths##
+
+    show NHS left at left
+    with moveinleft
+
+    NHS "Soooo….."
+
+    show NHS fan
+
+    NHS "How did it go?"
+
+    show JC -angy
+
+    JC "Why do you keep leaving me alone with people?  I'm not good at talking to strangers."
+
+    NHS "All the more reason to practice!"
+
+    show NHS -fan
+                    
+    NHS "Look.  No one is expecting you to negotiate peace terms with the Wen sect, but…"
+
+    show NHS fan
+
+    NHS "Do you at least know if you like her yet?"
+
+    show JC blush
+
+    JC "Well…"
+
+    menu:
+        "Yes!":
+                                
+            JC "She is pretty cute when she's angry."
+
+            show NHS smile
+
+            NHS "That sounds like a good start to me!"
+
+        "Who knows…":
+
+            JC "I barely know her…"
+
+            show JC -blush
+
+            JC "But at least it's better than having to watch Wei Wuxian flirt with Lan-er-gongzi."
+
+            show NHS smile
+
+            NHS "That sounds like a good start to me!"
+
+        "Nope!":
+
+            JC "To be honest, I'd rather hang out with you and Wei Wuxian."
+
+            NHS "Aww, Jiang-xiong!  You do care!"
+
+            show JC angy
+
+            JC "Ugh, shut up."
+
+            NHS "Let's not leave Wei-xiong waiting then!  Let's head back."
+
+            ##WWX yelling from off screen##
+
+    WWX "Jiang Cheng! Nie-xiong!  Did you know that the tips of Lan Zhan's ears blush red when he's embarrassed!"
+
+    show NHS fan
+
+    show WWX right grin at right
+    with moveinright
+
+    show JC left
+
+    WWX "You should have seen his {i}face{/i} when I showed him that yellow book I borrowed from you, Nie-xiong!"
 
     jump LXC_2
 
@@ -2819,7 +2897,7 @@ label LXC_2:
     jump MY_2
 
 label MY_2:
-    show JC left
+    show JC left at midright
 
     JC "Ugh, I need to finish my homework, but joining Huaisang in Caiyi for a bit would be pretty nice..."
 
@@ -2832,6 +2910,8 @@ label MY_2:
 
     JC "Oh, Meng-gongzi. Greetings."
 
+    show JC blush
+
     JC "If you're looking for Nie-gongzi, I have no idea where he is."
 
     MY "Hmm, I see."
@@ -2842,6 +2922,8 @@ label MY_2:
 
     menu:
         "Yes":
+
+            show JC talk
 
             JC "Er, sure."
 
@@ -2854,6 +2936,8 @@ label MY_2:
             JC "So, what is it?"
 
         "No":
+
+            show JC talk
 
             JC "Sorry, I have to go, actually."
 
@@ -2886,27 +2970,44 @@ label MY_2:
 
     MY "I've noticed that Jiang-gongzi has been spending a lot of time with Nie-er-gongzi. Could I venture that Jiang-gongzi would count himself a good friend of his?"
 
-    if sangcheng >= 5:
-        show JC blush
+    ## scene changed from here on out
 
-        JC "Er, yeah I hope so? We're...we're pretty good friends, I guess."
+    menu: 
+        "Yes":
+            $ sangcheng += 1 ## seems a bit weird to get sangcheng points when NHS isn't around, but then NHS is probably hiding in a bush eavesdropping or something
 
-        show MY smile
+            show JC blush
 
-        MY "I believe Nie-er-gongzi feels the same."
+            JC "Er, yeah I hope so? We're...we're pretty good friends, I guess."
 
-        show MY -smile
+            if sangcheng >= 5:
 
-        MY "So I think he would take your advice, if you thought to give it. And I do believe he needs some, at least with regard to his studies."
+                show MY smile
 
-    else:
-        JC "Er, he hangs out with me and Wei Wuxian sometimes, I guess. And also other people."
+                MY "I believe Nie-er-gongzi feels the same."
 
-        show MY -smile
+            else:
 
-        MY "Hmm, I see."
+                show MY smile
 
-        MY "Still, I believe you are friends enough that he would listen to your advice. And I do believe he needs some, at least with regard to his studies."
+                MY "Indeed."
+
+            show MY frowny
+
+            MY "So I think he would take your advice, if you thought to give it. And I do believe he needs some, at least with regard to his studies."
+
+        "No":
+            show JC -talk
+
+            JC "He hangs out with me and Wei Wuxian sometimes, I guess. And also other people."
+
+            show MY -smile
+
+            MY "Hmm, I see."
+
+            show MY frowny
+
+            MY "Still, I believe you are friends enough that he would listen to your advice. And I do believe he needs some, at least with regard to his studies."
     
     show JC talk
 
@@ -2914,147 +3015,151 @@ label MY_2:
 
     show MY talk
 
-    MY "It is my belief that Nie-er-gongzi could do well if he wanted to apply himself. Despite appearances, he is actually quite intelligent, and also very good at getting what he wants, wouldn't you agree?"
-
-    show JC -talk
-
-    JC "...Yeah, can't argue with that. Unfortunately."
-
-    MY "The problem is that Nie-er-gongzi doesn't feel the material being taught in the lectures here is meaningful to his life. And...ah, may I be frank with you, Jiang-gongzi?"
-
-    show JC blush
-
-    JC "With...Oh, yes. Sure."
-
-    show MY -talk
-
-    MY "Well, it pains me to say this, but the truth is that Nie-er-gongzi doesn't take my counsel. Nor his brother's, not really. He'll pretend to, but in the end he'll do what he thinks is best."
-
-    MY "But he would listen to a friend, I believe."
-
-    show JC talk
-
-    JC "So you want me to...what? Convince him that studying is good?"
-
-    JC "I mean, I'm already trying. Kind of. I mean, I {i}do{/i} think studying is important."
-
-    show MY smile
-
-    MY "Yes, I'm aware of Jiang-gongzi's good sense and diligence."
-
-    show JC blush
-
-    JC "Um, thank you."
-    
-    JC "Okay, I guess if you're being frank, I'll be frank too."
-
-    show JC talk
-    
-    JC "The thing is, Huaisang says he'll never need to fight, or use all the stuff we're being taught, so that's why he doesn't care about studying."
-    
-    JC "I have to care, because I'll be a sect leader one day, but he won't. I mean, is he wrong?"
-
-    show MY -smile
-
-    MY "I certainly hope he won't be."
-    
-    MY "Hmm, would it help if you could convince him of the importance of trying anyway?"
-
-    show MY talk
-    
-    MY "Forget the utility of the material, what about the utility of not having Nie-zongzhu be furious at him?"
-
-    show JC smile
-
-    JC "Hah, I think he's aware of that one already. He didn't expect Nie-zongzhu to send you back here to hound him."
-
-    show MY -talk
-
-    MY "Nor did I. Unfortunately, Lan-xiansheng sent a concerned letter about the state of Nie-er-gongzi's work thus far, and it's caused Nie-zongzhu some...significant worry."
-
-    MY "And when Nie-zongzhu is worried...forgive my presumption, but Jiang-gongzi is the son of the formidable Violet Spider, is he not? Would it help your understanding if you could imagine that it was your mother who's been {i}significantly worried?{/i}"
-
-    show JC -smile
-
-    JC "..."
-
-    show JC talk
-
-    JC "Fuck, yeah, okay. Huaisang's life is in danger, got it."
-
-    JC "Right, gotta—wait, no. But Huaisang's not going to fail. Nie-zongzhu won't be too upset as long as Huaisang passes at the end of the day, right?"
-
-    show MY talk
-
-    MY "{i}Will{/i} Nie-er-gongzi pass?"
-
-    JC "Yeah, definitely."
-
-    MY "How can Jiang-gongzi be so certain?"
-
-    JC "Er, because..."
+    MY "Just so. I hear Jiang-gongzi is doing far better in his studies, and is also known for his good sense and diligence."
 
     menu:
-        "Because I'll help him study really hard":
-
-            JC "Because I'll help him study really hard."
-
+        "Really?":
+            
             show JC blush
 
-            JC "Really, really hard. We have a...a five step study plan. And Zewu-jun offered to tutor us. So you don't have to worry, Meng-gongzi, he'll pass."
+            JC "Compared to Wei Wuxian and Nie Huaisang, sure, I got good sense."
 
-            show MY -talk
+        "Totally.":
 
-            MY "Hmm. If you say so, Jiang-gongzi."
+            show JC roll
 
-            MY "In any case, I've taken up too much of Jiang-gongzi's time. My deepest appreciation for Jiang-gongzi's consideration."
+            JC "Oh, sure. Beacon of good sense and diligence, that's me."
+    
+    show MY smile
 
-            show JC -blush
+    MY "Quite. Don't you think Nie-er-gongzi could benefit from a little friendly encouragement towards good sense and diligence, as well?"
 
-            JC "Ah, right. You're welcome."
-        
-        "Because he has a plan. That I can't tell you about":
-
-            JC "Because he has a plan for passing."
-
-            show MY -talk
-
-            MY "Oh? What plan is that?"
-
-            show JC blush
-
-            JC "I...can't tell you. But there's a plan."
-
-            MY "I see. And Jiang-gongzi has faith that this plan will come to fruition."
+    menu:
+        "I can try":
 
             show JC talk
 
-            JC "Oh yeah, it'll be fine. If there's one thing Wei Wuxian is good at, it's—"
+            JC "So you want me to...what? Convince him to study? I mean, I can try. The Jiang sect motto {i}is{/i} attempt the impossible."
 
-            show JC -talk
-            
-            JC "I mean, yeah. For sure."
+        "Pretty sure that's impossible":
 
-            show MY smile
+            show JC talk
 
-            MY "Well then, I'm glad to hear it. Thank you for your honesty and reassurance, Jiang-gongzi, it is very much appreciated."
+            JC "So you want me to...what? Convince him to study? Don't think anyone can earn enough friendship points to do {i}that.{/i}"
+
+        "Sure, if you mean bribery":
 
             $ chengyao += 1
 
+            show JC talk
+
+            JC "So you want me to...what? Convince him to study? Won't you have better luck just bribing him?"
+
+            show MY happy
+
+            MY "Ah, I could never!"
+
+            show MY smile
+
+            MY "I mean that quite literally, unfortunately; his allowance is too substantial. Couldn't Jiang-gongzi attempt more traditional methods of persuasion first?"
+    
+    show JC hands
+
+    JC "Look, I'll be honest, Meng-gongzi, I have to work hard because I'm the sect heir. But Nie Huaisang's not, he won't ever be the Nie sect leader."
+
+    show MY happy
+
+    MY "I certainly hope not. For his sake, and mine."
+
+    show JC smile
+
+    JC "Hah, yeah, sounds like a disaster for the Nie sect. And you."
+
+    show JC hands
+    
+    JC "But that's why it's impossible to convince him to care about his studies. He doesn't need to care, not like I do."
+
+    show MY smile
+
+    MY "Hmm. I must say, the Jiang sect is fortunate to have a sect heir such as yourself, Jiang-gongzi."
+
+    menu:
+        "For sure!":
+            
+            show JC smile
+
+            JC "Heh, thanks, I try my best. Gotta live up to the Jiang sect name!"
+
+        "I guess...":
+
             show JC blush
 
-            JC "Ah, right. You're welcome."
+            JC "I try my best, I guess. Um, thanks."
+
+        "Wei Wuxian would be better":
+
+            show JC blush
+
+            JC "Eh, Wei Wuxian would probably be better."
+
+            show MY frowny
+
+            MY "Oh?"
+
+            show MY talk
+
+            MY "Please let me assure you, Jiang-gongzi, that from what I know of you both, that cannot possibly be further from the truth."
+
+            show MY smile
+
+            MY "While I've heard Wei-gongzi has a natural talent for cultivation, that is the least of the skills a sect leader must have. Surely a sense of duty and responsibility, like Jiang-gongzi has, is of far greater import."
+
+            JC "If...if you say so. Thanks."
+
+        "My sister would be better":
+
+            show JC blush
+
+            JC "Eh, my sister would probably be better."
+
+            show MY frowny
+
+            MY "Oh? Jiang-guniang? I've heard her cultivation is..."
+
+            show JC hands
+
+            JC "Cultivation isn't the most important thing about being sect leader, is it! She's good at organising things, and at diplomacy stuff! Heaps better than me!"
+
+            show JC angy
+
+            JC "She's great!!"
+
+            $ chengyao += 1
+
+            show MY smile
+
+            MY "Yes, that does sound like she would make an excellent sect leader too. Though perhaps the fact that Jiang-gongzi recognises her skills speaks to his own capability as well."
+
+            show JC blush
+
+            JC "If...if you say so. Thanks."
+        
+    show MY talk
     
-    MY "I'm sure Jiang-gongzi has places to be. If you'll excuse me, Jiang-gongzi."
+    MY "Well, in any case, thank you for taking the time to answer my questions, Jiang-gongzi."
 
     show JC talk
 
     JC "Right. Of course, Meng-gongzi."
 
-    show MY right
+    show MY smile
+
+    MY "Now, if you'll excuse me..."
+
+    show MY right smile
     hide MY with moveoutleft
 
-    show JC talk
+    show JC -talk
 
     JC "Well."
 
@@ -3317,21 +3422,21 @@ label WBA_start:
     NHS "Anyway, I'm sure I'll be fine! There are so many strong cultivators here who'll look out for me, like...like Jiang-xiong! Right, Jiang-xiong?"
 
     menu:
-        "Agree to look out for Huaisang in Caiyi":
+        "Agree to stick with Huaisang":
             show JC talk
 
             JC "Yeah, I guess I can keep an eye out for Nie-gongzi if he comes to Caiyi with us."
 
             jump WBA_1
         
-        "Don't agree to look out for Huaisang in Caiyi":
+        "Don't stick with Huaisang":
             show JC talk
 
             JC "What? But aren't you always saying you don't want to go on night hunts anyway?"
 
             jump WBA_2
 
-        "Offer to stay in the Cloud Recesses with Huaisang and Meng Yao instead":
+        "Stay in the Cloud Recesses":
             show JC talk
 
             JC "Look, what if I stay in the Cloud Recesses with you and Meng-gongzi?"
@@ -3923,6 +4028,7 @@ label WBA_3:
     show MY left at left
     show JC right at center
     show NHS right pout at right
+    with dissolve
 
     MY "What is one possible sign that a restless spirit has had an unnatural death?"
 
@@ -3949,161 +4055,2095 @@ label WBA_3:
 
     NHS "Noooo, I'll die of boredom and become a restless spirit myself."
 
-    MY "...Perhaps some of these facts will stick better in your mind then."
-
     show MY talk
     
-    MY "Might another approach be more helpful? I apologise if you didn't find the previous method engaging enough."
-
-    show JC smile
-
-    JC "I thought it was a pretty good approach. Kinda ingenious. Makes it less painful to memorise all this stuff."
-
-    NHS "But it's still too much! Who even cares about restless spirits!"
-
-    show MY -talk
-
-    MY "Lan-xiansheng does. And, by extension, so does Nie-zongzhu."
-
-    NHS "Are you sure I can't convince you to just go back and tell Da-ge that I'm doing fine? You can even bring him a letter from me saying what an amazing job you did of teaching me."
-
-    show MY talk
-
-    MY "And when Lan-xiansheng writes his next letter to Zongzhu suggesting otherwise?"
-
-    show NHS talkfan:
-        ease 0.2 yoffset 0
-
-    NHS "If you leave Gusu next week and take a slightly more scenic route back, you'll probably arrive home after all the tests are done. The tests that I will pass for sure! So there's no reason Da-ge will care about my homework by then!"
-
-    show MY -talk
-
-    MY "And how is Nie-er-gongzi so certain he'll pass, may I ask?"
-
-    show NHS fan
-
-    NHS "Oh, you know, I have a good feeling."
-
-    MY "A good feeling."
-
-    show NHS talkfan
-
-    NHS "Yeah! And I saw a fortune teller in Caiyi, and she said this was a very auspicious year for my scholarly pursuits!"
-
-    MY "..."
+    MY "Might another approach be more helpful? I apologise if this isn't engaging enough."
 
     menu:
-        "Suggest that Huaisang tell Meng Yao about how he plans to pass":
-
-            show JC left talk
-
-            JC "Ugh, just tell him how you plan to pass. Then we can move on from this topic before we all die unnatural deaths."
+        "This is engaging enough":
 
             $ chengyao += 1
 
-            show NHS fan
-
-            NHS "Oh, but..."
-
-            show MY talk
-
-            MY "Please, Nie-er-gongzi, whatever your plan is, let me assure you that I am as eager as you are for it to succeed."
-
-            NHS "Okay, but you have to promise not to tell anyone else! Especially not Da-ge!"
+            JC "Nah, it's fine. This is way more engaging than how Old Man Lan teaches it, actually. Less painful."
 
             show MY smile
 
-            MY "Of course. I am an expert at not telling things to Zongzhu."
+            MY "Well, high praise indeed. Thank you, Jiang-gongzi, let's continue"
 
-            NHS "And not Zewu-jun either!"
+        "A break might be more helpful":
 
-            show MY -smile
+            $ sangcheng += 1
 
-            MY "...What {i}is{/i} your plan, Nie-er-gongzi? Unless you plan to burn down the Cloud Recesses to escape your examinations, I can't see why I would speak of it to Zewu-jun."
+            JC "Maybe a break would help. We've been studying for a shichen now."
 
-            show JC right angy
-
-            JC "What? Who the hell would do something like that!"
-
-            show NHS talkfan
-
-            NHS "No, no, I just plan to get a little extra help, that's all!"
-
-            show MY talk
-
-            MY "What does that mean?"
-
-            NHS "Er, so Wei-xiong has this talisman that duplicates something from one piece of paper onto another piece from a short distance away. So his answers will appear on my scroll too."
+            NHS "Yeah, a whole shichen! I'm about to keel over and turn into a restless spirit myself!"
 
             show MY -talk
 
-            MY "Hmm. I've not heard of such a talisman before."
+            MY "I suppose a break can't hurt. But let's at least get to the end of this chapter."
 
-            show NHS talk
+    show NHS pout
 
-            NHS "It's his own invention! Useful, isn't it?"
+    NHS "No, I need a break now! A...a pee break!"
 
-            show MY talk
+    show MY -smile
 
-            MY "Exceedingly. And you've confirmed it works with your own eyes? And that it'll work in the exam setting?"
+    MY "Er-gongzi, you've just—"
 
-            show NHS pout
+    show NHS fan:
+        ease 0.1 yoffset 0
 
-            NHS "Um..."
+    NHS "There's a waterborne abyss in my bladder, Meng Yao, I can't fight it, I'll be right back!"
+
+    show NHS left at offscreenright
+    show MY at right
+    with ease
+
+    MY "Er-gongzi, wait—"
+
+    show JC left
+
+    JC "You should just let him go."
+
+    show MY right frowny
+
+    MY "Oh? Should I?"
+
+    menu:
+        "He deserves a break":
+
+            $ chengyao -= 1
+
+            show JC smile
+
+            JC "He's probably about to pass out or something. You made him study more today than he has in the whole of last month."
+
+            JC "That's pretty damn good already, right?"
+
+            show MY -frowny
+
+            MY "Do you find it so, Jiang-gongzi? Somehow, I'm not sure that I agree."
+
+        "You deserve a break":
+
+            $ chengyao += 1
+
+            show JC smile
+
+            JC "You've got to be about to pass out or something. You made him study more today than he has in the whole of last month."
+
+            JC "That's pretty damn good already, right?"
+
+            show MY -frowny
+
+            MY "Do you find it so, Jiang-gongzi? Somehow, I'm not sure that I agree."
+
+        "He's going to pass anyway":
+
+            show JC roll
+
+            JC "He's going to pass anyway, so what's the point?"
+
+            show MY -frowny
+
+            MY "Is he? Not to cast doubt upon Nie-er-gongzi's many talents, but is Jiang-gongzi aware that Nie-er-gongzi has already failed three times?"
+
+            show JC blush
+
+            JC "Uh, yes, but..."
+
+            menu:
+                "He's working extra hard":
+
+                    JC "He's. Actually. Working extra hard."
+
+                    JC "Where you can't see."
+
+                    $ chengyao -= 2
+
+                    show MY frowny
+
+                    MY "Oh?"
+
+                    MY "I suppose I will have to take Jiang-gongzi's word for it, and keep my eyes peeled."
+
+                "Just have faith":
+
+                    JC "You should just have faith in him. He might surprise you."
+
+                    JC "Very surprising person, that Nie Huaisang."
+
+                    show MY frowny
+
+                    MY "...I suppose I can't disagree with that."
+
+                "He has a plan to cheat":
+
+                    $ chengyao += 2
+
+                    JC "He, um, has a plan to cheat."
+
+                    MY "...Is that so."
+
+                    show MY smile
+
+                    MY "Well, thank you for your honesty, Jiang-gongzi. Let me be honest in return, and say that I'm relieved that he {i}has{/i} a plan at all."
+
+                    show MY talk
+
+                    MY "I don't suppose Jiang-gongzi knows the details of said plan...?"
+
+                    show JC smile
+
+                    JC "Sure I do. Wei Wuxian is going to make some kind of talisman that copies his answers to Nie Huaisang's scroll."
+
+                    JC "It's the kind of stupidly ingenious thing that—"
+
+                    show JC talk
+
+                    JC "Er. Wait, you really don't care...?"
+
+                    show MY smile
+        
+                    MY "Oh, I care, and I would be grateful if Jiang-gongzi could convince Wei-gongzi and Nie-er-gongzi to tell me about their plan in greater detail."
+
+                    show MY happy
+
+                    MY "Because I care so much about Nie-er-gongzi's academic success, as Jiang-gongzi is aware."
+
+                    show JC smile
+
+                    JC "Hah, sure, I'll tell them."
+
+                    show MY smile
+
+                    MY "I'm grateful for your assistance, Jiang-gongzi."
+            
+    show MY talk
+
+    MY "Well, in any case, I suppose that we're free of restless spirits for today. What would you like to do now, Jiang-gongzi?"
+
+    menu:
+        "I'll go find the others in Caiyi":
 
             show JC talk
 
-            JC "It probably will. Wei Wuxian's damn good at this kind of thing."
-
-            JC "Which is why he gets into so much fucking trouble."
+            JC "I guess I'll head to Caiyi, see how the others are doing with the water ghouls."
 
             show MY smile
 
-            MY "Well, if Jiang-gongzi is also confident about this...Will it not be suspicious if both your scrolls are identical?"
+            MY "How thoughtful of you, Jiang-gongzi, I'm sure your strength and skill has been sorely missed."
+
+            show JC blush
+
+            JC "I guess, sure..."
+
+            show MY talk
+
+            MY "Good day to you then, Jiang-gongzi, and good luck."
+
+            show JC smile
+
+            JC "Right, yes. Good day, Meng-gongzi"
+
+            show MY left talk at offscreenright
+            with ease
+            pause 0.5
+
+            scene bg caiyi ## edit music/bg later
+            with cutfast
+
+            stop music fadeout 1.0
+            play music "audio/fun3.mp3" fadein 1.0
+
+            show JC right at midright
+            with moveinright
+
+            JC "Guess they've already gone ahead to Biling. Maybe I can still catch up—"
+
+            NHS "Jiang-xiong! Over here!"
+
+            show NHS left talk at midleft
+            with moveinleft
+
+            NHS "You made it out of Meng Yao's clutches alive!"
+
+            show JC angy
+
+            JC "Have you been on pee break in Caiyi this whole time??"
 
             show NHS talkfan
 
-            NHS "Oh, I'm planning to rewrite stuff, add some errors. Maybe doodle in the margins."
+            NHS "Well, it's much easier to go with the sound of water right outside your window, isn't it?"
 
-            MY "Very good. And what about—"
+            show JC rage
 
-            show JC hands
+            JC "Next time you run away to take a 'break', I'm breaking your legs!!"
 
-            JC "Wait, are you {i}helping{/i} him to cheat now???"
+            jump LET_1
 
-            show NHS smile
-
-            NHS "Meng Yao-ge is the best!"
-
-        "Stay silent":
-            show JC left
-                             
-            JC "..."
-
-            NHS "And I'm sure Old Man Lan will take pity on me. He knows what Da-ge's like, I'm sure he wouldn't have the heart to send me to my death."
-
-            MY "..."
-
-            NHS "And if he doesn't take pity on me, I'll just flee for Lotus Pier and never set foot in Qinghe again. Jiang-xiong has already agreed to take me in, right, Jiang-xiong?"
+        "I'll go after Nie Huaisang":
 
             show JC talk
 
-            JC "...Sure. My dad loves taking in new disciples off the streets."
+            JC "I guess I'll go after Nie Huaisang, see what he's up to."
+
+            show MY -talk
+
+            MY "Ah, of course, I'm sure I'd rather not know."
 
             show MY talk
             
-            MY "Of course. And Yu-furen is so famously delighted by these charitable impulses of his, as well."
+            MY "I'd offer to accompany you, Jiang-gongzi, but somehow I suspect you'll have more luck without me."
+
+            show JC blush
+
+            JC "Er..."
+
+            show MY smile
+
+            MY "Good day to you then, Jiang-gongzi, and good luck."
+
+            show JC talk
+
+            JC "Right, yes. Good day, Meng-gongzi"
+
+            show MY left
+            hide MY with moveoutright
+            pause 0.5
+
+            scene bg dorm  ## edit music/bg later
+            with cutfast
+
+            stop music fadeout 1.0
+            play music "audio/fun3.mp3" fadein 1.0
+
+            show NHS bush at midleft
+            with dissolve
+
+            show JC left at center
+            with moveinleft
+
+            JC "Right, now where would he be hiding..."
+
+            hide NHS
+            with moveoutbottom
+
+            show NHS left talk at midleft
+            with moveinbottom
+
+            NHS "You made it out of Meng Yao's clutches alive!"
+
+            show JC right rage:
+                ease 0.2 xoffset 400
+            
+            JC "GAH!"
+
+            show JC hands
+
+            JC "Where the hell did you come from! Have you been hiding this whole time?"
+
+            show NHS talkfan
+
+            NHS "No no, I just wanted to make sure Meng Yao wasn't following you. Did you talk him into giving up?"
+
+            show JC roll
+
+            JC "I didn't talk him into anything, but he sounds like he's given up on you alright."
+
+            JC "At least for today."
+
+            show NHS smile
+
+            $ sangcheng += 1
+
+            NHS "Great! See, Jiang-xiong, you really are the best at talking to people!"
+
+            show JC angy
+
+            JC "Next time you run away to take a 'break', I'm breaking your legs!!"
+
+            jump LET_1
+
+        "We could keep studying":
+
+            $ chengyao += 1
+
+            show JC talk
+
+            JC "We could keep studying? You're pretty great at teaching things."
+
+            show JC blush
+
+            JC "Only if you want to! Not that Meng-gongzi has to teach anyone anything—except Nie Huaisang, maybe..."
+
+            show MY smile
+
+            MY "Jiang-gongzi is certainly the more apt pupil. It would be my pleasure."
+
+            show MY talk
+
+            MY "Now, where were we—"
+
+        "What do you want to do?":
+
+            $ chengyao += 2
+
+            JC "What would {i}you{/i} like to do now, Meng-gongzi? You're always running after Nie Huaisang, but now that he's run away—"
+
+            show JC angy
+
+            JC "I mean, not to say you don't do anything else, or that you don't WANT to do anything else!"
+
+            show JC hands
+
+            JC "But if you DID want to do something else I'm just saying that you can! Not that you need my permission or anything!"
+
+            show JC blush
+
+            JC "Whatever. Do whatever you want."
+
+            show MY blush
+
+            MY "Perhaps I will, Jiang-gongzi."
+
+            show MY talk
+
+            MY "I'd like to spend more time here in the library, and Jiang-gongzi is very welcome to join me if—"
+
+    show MY -talk
+
+    show JC -blush
+
+    show NPC1 at offscreenleft
+    show NPC2 at offscreenleft
+    
+    NPC1 "{size=-9}Hey look, is that Jin-zongzhu's bastard hanging out with Jiang Wanyin?"
+
+    show JC right
+
+    NPC2 "{size=-9}Yeah, that's Meng Yao alright. That guy doesn't know his place."
+
+    menu:
+        "Yell at them":
+
+            $ WBA3_yell = True
+
+            jump .JCyell            
+
+        "Ignore them":
+            show JC left talk
+
+            JC "Um, tell me more about, er, plant spirits."
+
+        "Tell Meng Yao to ignore them":
+
+            $ chengyao -= 1
+
+            show JC left angy
+
+            JC "UGH, ignore those assholes. Tell me about, er, plant spirits."
+
+        "Ask Meng Yao about Jin Guangshan":
+
+            $ chengyao -= 2
+
+            show JC left talk
+
+            JC "So, Jin Guangshan's your father?"
+
+            show MY frowny
+
+            MY "Yes."
+
+            JC "That sucks."
+
+            MY "You could say that."
+
+            show MY -frowny
+
+            MY "Though perhaps we could discuss more relevant academic topics instead?"
+
+            show JC blush
+
+            JC "Right. Yes. Tell me about, er, plant spirits."
+
+    MY "Of course. There are various classifications of plant spirits, which can be—"
+            
+    NPC1 "{size=-9}Isn't he usually yapping after Nie Huaisang? Found some other master's boots to lick, hasn't he?"
+
+    show JC right
+    pause 0.5
+    show JC left angy
+
+    JC "SO. Those classifications."
+
+    show MY talk
+
+    MY "Yes. While they can be difficult to remember, in the field, the most pertinent thing to note is that—"
+
+    show JC right angy
+    show MY -talk
+
+    NPC2 "{size=-9}Sure looks like it. Not like he can go crawling back to his father after all {i}that{/i}, heh."
+
+    menu:
+        "Keep ignoring them":
+
+            show JC left angy
+
+            JC "RIGHT. What is the pertinent thing about...whatever we're talking about?"
+
+            show MY talk
+
+            MY "Plant spirits. What's most pertinent in the field is whether they use airborne attacks, such as pollen that lowers inhibitions, or physical attacks, like vines that may function as spiritual whips or rope bindings."
+
+            NPC1 "{size=-12}Guess he'll go crawling to any sect heir. I saw him pestering Lan Xichen too."
+
+            NPC2 "{size=-18}Zewu-jun must know better than to associate with someone like that. I suppose Jiang Wanyin likes having his boots licked, hah!"
 
             show MY -talk
 
-            MY "In any case, let us aim to not get thrown out of Qinghe, shall we? Nie-er-gongzi, Jiang-gongzi, shall we review this chapter on wandering ghosts and restless spirits one more time?"
+            MY "..."
 
-            MY "Again, Nie-er-gongzi, what is one possible sign that a restless spirit has had an unnatural death?"
+            show JC hands
 
-            show NHS pout:
-                ease 3.0 yoffset 1000
+            JC "{i}Anyway!!{/i} How about those attacks!"
 
-            NHS "I don't know, I don't know, I really don't knoooooooow..."
+            show MY frowny
+
+            MY "...They've left, Jiang-gongzi. You needn't keep up the pretense."
+
+            menu:
+                "What pretense?":
+
+                    $ chengyao += 1 ## ehhh might remove this point
+
+                    show JC angy
+
+                    JC "Who's pretending anything! Maybe I want to learn about ropes and whips with you!"
+
+                    show MY blush
+
+                    MY "...I don't think that's in the curriculum."
+
+                    show MY -blush
+
+                "What the fuck is with them!":
+
+                    show JC angy
+
+                    JC "What the fuck is with them! Why the hell are they going around talking about you like that!"
+
+                    MY "Ah, well, I'm sure I couldn't speculate."
+
+                    JC "Actually, I bet you could!"
+
+                    show MY -frowny
+
+            MY "Ah, it doesn't matter. It's very kind of you to have spent the last shichen with me, Jiang-gongzi, but I'm sure you have other things that need your attention."
+
+            jump .WBA3end
+
+        "Yell at them":
+
+            jump .JCyell
+
+    label .JCyell:
+
+        $ chengyao += 1
+
+        show JC rage at left
+        with move
+            
+        JC "HEY, WHAT THE HELL ARE YOU TWO TALKING ABOUT!"
+
+        show NPC1 at midleft
+        show NPC2 at left
+        show JC at midright
+        show MY at offscreenright
+        with move
+
+        NPC1 "What? What??"
+
+        hide MY
+
+        NPC2 "We weren't saying anything!"
+
+        show JC angy
+
+        JC "Weren't saying anything? Then what was that I heard you say about Meng-gongzi?"
+
+        NPC1 "I...I said he was Jin-zongzhu's illegitimate son, that's all! Everyone knows that!"
+
+        NPC2 "Yeah, maybe you didn't know that about Meng Yao, but it's true."
+
+        NPC1 "And everyone also knows that his mother is a prostitute!"
+
+        menu:
+            "{i}Your{/i} mom is a prostitute":
+
+                $ chengyao -= 2
+
+                show JC rage
+
+                JC "{i}Your{/i} mother is a prostitute! And {i}you{/i} should crawl back into the gutter she birthed you in!"
+
+            "Don't talk about him like that":
+
+                ## mid-arc romance splash screen here?
+
+                show JC rage
+
+                JC "How dare you talk about Meng-gongzi like that! You watch your mouth, or Sandu will watch it for you!"
+
+            "Jin Guangshan sucks anyway":
+
+                $ chengyao -= 1
+
+                show JC rage
+
+                JC "Jin Guangshan is a philandering low-life who no one wants as a father anyway! And you two are even lower than he is!!"
+
+            "I don't care who his parents are":
+
+                ## mid-arc romance splash screen here also? or only here? If it's only here might be a good idea to beef up the dialogue some more
+
+                $ chengyao += 1
+
+                show JC rage
+
+                JC "I don't give a shit who his parents are! And I don't give a shit who {i}your{/i} parents are either, I can beat you up all the same!"
+
+        show NPC1:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+            pause 0.2
+            ease 0.5 xoffset -200
+
+        show NPC2:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+            pause 0.2
+            ease 0.5 xoffset -200
+
+        NPC1 "Whoa, okay, chill out, Jiang-gongzi. Just thought you ought to know."
+
+        NPC2 "Yeah, not trying to pick a fight or anything. We were just leaving anyway."
+
+        JC "Good! Leave!"
+
+        show NPC1 at offscreenleft
+        show NPC2 at offscreenleft
+        with move
+
+        NPC1 "{size=-9}Man, what's wrong with that Jiang Wanyin."
+
+        NPC2 "{size=-12}He's unstable. Guess it's not a surprise, with a mother like the Violet Spider."
+
+        NPC1 "{size=-18}Hah, more like the Violent Spider. I hear she beats up her husband all the time!"
+
+        show JC rage at midleft
+        with ease
+
+        JC "WHAT DID YOU SAY ABOUT MY MOTHER?!"
+
+        MY "Jiang-gongzi, wait—"
+
+        menu:
+            "Wait":
+
+                pass
+
+            "Get their asses":
+
+                JC "YOU TWO ASSHOLES GET BACK HERE!!"
+
+                hide JC with moveoutleft
+                
+                show MY right at right
+                with moveinright
+
+                NPC1 "{size=-12}Stop! No...no running in the Cloud Recessess!"
+
+                JC "{size=-18}THEN STAND STILL AND GET YOUR ASS KICKED!!"
+
+                MY "..."
+
+                jump LET_1
+
+        $ chengyao += 1
+
+        show MY right at right
+        with moveinright
+
+        show JC left rage
+
+        JC "What!!"
+
+        MY "Leave them be, Jiang-gongzi, it's not worth the trouble."
+
+        show JC hands
+
+        JC "Not worth the trouble?! Did you hear what they said??"
+
+        show MY frowny
+
+        MY "Of course I heard. But chasing them down will only stop them saying it in your hearing, Jiang-gongzi, and not out of it."
+
+        show JC angy
+
+        JC "That's still better than just letting them talk anywhere they want, any way they want!"
+
+        show MY -frowny
+
+        MY "Perhaps. But it's still best if they didn't talk at all."
+
+        show JC -angy
+
+        JC "..."
+
+        show JC talk
+
+        JC "Are you suggesting I kill them...?"
+
+        JC "Not saying I'm opposed, exactly, but—"
+
+        show MY happy
+
+        MY "What? Haha, I'd never suggest anything like that!"
+
+        show MY talk
+
+        MY "At least, not for so minor an incident."
+
+        show MY -talk
+
+        MY "I just meant not giving people any reason to talk at all. That is to say, if you aren't seen with me, then there wouldn't have to be talk about you, Jiang-gongzi."
+
+        jump .WBA3end
+
+    label .WBA3end:
+
+        show JC hands
+
+        JC "What? Are you telling me to go?"
+
+        show MY frowny
+
+        MY "I..."
+
+        show MY -frowny
+
+        MY "Only if you want to."
+
+        show JC blush
+        
+        JC "...What if I don't want to?"
+
+        show MY blush
+
+        MY "Please don't misunderstand, I truly have enjoyed Jiang-gongzi's company today. And I hope Jiang-gongzi has enjoyed mine."
+
+        show MY -blush
+
+        MY "But Jiang-gongzi must see that people will talk, if you're seen spending time with me."
+
+        menu:
+            "Who cares what they say":
+                show JC angy
+
+                JC "Who gives a shit about what people say!"
+
+                show MY smile
+
+                MY "...Who indeed."
+
+            "They don't know you":
+
+                $ chengyao += 2
+
+                show JC angy
+
+                JC "They don't know a damn thing about you, so who cares what they have to say! The people who really know you will know better!"
+
+                show MY blush
+
+                MY "And I suppose Jiang-gongzi knows better."
+
+            "I can talk louder":
+
+                $ chengyao += 1
+
+                show JC angy
+
+                JC "They're not the only ones who can talk!"
+
+                JC "I can talk, and I bet I can talk louder!"
+
+                show MY smile
+
+                MY "Indeed. Why, when Jiang-gongzi talks, sometimes all of the Cloud Recesses listens."
+
+        if WBA3_yell == True:
+
+            show MY talk
+
+            MY "Now, shall we get back to more important matters? I believe we were learning about restless spirits."
+
+            MY "Let's move on to how to fight them."
+
+            show JC smile
+
+            JC "Finally! Now we're getting to the good part."
+
+            jump LET_1
+        
+        show MY talk
+
+        MY "Now, shall we get back to plant spirits? Firstly, how to combat their sex pollen in the field."
+
+        show JC blush:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+
+        JC "Sex pollen?! What the hell is sex pollen???"
+
+        jump LET_1
+
+label LET_1:
+
+    ## edit bg and music and days to Qixi
+    
+    scene bg class
+    with cutslow
+
+    stop music fadeout 1.0
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show bar
+    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Ten days to Qixi{/color}{/font}" at truecenter
+    with Dissolve(0.5)
+    pause(2.0)
+    hide text
+    hide bar
+    with Dissolve(0.5)
+
+    show JC left at left
+    show NHS right smile at right
+    show WWX left at center
+    with dissolve
+
+    NHS "It worked, it worked! I really might pass after all! Wei-xiong you're a life-saver and a genius!!!"
+
+    show WWX talk
+
+    WWX "Of course I am! Why would you ever doubt me?"
+
+    menu:
+        "Get over yourself":
+
+            show JC angy
+
+            JC "Ugh, get over yourself. The only thing you're a genius at is breaking the rules."
+
+            show WWX right cheeky
+
+            WWX "Aww Jiang Cheng, no need to be jealous! You're welcome to use my talisman if you need it during the final exam too."
+        
+        "Fine, you're a genius":
+
+            $ chengxian += 1
+
+            show JC roll
+
+            JC "Fine, fine, you're a genius. A genius at {i}breaking the rules.{/i}"
+
+            show WWX right grin
+
+            WWX "Aw, Jiang Cheng, I know you're secretly very impressed by my talismans! Hey, if you wanna use them too—"
+
+    show JC rage
+
+    JC "I don't need your stupid cheating talisman!!"
+
+    show NHS talkfan
+
+    NHS "Well, I do! So I'm glad Wei-xiong very cleverly invented it so that I don't have to fail!"
+
+    show JC hands
+
+    JC "But that was just a quiz! What if Old Man Lan takes more precautions against cheating in the final exam?"
+
+    show WWX talk
+
+    WWX "Why would he? He didn't notice anything was wrong, we were super sneaky!"
+
+    show NHS fan
+
+    NHS "Super duper sneaky! And now we should super duper sneak our way out of the Cloud Recesses and into Caiyi town to celebrate!"
+
+    show JC talk
+
+    JC "Why do we have to sneak—oh, are Meng-gongzi and Zewu-jun looking for you again?"
+
+    show NHS pout
+
+    NHS "They're always trying to hunt me down! It's all Da-ge's fault, they—"
+
+    show NHS talkfan:
+        ease 0.15 yoffset -40
+        ease 0.15 yoffset 0
+
+    NHS "Wait! Jiang-xiong, you should talk to Da-ge for me!"
+
+    show JC angy
+
+    JC "Talk to {i}your Da-ge?{/i} Isn't he in Qinghe?! You want me to go {i}all the way to—{/i}"
+
+    show NHS talk
+
+    NHS "No no, just write him a letter!"
+
+    show NHS fan
+
+    NHS "Tell him how well I'm doing and that I'm totally gonna pass and that he should call off his spies—ahem, I mean he should tell Meng Yao and Xichen-ge that they can totally leave me alone!"
+
+    show JC roll
+
+    JC "Yeah, like he's gonna believe me over Meng-gongzi and Zewu-jun."
+
+    show NHS talkfan
+
+    NHS "Of course he will! You're so responsible and trustworthy!"
+
+    show WWX cheeky
+
+    WWX "Heh, you mean boring and too unimaginative to lie."
+
+    show JC hands
+
+    JC "{i}Who are you calling boring—{/i}"
+
+    show WWX left grin
+
+    WWX "Besides, Jiang Cheng's terrible at letter writing! Shijie always has to help him or it takes him all day. Bet he won't finish in time to join us in Caiyi."
+
+    show JC rage
+
+    JC "{i}WEI WUXIAN, I'LL SHOW YOU TERRIBLE—{/i}"
+
+    show NHS pout
+
+    NHS "I'm sure Jiang-xiong will write a great letter! Won't you, Jiang-xiong?"
+
+    menu:
+        "Write the letter":
+
+            $ sangcheng += 1
+
+            show JC hands
+
+            JC "Damn right! I'll write a great fucking letter!"
+
+            show NHS smile
+
+            NHS "Yay! Thanks, Jiang-xiong, I'm sure Da-ge will be really impressed! And convinced about my diligence and academic prowess!"
+
+            show JC roll
+
+            JC "...I don't know if {i}anyone{/i} can write a letter that's {i}that{/i} good."
+
+            show WWX right talk
+
+            WWX "Good luck! Take breaks every hour or your hand will cramp up! Remember to eat and sleep and use the toilet! And if nobody sees you for the next three days, we'll know what you're doing."
+
+            show JC angy
+
+            JC "If nobody sees me, it'll be because I {i}smothered you in your sleep{/i} to get you to {i}shut up{/i} and had to go on the run!"
+
+            show NHS talk
+
+            NHS "Don't worry, Jiang-xiong! I'll help you hide the body!"
+
+            show WWX left wat
+
+            WWX "Hey, I thought I was your life-saver."
+
+            show NHS smile
+
+            NHS "You are, you are. Which is why I'll buy you four jars of Emperors Smile in Caiyi before Jiang-xiong kills you!"
+
+            show WWX grin
+
+            WWX "Sounds like a good way to go, I accept!"
+
+            show JC hands
+
+            JC "Ugh, both of you get lost already. I have a letter to write. Apparently."
+
+            jump LET_2
+        
+        "Go to Caiyi":
+
+            show JC hands
+
+            JC "No! I'm not writing a great letter, or {i}any{/i} letter, to Chifeng-zun!"
+
+            show NHS pout
+
+            NHS "But Jiang-xiong..."
+
+            show WWX left talk
+
+            WWX "Yeah, better not. What if Jiang Cheng does such a bad job at it that your Da-ge comes down in person to make sure you study?"
+
+            show JC angy
+
+            JC "I would not!"
+
+            show NHS talk
+
+            NHS "Jiang-xiong would not!"
+
+            show NHS fan
+
+            NHS "...Would he?"
+
+            show WWX cheeky
+
+            WWX "Oh, he would, I'll get Shijie to show you some of his most appalling attempts—"
+
+            show JC rage
+
+            JC "WEI WUXIAN—"
+
+            show WWX grin
+
+            WWX "—But we said we were going to Caiyi! To celebrate! So why spoil a good day!"
+
+            JC "I'LL SPOIL YOUR FACE—"
+
+            jump GIFT_1
+
+label LET_2:
+
+    scene bg indoors
+    with cutslow
+
+    ## music double-check later
+
+    stop music fadeout 1.0  
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show JC left angy at center
+    with moveinleft
+
+    JC "—of course I can write a fucking letter, I can write a great fucking letter—"
+
+    show JC:
+        ease 0.5 yoffset 100
+
+    JC "—I'll start right fucking now and catch up with them in Caiyi and—"
+
+    show JC -angy
+
+    JC "Wait."
+
+    show JC angy
+
+    JC "I need paper! Where the hell's my paper!"
+
+    show JC angy:
+        ease 0.2 yoffset 0
+        ease 0.5 xoffset 500
+        ease 0.5 xoffset 0
+
+    JC "And my ink!"
+
+    show JC right angy:
+        ease 0.5 xoffset -500
+        ease 0.5 xoffset 0
+
+    JC "And brush! And seal! And paper—no, wait, I already have—{nw}"
+
+    show JC right hands:
+        ease 0.1 yoffset -100
+        ease 0.1 yoffset 0
+
+    extend "{i}SHIT ow shit paper cut!{/i}"
+
+    show JC rage
+
+    JC "FUCK THIS STUPID LETTER, LET'S FINISH IT ALREADY!!"
+
+    scene bg letter
+
+    JC "...how the hell do letters start??"
+
+    menu:
+        "To the esteemed Chifeng-zun,":
+
+            JC "I remember A-jie said to always address the other person politely, so..."
+
+            $ let1 = "To the esteemed Chifeng-zun,"
+        
+        "To Nie-zongzhu":
+
+            $ mingcheng += 1
+
+            JC "Can't go wrong calling him Nie-zongzhu, not like Nie-zongzhu could ever be anyone else..."
+
+            $ let1 = "To Nie-zongzhu,"
+
+        "To Nie Mingjue,":
+
+            JC "That...is his name, isn't it...? Damn it, no one ever calls him by name, how do you even write it..."
+
+            $ let1 = "To {s}Nie Minjue{/s} {s}Nie Mingju{/s} Nie Mingjue,"
+
+        "To Nie Huaisang's Da-ge,":
+
+            $ mingcheng += 1
+
+            JC "If Nie Huaisang wants me to write to his Da-ge, then I damn well will."
+
+            $ let1 = "To Nie Huaisang's Da-ge,"
+
+        "Dear Da-ge,":
+
+            JC "Fuck, this is stupid, letters are stupid, Nie Huaisang should write it his damn self!"
+
+            JC "Ah, fuck, I'll just go whatever Nie Huaisang would say, that can't be wrong...right??"
+
+            $ let1 = "Dear Da-ge,"
+    
+    let "[let1]" ## this nvl shit needs fixing the spacing is weird, but also wait for actual bg letter before you start on that
+
+    JC "Now some kind of opening paragraph...thing..."
+
+    menu:
+        "Talk about the weather":
+
+            $ let_weather = True
+
+            JC "Ah, fuck, can't go wrong with the weather."
+
+            $ let2 = "The weather in Gusu is quite warm. I thought it would be colder, but it's not."
+
+        "Ask after his health":
+
+            JC "Ah, fuck, I'll just ask about his health, he can't have a problem with that."
+
+            $ let2 = "How has your health been? I'm sure there's nothing wrong with your health."
+
+        "Write about the lectures":
+
+            JC "He keeps sending Nie Huaisang here for the lectures, clearly he must give a shit about it."
+
+            $ let2 = "The Cloud Recesses lectures are happening right now. There are classes almost every day."
+
+        "Skip the opening pargraph":
+
+            $ mingcheng += 1
+
+            JC "Ah, fuck, who cares about the opening, I always skip reading it anyway."
+
+            $ let2 = "Greetings.{p=0.1}{p=0.1}"
+    
+    nvl clear
+    scene bg letter
+
+    let """
+
+    [let1]
+
+    [let2]
+
+    """
+
+    JC "Hmph. Needs more...something."
+
+    menu:
+        "Talk more about the weather" if let_weather == True:
+
+            JC "...More...weather...?"
+
+            $ let3 = "Still, the weather isn't too bad. Not as good as the weather in Yunmeng though. How is the weather in Qinghe?"
+        
+        "Talk about the weather" if let_weather == False:
+
+            $ let_weather = True
+
+            JC "Can't go wrong with the weather."
+
+            if let2 == "Greetings.{p=0.1}{p=0.1}":
+                $ let3 = "The weather in Gusu is quite warm. I thought it would be colder, but it's not."
+            else:
+                $ let3 = "Also, the weather in Gusu is quite warm. I thought it would be colder, but it's not."
+
+        "Talk about Lan Xichen":
+
+            $ let_LXC = True
+            $ mingcheng += 1
+
+            JC "Oh, he knows Zewu-jun, I guess I could talk about him."
+
+            if xicheng >= 3: ## come back to work on point totals, and also on what JC would say based on prev points
+                $ let3 = "Zewu-jun has been here in the Cloud Recesses. He's kind. And nice. And tall. You probably knew that."
+            else:                
+                $ let3 = "Zewu-jun has been here in the Cloud Recesses. He lives here. You probably knew that."
+
+        "Talk about Meng Yao":
+
+            $ let_MY = True
+            $ mingcheng += 1
+
+            JC "Oh, he knows Meng Yao, I guess I could talk about him."
+
+            if chengyao >= 3: ## come back to work on point totals, and also on what JC would say based on prev points
+                $ let3 = "Meng-gongzi arrived safely at the Cloud Recesses. He smiles a lot. It's a nice smile. You probably knew that."            
+            else:                
+                $ let3 = "Meng-gongzi arrived safely at the Cloud Recesses. You probably knew that. Since he's probably writing to you too."
+        
+        "Talk about Lan Qiren":
+
+            JC "I guess he knows Old Man Lan? I could talk about him...?"
+
+            $ let3 = "Lan-xiansheng is still teaching here. You probably knew that. Everyone and their grandfathers probably knew that. I bet Lan-xiansheng lectured them too."
+
+    nvl clear
+    scene bg letter
+    let """
+
+    [let1] {nw}
+
+    [let2] {w}[let3]
+
+    """
+
+    JC "GOOD ENOUGH. Time to get to the point."
+
+    menu:
+        "Nie Huaisang is doing great":
+
+            $ mingcheng -= 1
+            $ NHS_let_flag = True
+
+            JC "Nie Huaisang you better thank me for this..."
+
+            $ let4 = "Nie Huaisang is doing really well in his studies. I know, because I have been studying with him."
+
+        "Nie Huaisang is doing fine":
+
+            $ mingcheng += 1
+            $ NHS_let_flag = True
+
+            JC "As if he'd believe Nie Huaisang is doing great."
+
+            $ let4 = "Nie Huaisang is doing fine. Not great, but not terrible. I know, because I have been studying with him."
+
+        "Nie Huaisang is...doing...":
+
+            JC "Better not lie to Chifeng-zun..."
+
+            $ let4 = "Nie Huaisang is doing. Stuff. Like calligraphy, which is one of the four great arts. Also painting. Which is another of the four great arts."
+    
+    nvl clear
+    scene bg letter
+    let """
+
+    [let1] {nw}
+
+    [let2] [let3]
+
+    [let4]
+
+    """
+
+    JC "...Damn it! Why the fuck is there still so much paper?!"
+
+    menu:
+        "Talk about the weather" if let_weather == False:
+
+            $ let_weather = True
+
+            JC "Guess I can always talk about the weather."
+
+            $ let5 = "By the way, did you know the weather in Gusu is quite warm? I thought it would be colder, but it's not."
+        
+        "Talk about Lan Xichen" if let_LXC == False:
+
+            $ let_LXC = True
+            $ mingcheng += 1
+
+            JC "Oh, he knows Zewu-jun, I guess I could talk about him."
+
+            if xicheng >= 3: ## come back to work on point totals, and also on what JC would say based on prev points
+                $ let5 = "By the way, did you know Zewu-jun has been here in the Cloud Recesses? He's kind. And nice. And tall. You probably knew that."
+            else:                
+                $ let5 = "By the way, did you know Zewu-jun has been here in the Cloud Recesses? He lives here. You probably knew that."
+        
+        "Talk about Meng Yao" if let_MY == False:
+
+            $ let_MY = True
+            $ mingcheng += 1
+
+            JC "Oh, he knows Meng Yao, I guess I could talk about him."
+
+            if chengyao >= 3: ## come back to work on point totals, and also on what JC would say based on prev points
+                $ let5 = "By the way, did you know Meng Yao arrived safely at the Cloud Recesses? He smiles a lot. It's a nice smile. You probably knew that."            
+            else:                
+                $ let5 = "By the way, did you know Meng Yao arrived safely at the Cloud Recesses? You probably knew that. Since he's probably writing to you too."
+        
+        "Talk more about Nie Huaisang":
+
+            $ let_NHS = True
+            $ mingcheng += 1
+            $ NHS_let_flag = True
+
+            JC "Eh, he's probably happy to keep hearing about Nie Huaisang. Or at least, to hear about this one thing."
+
+            $ let5 = "Don't worry about him. He'll pass his exams this year."
+
+        "Talk about Wen Qing":
+
+            $ let_WQ = True
+            $ mingcheng -= 1
+
+            JC "I guess...he might also know...Wen Qing...?"
+
+            $ let5 = "By the way, did you know Wen Qing is also here in the Cloud Recesses? Her brother, Wen Ning, is also with us. Her cousin, Wen Chao, was here at first, but is thankfully no longer with us. {w}I mean he left, not that he's dead."
+
+        "Skip the closing paragraph":
+
+            $ mingcheng += 1
+
+            JC "Eh, no one wants to read more than they have to, anyway."
+
+            $ let5 = "Regards, Jiang Wanyin of Yunmeng Jiang"
+        
+    nvl clear
+    scene bg letter
+    let """
+
+    [let1] {nw}
+
+    [let2] [let3] {nw}
+
+    [let4]
+
+    [let5]
+
+    """
+    scene bg indoors 
+    with cutfast
+
+    show JC left hands
+    with dissolve
+
+    JC "...In addition—OW, HAND CRAMP!"
+
+    show JC angy
+
+    JC "Fuck this! I'm done!!"
+
+    show JC left angy
+    pause 0.5
+    show JC rage
+
+    JC "...HOW HAS IT BEEN A SHICHEN ALREADY??"
+
+    if NHS_let_flag == True:
+        $ sangcheng += 1
+
+    jump WBA_end
+
+label GIFT_1:
+
+    scene bg caiyi
+    with cutslow
+
+    ## music double-check later
+
+    stop music fadeout 1.0  
+    play music "audio/fun3.mp3" fadein 1.0            
+
+    show WWX right at right
+    show JC right at center
+    show NHS right at left
+    with moveinright
+    pause 0.5
+
+    show NHS talk
+
+    NHS "...and this one's so elegant! I'll have this fan too, thanks!"
+
+    show JC hands
+
+    JC "Your haul is already twice your weight! How are you planning to carry it back up the mountain?!"
+
+    show NHS left talkfan
+
+    NHS "I'm sure my very good friends Wei-xiong and Jiang-xiong will help me carry it all, right?"
+
+    show WWX talk
+
+    WWX "I have my own haul to carry, but Jiang Cheng can help you! He hasn't bought anything at all."
+
+    show JC left angy
+
+    JC "The only thing {i}you've{/i} bought is two jars of Emperor's Smile!"
+
+    show WWX grin
+
+    WWX "They're very heavy jars!"
+
+    show WWX cheeky
+
+    WWX "And if Lan Zhan spots us on the way back, I have to be prepared to run very fast."
+
+    show NHS talk
+
+    NHS "Are you really not going to buy anything, Jiang-xiong? Look, they're selling so many different things here!"
+
+    scene bg shop
+    with cutfast
+
+    JC "What's this random pile of junk! I don't want any of this!"
+
+    SHOPK "What are you calling junk, you little wretch?!"
+
+    WWX "Sorry about him, Uncle, he was raised by dogs."
+    
+    NHS "{size=-9}Now you {i}really{/i} have to buy something, Jiang-xiong. Look, maybe you could get a gift for someone else?"
+
+    label giftshop:
+
+        call screen shopping
+    
+        label gift_MYgd:
+
+            if seen_MYgd == False:
+
+                $ seen_MYgd = True
+
+                WWX "What about this chonky jade bangle—whoa, it's heavy!"
+
+                JC "Who the hell would wear a bangle this big? You could knock someone out with this thing!"
+
+                WWX "Well, it's fancy jewellery, so bigger is better, right?"
+
+                NHS "Don't be such a size queen, Wei-xiong. {i}Greener{/i} is better, not bigger."
+                
+                WWX "It {i}is{/i} very green...Oh, but it's got a crack in it."
+
+                JC "Tch, no wonder it's not selling for much, it's broken crap."
+
+                SHOPK "CRAP?! It might have a crack, but it's still made of the finest Dragonstone jade!"
+
+                NHS "{size=-9}Hmm, the jade {i}is{/i} high quality. He might have to sell it at a markdown because of the crack, but a person with good business sense could cut beads from it instead and sell {i}that{/i} for far more."
+
+                WWX "{size=-9}But why would anyone want a present they're supposed to break apart and sell?"
+
+                NHS "{size=-9}I guess it depends on the person."
+            
+            NHS "So, Jiang-xiong, do you want to buy this jade bangle?"
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "MYgd"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_WQgd:
+
+            if seen_WQgd == False:
+
+                $ seen_WQgd = True
+
+                NHS "Chatter chatter chatter about the present here"  ## placeholder text!!
+            
+            NHS "So, Jiang-xiong, do you want to buy this thing WQ will like?" ## change the thing to the actual thing!!
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "WQgd"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_LXCgd:
+
+            if seen_LXCgd == False:
+
+                $ seen_LXCgd = True
+
+                NHS "Chatter chatter chatter about the present here"  ## placeholder text!!
+            
+            NHS "So, Jiang-xiong, do you want to buy this thing LXC will like?" ## change the thing to the actual thing!!
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "LXCgd"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_LWJgd:
+
+            if seen_LWJgd == False:
+
+                $ seen_LWJgd = True
+
+                WWX "Is this a textbook? 'The Definitive Guide to the Anatomy, Behaviour, and Habitat Use of Leporidae'."
+
+                NHS "What are Lepeordi...Leperidi...those? Some kind of yao?"
+
+                JC "No idea. There's no diagrams or illustrations or anything."
+
+                WWX "{i}'Leporids ferment fiber in the cecum and then expel the contents as cecotropes, which are reingested. The cecotropes are then absorbed in the small intestine to utilize the nutrients. The dental formula of leporids is—'{/i}"
+
+                NHS "Noooo, stop before I fall asleep, Wei-xiong."
+
+                JC "At least you could use it as a pillow if you fall asleep reading it, it's thick enough..."
+
+                WWX "You could also cut a hole in the pages and hide a {i}different{/i} book in it, it's thick enough for that too!"
+
+                JC "Why the hell would anyone do that!"
+
+                NHS "Ohhhhh, you could! Hmm..."
+            
+            NHS "So, Jiang-xiong, do you want to buy The Definitive Guide to the Anatomy, Behaviour, and Habitat Use of Leporidae?"
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "LWJgd"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_MYbad:
+
+            if seen_MYbad == False:
+
+                $ seen_MYbad = True
+
+                NHS "Oh look, here's a book that's nice and thin!"
+
+                WWX "'The Illustrated Classics of Filial Piety'...looks like it's for kids."
+
+                JC "Ugh, sounds boring. Put it back"
+
+                SHOPK "Boring?! Did your parents not raise you right, young man, filial piety is one of the highest virtues!"
+
+                JC "I know that! I didn't mean that filial piety is boring, I meant this book is—"
+
+                WWX "{i}What my shidi means!{/i} Is that all the {i}rest{/i} of your goods are so exciting that this one pales just a little in comparison..."
+
+                NHS "Actually, it's quite good! The illustrations are really well drawn!"
+
+                SHOPK "Hah! Now {i}that{/i} is a young man of taste and virtue."
+
+                NHS "...I wonder if the artist takes commissions for works that {i}aren't{/i} for kids..."
+            
+            NHS "So, Jiang-xiong, do you want to buy 'The Illustrated Classics of Filial Piety'?"
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "MYbad"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_WQbad:
+
+            if seen_WQbad == False:
+
+                $ seen_WQbad = True
+
+                NHS "chatter"
+            
+            NHS "So, Jiang-xiong, do you want to buy the thing WQ will hate?"
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "WQbad"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_LXCbad:
+
+            if seen_LXCbad == False:
+
+                $ seen_LXCbad = True
+
+                NHS "chatter"
+            
+            NHS "So, Jiang-xiong, do you want to buy the thing LXC will hate?"
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "LXCbad"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+
+        label gift_LWJbad:
+
+            if seen_LWJbad == False:
+
+                $ seen_LWJbad = True
+
+                JC "There's a book here...'The Regret of Chunshan', wonder what that's—GAAAAH!!"
+
+                NHS "Oooh, it's the illustrated version, I have a copy at home! It's good, I thought the artist picked the best, most dramatic scenes to draw!"
+
+                WWX "Whoa, surely no one's heavenly pillar is that...dramatic..."
+
+                JC "I'm not buying porn out here in broad daylight!!"
+
+                SHOPK "Hmph, well the shop's open until late evening, so if you prissy young masters want to sneak back after sunset, you can."
+
+                JC "THAT'S NOT WHAT I—"
+
+                NHS "{size=-9}Shhh not so loud! Now everyone's looking!"
+            
+            NHS "So, Jiang-xiong, do you want to buy The Regret of Chunshan?"
+
+            menu:
+                "Yes":
+
+                    $ giftbought = "LWJbad"
+
+                    jump giftbought
+
+                "No":
+
+                    NHS "Let's see what else there is."
+
+                    jump giftshop
+           
+        label giftbought:
+
+            NHS "Great! I'm sure someone will like this!"
+
+            WWX "{size=-9}And now we don't have to duel this uncle for the honour of his shop before he lets Jiang Cheng leave."
+
+            jump GIFT_2
+
+label GIFT_2:
+
+    scene bg gusu
+    with cutfast
+
+    ## change music or keep the same?    
+
+    show NHS right at right
+    show WWX right at center
+    show JC right angy at left
+    with moveinright
+
+    JC "...still think it was all overpriced rubbish!"
+
+    show WWX talk
+
+    WWX "That's the price you pay for having no manners."
+
+    show NHS fan
+
+    NHS "At least we got away safely. Jiang-xiong, I really thought that shopkeeper was going to beat you up even after you paid him."
+
+    show JC left hands
+
+    JC "It's your fault! If you hadn't forced me to look at his shop, I wouldn't have insulted his goods in the first place!"
+
+    show NHS talkfan
+
+    NHS "Well, you've already paid for it. If you don't want to keep it, why not give it to someone else?"
+
+    menu:
+        "Give it to Lan Xichen": ## edit this text later
+
+            jump GIFT_LXC
+
+        "Give it to Wen Qing": ## edit this text later
+
+            jump GIFT_WQ
+
+        "Give it to Meng Yao": 
+            
+            show JC blush
+
+            JC "Maybe I'll give it to Meng-gongzi..."
+
+            show WWX cheeky
+
+            WWX "Oho, Meng-gongzi, is it? Soooo, do you like him? Is he your type?"
+
+            show JC angy
+
+            JC "What? What type—I don't—"
+
+            WWX "But you want to give him a present! You want him to know you thought of him!"
+
+            show JC hands
+
+            JC "It's just a gift, I don't want him to know any damn thing—"
+
+            show WWX left cheeky
+
+            WWX "Did you hear that, Nie-xiong? Jiang Cheng wants to give Meng Yao a gift—a courting gift!"
+
+            show JC rage
+
+            JC "{i}It's not a courting gift! No courts involved!! BOTH OF YOU SHUT UP!!{/i}"
+
+            show JC right rage at offscreenleft
+            with ease
+
+            show NHS pout
+
+            NHS "I didn't even say anything..."
+
+            jump GIFT_MY
+
+        "Give it to Nie Huaisang":
+
+            show JC left hands:
+                ease 0.1 xoffset 100
+                ease 0.1 xoffset 0
+
+            JC "Fine! Nie Huaisang, you take it!"
+
+            show NHS smile
+
+            NHS "Aww, for me? Thanks, Jiang-xiong!"
+
+            show NHS fan
+
+            NHS "I'll make sure to give it to someone who'll really appreciate this...and maybe get something in return..."
+
+            jump WBA_end
+
+        "Give it to Wei Wuxian":
+
+            show JC left hands:
+                ease 0.1 xoffset 100
+                ease 0.1 xoffset 0
+
+            JC "Wei Wuxian, you deal with this!"
+
+            show WWX wat
+
+            WWX "What am I supposed to do with—"
+
+            show WWX cheeky
+
+            WWX "Oh! I could give it to Lan Zhan!"
+
+            show JC angy
+
+            JC "Is there nothing in your brain but Lan Wangji?! Why would you give something like this to him!"
+
+            if giftbought == "LWJgd":
+                show WWX right talk
+
+            else:
+                show NHS fan
+
+                NHS "Yeah, Wei-xiong, I'm not sure Lan-er-gongzi will like it..."
+
+                show WWX left cheeky
+
+            WWX "Hey, it's the thought that counts, right?"
+
+            show WWX left
+            hide WWX with easeoutright
+
+            show JC hands
+
+            JC "That's the problem, dumbass! There {i}was{/i} no thought!! YOU NEVER HAVE THOUGHTS!!"
+
+            jump GIFT_LWJ
+
+        "Keep it":
+
+            show JC angy
+
+            JC "I already paid through my nose for this, I'm damn well keeping it!"
+
+            show WWX cheeky
+
+            WWX "Good idea! Next time you piss someone off, you'll have a present on hand to appease them."
+
+            show NHS fan
+
+            NHS "I don't know, I feel like this present might piss some people off even more..."
+
+            show WWX talk
+
+            WWX "That's true. Maybe you should give it to Shijie, at least she'll love you no matter what."
+
+    jump WBA_end
+
+label GIFT_LXC: ## edit everything including bg and music!
+
+    scene bg library
+    with cutslow
+
+    stop music fadeout 1.0
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show LXC left at midleft
+    with None
+
+    show JC right at midright
+    with moveinright
+
+    JC "Hi Zewu-jun, here have [giftbought] as a present"
+
+    jump WBA_end
+
+label GIFT_WQ: ## edit everything including bg and music!
+
+    scene bg backhill
+    with cutslow
+
+    stop music fadeout 1.0
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show WQ left at midleft
+    with None
+
+    show JC right at midright
+    with moveinright
+
+    JC "Hi Wen Qing, here have [giftbought] as a present"
+
+    jump WBA_end
+
+label GIFT_MY: ## edit music and maybe bg?
+
+    scene bg class
+    with cutslow
+
+    stop music fadeout 1.0
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show MY left at midleft
+    with dissolve
+
+    show JC right talk at midright
+    with easeinright
+
+    JC "Meng-gongzi, there you are."
+
+    show MY talk
+
+    MY "Jiang-gongzi, greetings. Were you looking for me?"
+
+    show JC blush
+
+    JC "No. Yes. It's not—"
+
+    show JC hands:
+        ease 0.1 xoffset -100
+        ease 0.1 xoffset -100
+
+    JC "JUST TAKE THIS, ALRIGHT?! IT'S NOT A COURTING GIFT JUST A REGULAR GIFT!"
+
+    if giftbought == "MYgd":
+
+        $ chengyao += 2
+
+        show MY frowny:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+        
+        MY "It's...a jade bangle? For me?"
+
+        show JC angy
+
+        JC "It's too big for you! And it's got a crack in it!"
+
+        MY "I...see."
+
+        show JC hands
+
+        JC "Nie Huaisang said you could get it cut into beads and sell it for more money cause the jade is high quality!"
+
+        show JC angy
+
+        JC "ARGH look, I'm bad at presents, but you seem like a practical person so I thought maybe you could sell this off and buy yourself something nice! If you want!!"
+
+        show JC hands
+
+        JC "And if you don't want, then you can use it as a weapon and throw it at someone's head or something, I don't know!!"
+
+        show MY talk
+
+        MY "...I suppose no one would suspect that a jade bangle could be a murder weapon. And it doesn't take blood stains."
+
+        show JC blush
+
+        JC "Right! Exactly! Good!"
+
+        show MY blush
+
+        MY "It {i}is{/i} good, Jiang-gongzi, thank you."
+
+        MY "I always appreciate your honesty and forthrightness. And as you say, I'm a practical person."
+
+        show MY smile
+        
+        MY "That you tried to give me something I could use to help myself...well, that's worth more to me than the best jade in the world."
+
+    elif giftbought == "MYbad":
+
+        $ chengyao -= 2
+
+        show MY frowny:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+        
+        MY "A gift?"
+
+        MY "'The Illustrated Classics of Filial Piety'...ah. A children's book. To teach them about filial piety."
+
+        show MY -frowny
+
+        MY "..."
+
+        show JC angy
+
+        JC "Look, you like books, right? Books that teach people things? You're always carrying them around!"
+
+        show MY frowny
+
+        MY "...I am indeed often carrying textbooks around for Nie-er-gongzi's benefit, yes."
+
+        show JC hands
+
+        JC "Right! So I figured you'd want to have some of your own, instead of borrowing from the Lan sect library all the time. And this one's about filial piety, that's always good, right?"
+
+        MY "...So it is said, yes. That's...a thoughtful...thought."
+
+        show JC blush
+
+        JC "Great. So, enjoy reading it. Hope you, um, learn something."
+
+        show MY -frowny
+
+        MY "..."
+
+        show MY happy
+
+        MY "Yes, I'm sure this children's book will be both entertaining and educational. How gracious of Jiang-gongzi, to think of me when he saw this."
+
+        MY "Now, if you'll excuse me, Jiang-gongzi, I really cannot wait to crack into it."
+
+        show MY right
+        hide MY with moveoutleft
+
+        show JC talk
+
+        JC "Great. That went well. Right?"
+
+        JC "...Right?"
+
+    else:
+
+        $ chengyao += 1
+
+        show MY frowny:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+
+        MY "Oh! Oh? Oh..."
+
+        show MY -frowny
+
+        MY "Ah, thank you, Jiang-gongzi. This is...very kind of you."
+
+        show MY talk
+
+        MY "I'll just...keep this. Thank you. Again."
+
+        show JC blush
+
+        JC "Good! You do that!"
+
+        JC "Goodbye."
+
+        show JC left blush
+        hide JC with easeoutright
+
+        show MY -talk
+
+        MY "But why...?"
+
+    jump WBA_end
+
+label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
+
+    scene bg library
+    with cutslow
+
+    stop music fadeout 1.0
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show LWJ left at midleft
+    with dissolve
+
+    show WWX right talk at midright
+    with easeinright
+
+    WWX "Hey Lan Zhan, Lan Zhan!"
+
+    LWJ "..."
+
+    show WWX at center
+    with ease
+
+    WWX "Guess what! I got you a present!"
+
+    show LWJ:
+        ease 0.5 xoffset -100
+
+    LWJ "...No."
+
+    show WWX cheeky
+
+    WWX "Here, look!"
+
+    if giftbought == "LWJbad": 
+
+        $ wangxian -= 1
+
+        WWX "It's a book! You like books, right?"
+
+        LWJ "...Mn. The Regret of Chunshan...?"
+
+        show LWJ angy:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+        
+        LWJ "?!?"
+
+        show WWX grin
+
+        WWX "Ahahah! Great book, right? Lots of illustrative diagrams and everything!"
+
+        LWJ "You—!!"
+
+        play sound "audio/swords.mp3"
+        ## play sound "audio/paperslashed.mp3" ## need to find this audio clip for this scene
+
+        show WWX wat:
+            ease 0.1 xoffset 300
+        
+        WWX "WHOA!"
+
+        show WWX cheeky
+
+        WWX "Really, Lan Zhan, ruining another book? I'm starting to think you hate reading!"
+
+        WWX "Is that it? Do you secretly hate books? You can tell me, I promise to keep it a secret from Old Man Lan—"
+
+        show LWJ right angy
+        hide LWJ with moveoutleft
+    
+    elif giftbought == "LWJgd": 
+
+        $ wangxian += 1
+
+        show WWX talk
+
+        WWX "It's a book! You like books, right?"
+
+        LWJ "...Mn. The Definitive Guide to the Anatomy, Behaviour, and Habitat Use of Leporidae...?"
+        
+        LWJ "..."
+
+        LWJ "Ah."
+
+        show WWX grin
+
+        WWX "Yeah, it's a book about bunnies!"
+        
+        show WWX cheeky
+        
+        WWX "Except written in the most boring, stuffy, Lan way possible. Which I figure makes it perfect for you!"
+
+        LWJ "Hmm."
+
+        show WWX talk:
+            ease 0.3 xoffset -100
+
+        WWX "You like it, don't you?"
+
+        LWJ "..."
+
+        show WWX grin
+
+        WWX "You do! I knew you would, you like my present sooooo much! Is it 'cause of the bunnies, or 'cause it's the most boring textbook I've ever read? I bet it's both, it takes a real talented writer to make even bunnies boring, you know, and..."        
+
+    else:
+        LWJ "..."
+
+        LWJ "I decline."
+
+        show LWJ right at offscreenleft
+        with move
+
+        show WWX grin
+
+        WWX "Awww, hate to see you leave, love to watch you go!"
 
     jump WBA_end
 
@@ -4115,15 +6155,6 @@ label WBA_end:
     stop music fadeout 1.0
     play music "audio/fun2.mp3" fadein 1.0
 
-    "Despite the Lan sect rules prohibiting gossip, the story of how a certain group of young cultivators eradicated a waterborne abyss spreads throughout the Cloud Recesses."
-
-    "This inspires some students in the Cloud Recesses to take an even greater interest in their studies; their dormitory windows stay lit well into the night as they bury their noses further into their scrolls and tomes."
-
-    "Some other students, however, are staying up past sunset for slightly different reasons..."
-
-    scene bg indoorsnight
-    with cutfast
-    
     show bar
     show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Seven days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
@@ -4132,14 +6163,21 @@ label WBA_end:
     hide bar
     with Dissolve(0.5)
 
+    let "{vspace=200}As the weeks of lectures pass and the final exam looms ever closer, some students discover new depths to their wells of diligence; their dormitory windows stay lit well into the night as they bury their noses further into their scrolls and tomes."
+
+    let "Some other students, however, are staying up past sunset for slightly different reasons..."
+
+    scene bg indoorsnight
+    with cutfast
+
     show NHS right at right
     show WWX right at center
     show JC left at left
     with dissolve
 
-    WWX "Since we're in Gusu, we have to drink Emperor's Smile!"
-
     show WWX talk
+
+    WWX "Since we're in Gusu, we have to drink Emperor's Smile!"
 
     WWX "Its scent is subtle, yet the flavour is rich. Pure, yet smooth. Strong, yet not overwhelming. Ahhh."
 
@@ -4196,8 +6234,6 @@ label WBA_end:
 
             NHS "And even Wen-guniang smiled at him when she walked by, just the other day!"
         
-        else:
-            pass
     
     elif xicheng >= 3 and chengqing >= 3:
         show NHS smile
@@ -4924,6 +6960,15 @@ label CSC_1:
     stop music fadeout 1.0
     play music "audio/CSC_1.mp3" fadein 1.0
 
+    scene bg indoors
+    with timepass2
+
+    stop music fadeout 1.0
+    play music "audio/CSC_1.mp3" fadein 1.0
+
+    let "{vspace=260}It is, of course, entirely possible for Wei Wuxian to get into more trouble, and so the next day finds these four young masters hauled up for punishment. Thankfully, they have the day after the punishment set aside for rest and reflection."
+
+    scene bg indoors
     show bar
     show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Five days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
@@ -5958,13 +8003,16 @@ label LT:
     hide bar
     with Dissolve(0.5)
 
-    show NHS right talk at right
+    show NHS right at right
     show WWX right at midright
     show JC left at midleft
+    with dissolve
+
+    show WWX talk
 
     WWX "YAAAAH I can't believe we're finally done with these boring lectures and even more boring tests!"
 
-    show JC hands
+    show JC angy
 
     JC "As if you didn't get thrown out of half of those lectures."
 
@@ -5972,7 +8020,7 @@ label LT:
 
     NHS "I can't believe I passed! Finally!"
 
-    show WWX left talk
+    show WWX left grin
 
     WWX "Hah, told you you had nothing to worry about."
 
@@ -5980,13 +8028,501 @@ label LT:
 
     NHS "Tell that to my Da-ge."
 
-    WWX "Now you can tell him yourself! But hey, we had a deal, and I've kept my end of it, soooo..."
+    if mingcheng >= 4:
 
-    show WWX grin
+        show WWX left talk
 
-    WWX "Have you gotten Jiang Cheng a date?"
+        WWX "Speaking of your Da-ge, doesn't that look like him over there?"
 
-    show JC angy
+        show NHS left talkfan
+
+        NHS "Hah, why would Da-ge even be—"
+
+        show NHS fan
+        
+        NHS "Wait! That's him! Why is he—"
+
+        show NHS fan:
+            ease 0.1 yoffset -100
+            ease 0.1 yoffset 0
+
+        NHS "He's looking this way!"
+
+        hide NHS with moveoutbottom
+
+        show NHS bush at center
+        with moveinbottom
+
+        NHS "{size=-9}I was never here, I am one with the bushes, I do not exist..."
+
+        show NMJ right pissed at right
+        with moveinright
+
+        show WWX at midleft
+        show JC at left
+        with move
+
+        NMJ "...I swear I saw Huaisang around here—"
+
+        show WWX left:
+            ease 0.3 yoffset 100
+            ease 0.3 yoffset 0
+
+        show JC left talk:
+            ease 0.3 yoffset 100
+            ease 0.3 yoffset 0
+
+        WWX "Wei Wuxian of Yunmeng Jiang greets Chifeng-zun." ## maybe do this in unison with JC?
+
+        JC "Jiang Wanyin of Yunmeng Jiang greets Chifeng-zun."
+
+        show NMJ talk
+
+        NMJ "Yes, greetings, Jiang-gongzi, Wei-gongzi. Just the man I wanted to meet."
+
+        show WWX grin
+
+        WWX "Me, really?"
+
+        show WWX wat
+
+        NMJ "No. I meant Jiang-gongzi. Let's talk, Jiang-gongzi, walk with me."
+
+        menu:
+            "Yes, sir":
+
+                JC "Of course, Chifeng-zun."
+
+                NMJ "Good. Come." ## there is a funny sex joke to be made by WWX after this i think??
+
+                show NMJ left
+                hide NMJ with moveoutright
+                hide JC with moveoutright
+
+            "...May I respectfully decline, sir":
+
+                show JC blush
+
+                JC "Of course, Chifeng-zun. Only, the lantern lighting—"
+
+                NMJ "Don't worry about that, I won't take long. Come."
+
+                show NMJ left
+                hide NMJ with moveoutright
+                hide JC with moveoutright
+        
+        ## edit scene/music
+
+        scene bg gusu
+        with cutfast
+
+        stop music fadeout 1.0
+        play music "audio/lantern1.mp3" fadein 1.0
+
+        show NMJ left talk at midleft
+        show JC right at midright
+        with dissolve
+
+        NMJ "Jiang-gongzi, I'll be frank, I was surprised to receive a letter from you."
+
+        NMJ "Tell me, did Huaisang put you up to it?"
+
+        menu:
+            "Yes":
+
+                show JC blush
+
+                JC "He...did ask me to."
+
+                show JC angy
+
+                JC "But I was the one who decided what to write! He didn't write it for me!"
+
+                show NMJ smile
+
+                NMJ "I didn't think so. Huaisang writes better."
+
+                NMJ "But I liked your letter anyway. Appreciated the honesty."
+
+                NMJ "And the brevity."
+
+                show JC blush
+
+                JC "You liked my letter?? But no one ever—I mean, thank you, Chifeng-zun."
+
+                show NMJ talk
+
+                NMJ "Speaking of honesty, and brevity, let me get right to the point."
+
+                NMJ "What do you think of Huaisang?"
+
+                show JC angy
+
+                JC "...What do I think of Nie Huaisang??"
+
+                menu:
+                    "He's a good friend" if sangcheng >= 10: ## fix all these points!
+
+                        $ mingcheng += 1
+
+                        JC "He's fine!"
+
+                        NMJ "Fine?"
+
+                        show JC hands
+
+                        JC "Not like—"
+                        
+                        JC "I mean he's okay! Good! A...a good friend, good company."
+                        
+                        show JC angy
+
+                        JC "Would be better company if he didn't keep making me keep {i}other people{/i} company—"
+
+                        show NMJ smile
+
+                        NMJ "Hah! Well, that's something. I was told he passed his exams this year somehow, it must have been Jiang-gongzi's good influence."
+
+                        show NMJ pissed
+
+                        NMJ "Not that he hasn't given Xichen and Meng Yao more than enough trouble, or so I've been told."
+            
+                    "He's fun":
+
+                        JC "He's fine!"
+
+                        NMJ "Fine?"
+
+                        show JC hands
+
+                        JC "Not like—"
+                        
+                        JC "I mean he's okay! Fun! He drags us down to Caiyi to shop sometimes, or to the back hills to fish, or—"
+
+                        show NMJ pissed
+
+                        NMJ "That layabout, I already warned him that I'd send him back again next year if—"
+
+                        show JC blush:
+                            ease 0.1 yoffset -100
+                            ease 0.1 yoffset 0
+
+                        JC "But he passed the exams! Which is a very important thing I think about Nie Huaisang too!"
+
+                        NMJ "Did he now. Then perhaps I won't have to inflict him on Xichen and Wangji again next year."
+
+                    "He's bad at studying":
+
+                        JC "He's fine!"
+
+                        NMJ "Fine?"
+
+                        show JC hands
+
+                        JC "Not like—"
+                        
+                        JC "I mean he's okay! I mean, he's bad at studying, and training with the sword, but he's pretty good at fishing and—"
+
+                        show NMJ pissed
+
+                        NMJ "That layabout, I already warned him that I'd send him back again next year if—"
+
+                        show JC blush:
+                            ease 0.1 yoffset -100
+                            ease 0.1 yoffset 0
+
+                        JC "But he passed the exams! Which is a very important thing I think about Nie Huaisang too!"
+
+                        NMJ "Did he now. Then perhaps I won't have to inflict him on Xichen and Wangji again next year."
+
+                    "He keeps making me talk to people":
+
+                        $ mingcheng += 1
+
+                        JC "He's fine!"
+
+                        NMJ "Fine?"
+
+                        show JC hands
+
+                        JC "Not like—"
+                        
+                        JC "I mean he's okay! Likes to talk to people too much, likes to make {i}me{/i} talk to other people too damn much, but he's okay! An okay person!"
+
+                        show NMJ smile
+
+                        NMJ "Hah, sounds like Huaisang alright. I was told he passed his exams this year somehow, it must have been Jiang-gongzi's good influence."
+
+                        show NMJ pissed
+
+                        NMJ "Not that he hasn't given Xichen and Meng Yao more than enough trouble, or so I've been told."
+
+                NMJ "I should go find him now, see what he has to say for himself."
+
+            "No":
+
+                show JC blush
+
+                JC "No, he, uh. I heard him talk so much about you that I...couldn't stop myself from writing to you."
+
+                $ mingcheng -= 1
+
+                show NMJ pissed
+
+                NMJ "Next time, stop."
+
+                NMJ "Forget it. I'll find him and shake some answers out of him myself."
+
+            "Maybe?":
+
+                show JC blush
+
+                JC "Er, maybe. I...can't remember, I don't know."
+
+                $ mingcheng -= 1
+
+                show NMJ pissed
+
+                NMJ "Now you even sound like him."
+        
+                NMJ "Forget it. I'll find him and shake some answers out of him myself."
+            
+        menu:
+            "Suggest he look for Lan Xichen":
+
+                $ NMJ_gusu = "3zun"
+
+                show JC talk
+
+                JC "Maybe Chifeng-zun could ask Zewu-jun about Nie Huaisang too...?"
+
+                show NMJ talk
+
+                NMJ "Yes, good point, I'm sure Xichen will have something more to say about how Huaisang has been doing."
+
+                if xiyao >= 2: ## fix points
+
+                    NMJ "Instead of just talking about how great Meng Yao is all the damn time...like I don't already know how great Meng Yao is, tch."
+
+                JC "He—"
+
+                show NMJ talk
+
+                NMJ "Right, good talk, Jiang-gongzi."
+
+                show NMJ right
+                hide NMJ with moveoutleft
+            
+            "Suggest he look for Meng Yao":
+
+                $ NMJ_gusu = "3zun"
+
+                show JC talk
+
+                JC "Maybe Chifeng-zun could ask Meng-gongzi about Nie Huaisang too...?"
+
+                show NMJ talk
+
+                NMJ "Yes, good point, I'm sure Meng Yao will have something more to say about how Huaisang has been doing."
+
+                if xiyao >= 2: ## fix points
+
+                    NMJ "Instead of just talking about how great Zewu-jun is all the damn time...like I don't already know how great Xichen is, tch."
+
+                JC "He—"
+
+                show NMJ talk
+
+                NMJ "Right, good talk, Jiang-gongzi."
+
+                show NMJ right
+                hide NMJ with moveoutleft
+            
+            "Suggest he look for Nie Huaisang in Caiyi":
+
+                $ NMJ_gusu = "caiyi"
+
+                show JC talk
+
+                JC "Right. Yes. He said that he was...going down to Caiyi."
+
+                NMJ "To Caiyi? Why would he go there now instead of making those ridiculous lanterns? He always says this is the only part of the lectures he likes!"
+
+                show JC blush
+
+                JC "Yes, but he had to go. To, er, hide. From."
+
+                JC "...You...?"
+
+                NMJ "..."
+
+                show NMJ pissed
+
+                NMJ "Of course he did."
+
+                NMJ "Right, I'm heading to Caiyi now. Good talk, Jiang-gongzi."
+
+                show NMJ right
+                hide NMJ with moveoutleft
+
+            "Suggest he stay":
+
+                show JC blush
+
+                JC "Or Chifeng-zun could stay."
+
+                show JC hands
+
+                JC "To talk! That's all! Not like I—"
+
+                if mingcheng <= 2: ## fix points
+
+                    show NMJ talk
+                    $ NMJ_gusu = "NHS"
+                    $ sangcheng -= 10
+
+                    NMJ "I think we've talked enough, Jiang-gongzi. I'll head back now, and you should too. Good to meet you."
+
+                    show NMJ right
+                    hide NMJ with moveoutleft
+                
+                else:
+
+                    show NMJ smile
+
+                    NMJ "Yes, I think I wouldn't mind talking to you some more, Jiang-gongzi. What would you like to talk about?"
+
+                    show JC blush
+
+                    JC "Uh. The."
+
+                    JC "...Weather...?"
+
+                    NMJ "Hah, sod the weather! Tell me about your Jiang sword forms."
+
+                    show JC smile
+
+                    JC "Our sword forms? They're the best in the cultivation world!"
+
+                    NMJ "Is that so? Let's see about that."
+
+                    jump LT_NMJ
+
+            "Say nothing":
+
+                $ NMJ_gusu = "NHS"
+                $ sangcheng -= 10
+
+                NMJ "I bet he's still back there, hiding from me in some bushes."
+
+                show JC talk
+
+                JC "He—"
+
+                show NMJ talk
+
+                NMJ "Right, good talk, Jiang-gongzi."
+
+                show NMJ right
+                hide NMJ with moveoutleft
+
+        JC "..."
+
+        show JC hands
+
+        JC "Right! Sure! Good talk, Chifeng-zun!"
+            
+    if NMJ_gusu == "NHS":
+
+        ## edit music/transitions
+
+        scene bg lantern1
+        with cutfast
+
+        stop music fadeout 1.0
+        play music "audio/lantern1.mp3" fadein 1.0
+
+        show WWX right at midright
+        with dissolve
+
+        show JC left angy at midleft
+        with moveinleft
+
+        JC "...seriously what the hell was that—where's Nie Huaisang?"
+
+        show WWX grin
+
+        WWX "His Da-ge showed up, so he ran away! Oh man, you should have seen his face—"
+
+        ## might it be funny to add a leaves overlay to NHS sprite from here on out?
+
+        show NHS right pout at right 
+        with moveinright
+
+        NHS "Jiang-xiooooong, why didn't you keep talking to Da-ge! He came back and tried to hunt me down! I had to bribe some of the others with my precious lantern paper to tell him they'd seen me heading to Caiyi!"
+
+        show JC hands
+
+        JC "You seriously wanted me to talk to {i}your Da-ge?!{/i}"
+
+        show NHS fan
+
+        NHS "Oh, I don't know, lots of people think Da-ge's pretty dashing..."
+
+        show WWX left cheeky
+
+        WWX "The only thing dashing is you, Nie-xiong, whenever Chifeng-zun is around."
+        
+        WWX "Anyway, the {i}important{/i} thing is, have you gotten Jiang Cheng a date? A date who's not your brother."
+
+    elif NMJ_gusu == ".": 
+
+        show WWX left talk
+
+        WWX "Now you can tell him yourself! But hey, we had a deal, and I've kept my end of it, soooo..."
+
+        show WWX grin
+
+        WWX "Have you gotten Jiang Cheng a date?" ## check sprites are on either side of WWX to make who WWX is talking to clear
+    
+    else:
+
+        ## edit music/transitions
+
+        scene bg lantern1
+        with cutfast
+
+        stop music fadeout 1.0
+        play music "audio/lantern1.mp3" fadein 1.0
+
+        show WWX right at midright
+        show NHS right at right
+        with dissolve
+
+        show JC left angy at midleft
+        with moveinleft
+
+        JC "...seriously what the hell was that?"
+
+        show NHS talk
+
+        NHS "Jiang-xiong, you're back! Soooo, did you have a good talk with Da-ge?"
+
+        show JC hands
+
+        JC "What the hell, why would I have a good talk with {i}your Da-ge?!{/i}"
+
+        show NHS fan
+
+        NHS "Oh, I don't know, lots of people think Da-ge's pretty dashing..."
+
+        show WWX left cheeky
+
+        WWX "The only thing dashing is you, Nie-xiong, whenever Chifeng-zun is around."
+        
+        WWX "Anyway, the {i}important{/i} thing is, have you gotten Jiang Cheng a date? A date who's not your brother."
+
+    show JC rage
 
     JC "Who said anything about a date!"
 
@@ -6294,6 +8830,8 @@ label .choseMY:
 
     NHS "Well, go ask him then! I'm sure he'll say yes!"
 
+    show JC angy
+
     JC "But if—"
 
     NHS "No no, just go! Go! Trust me on this!"
@@ -6307,66 +8845,85 @@ label .choseMY:
     show JC right blush at midright
     with moveinright
 
-    JC "Uh, Meng-gongzi..."
+    JC "Meng-gongzi. So. Greetings."
 
-    show MY left
+    show MY left talk
 
-    MY "Yes, Jiang-gongzi? Can I help you with something?"
+    MY "Greetings, Jiang-gongzi. Can I help you with something?"
 
-    JC "I. Er. I thought I'd ask if—"
-
-    show MY smile
-
-    MY "Yes...?"
-
-    JC "..."
-
-    show JC angy
-
-    JC "ARGH!"
+    JC "No. Yes. Maybe, but it's not...I mean..."
 
     show JC hands
-    show MY left:
-        ease 0.1 xoffset -100 yoffset -100
-        ease 0.1 yoffset 0
 
-    JC "Look you don't have to if you don't want to but do you want to light a lantern with me or not???"
-
-    show MY talk
-
-    MY "I..."
-
-    show MY smile
-
-    MY "Do you mean you need assistance making a lantern of your own...? I don't have any experience, but I'll try my best to help."
+    JC "Look, I already have all the paper and things to make the lantern, and you don't have anything—"
 
     show JC angy
 
-    JC "No, no I mean making it {i}together.{/i} For Qixi."
+    JC "I'm not saying you don't have—I'm just saying you don't have anything right now—I mean that you're not making a lantern right now and I am! I mean, I could be!"
+
+    JC "And so could you! If you wanted! You probably know how to do stuff like this better than me anyway!"
+
+    show MY smile
+
+    MY "That's very kind of you to say, Jiang-gongzi. Are you asking for assistance in your lantern making...?"
+
+    show JC hands
+
+    JC "No! But everyone here's making a damn lantern, and you aren't, and if you wanted to make a damn lantern then you damn well should!!"
+
+    JC "But only if you really wanted to!"
 
     show MY talk
 
-    MY "Oh! That's—"
+    MY "Is...is Jiang-gongzi asking if I'd like to join everyone in making lanterns...?"
 
     show MY blush
 
-    MY "I...Well, I'm not really a student so I don't know if I should..."
+    MY "I...appreciate Jiang-gongzi thinking of me. And trying to include me. Truly, I do."
+
+    show MY frowny
+
+    MY "Still, I'm not a student, so it might not be appropriate—"
+
+    show JC angy
+
+    JC "Who cares about appropriate! Do it if you want to! Or don't, if you don't! And if anyone has a problem with that, they'll have a problem with me!"
+    
+    show MY smile
+
+    MY "Well, if Jiang-gongzi is willing to do battle for this Meng Yao's right to make lanterns, then how can I not?"
 
     show JC blush
 
-    JC "I don't care. I mean, if you don't want to, then—"
+    JC "I...I mean...you don't have to if you really don't want to. Or if you have someone else you want to make a lantern with instead, it's..."
+
+    show MY left:
+        ease 0.1 yoffset -50
+        ease 0.1 yoffset 0
+
+    MY "Oh!"
+
+    show MY frowny
+
+    MY "You were asking if I wanted to make a lantern {i}with you{/i}. Together. For Qixi."
+
+    JC "That. Yeah."
+
+    JC "Together. For Qixi. If Meng-gongzi would like."
 
     show MY blush
 
-    MY "I do."
+    MY "I..."
+
+    MY "I {i}would{/i} like, actually."
 
     show MY smile
 
-    MY "That is, if Jiang-gongzi would like us to make a lantern together, then I would be very honoured to do so."
+    MY "Thank you for thinking of me. For asking me what I'd like. And...and for choosing me to do this with, out of everyone else here. I would love to light a lantern with you, Jiang-gongzi."
 
-    show MY happy
+    show JC smile
 
-    MY "Thank you, Jiang-gongzi. For...for choosing me to do this with, out of everyone else here."
+    JC "That's...me too. I'd love to light a lantern with you too."
 
     jump LT_MY
 
@@ -6557,35 +9114,6 @@ label .chosenone:
 
     jump LT_canon
 
-label LT_NHS:
-    scene bg lantern2
-    with cutfast
-    pause(0.8)
-
-    stop music fadeout 0.8
-    play music "audio/lantern2.mp3" fadein 0.8
-
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
-
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
-
-    ## sangcheng ship splash screen goes here 
-
-    centered "The relationship between Nie Huaisang and Jiang Cheng continues to remain joyful and abiding. And one day, when Jiang Cheng should find himself desperately alone and needing support—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—Nie Huaisang will uproot himself from Qinghe to stand by Jiang Cheng's side at Lotus Pier. And when the cultivation world marks the 100th day after the birth of his nephew, it will truly be a cause for celebration instead of tragedy, as Nie Huaisang successfully helps to smuggle Wei Wuxian into Koi Tower for a humble little family gathering."
-
-    if wangxian >= 3:
-        ## wangxian ship splash screen goes here
-
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
-    
-    if xiyao >= 2:
-        ## xiyao ship splash screen goes here
-
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
-
-    jump end
-
 label LT_canon:
     scene bg lantern2
     with cutfast
@@ -6594,25 +9122,118 @@ label LT_canon:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## canon splash screen goes here...?? 
 
-    centered "The friendships Jiang Cheng made these few months will continue to be a source of small, quiet comfort as the years and tragedies sweep him along. One day, when he finds himself desperately alone and tired—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—he will look back to this moment and find a little more strength, just enough to keep going, in the hopes that future generations of Jiang disciples may one day have a childhood at least as bright as his own once was, if not brighter."
+    let "{vspace=150}The friendships Jiang Cheng made these few months will continue to be a source of small, quiet comfort as the years and tragedies sweep him along. \n \n One day, when he finds himself desperately alone and tired—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—he will look back to this moment and find a little more strength, just enough to keep going, in the hopes that future generations of Jiang disciples may one day have a childhood at least as bright as his own once was, if not brighter."
+
+    nvl clear
+    
+    if xiyao >= 2 and NMJ_gusu == "3zun":
+        ## 3zun ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. \n \n The wishes they speak to each other of the future may be lost underneath the carousing of the students, but the connection they forge that night will not. \n \n And when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember those wishes, and seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+    
+    elif xiyao >= 2:
+        ## xiyao ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
 
     if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
+        ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
 
+        nvl clear
+
+    jump end
+
+label LT_NHS:
+    scene bg lantern2
+    with cutfast
+    pause(0.8)
+
+    stop music fadeout 0.8
+    play music "audio/lantern2.mp3" fadein 0.8
+
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+
+    nvl clear
+
+    ## sangcheng ship splash screen goes here 
+
+    let "{vspace=150}The relationship between Nie Huaisang and Jiang Cheng continues to remain joyful and abiding. \n \n One day, when Jiang Cheng should find himself desperately alone and needing support—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—Nie Huaisang will uproot himself from Qinghe to stand by Jiang Cheng's side at Lotus Pier. \n \n And when the cultivation world marks the 100th day after the birth of his nephew, it will truly be a cause for celebration instead of tragedy, as Nie Huaisang successfully helps to smuggle Wei Wuxian into Koi Tower for a humble little family gathering."
+
+    nvl clear
     
-    if xiyao >= 2:
-        ## xiyao ship splash screen goes here 
-        
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+    if xiyao >= 2 and NMJ_gusu == "3zun":
+        ## 3zun ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. \n \n The wishes they speak to each other of the future may be lost underneath the carousing of the students, but the connection they forge that night will not. \n \n And when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember those wishes, and seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+    
+    elif xiyao >= 2:
+        ## xiyao ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+
+    if wangxian >= 3:
+        ## wangxian ship splash screen goes here
+
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
+
+    jump end
+   
+label LT_WQ:
+    scene bg lantern2
+    with cutfast
+    pause(0.8)
+
+    stop music fadeout 0.8
+    play music "audio/lantern2.mp3" fadein 0.8
+
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+
+    nvl clear
+
+    ## chengqing ship splash screen goes here 
+
+    let "{vspace=150}A single lantern's light rises between Wen Qing and Jiang Cheng, carrying their unspoken but heartfelt wishes into the night. And though that light wavers in the winds of war, it is never extinguished; a single flame that nevertheless illuminates a way through their darkest times. \n \n For Jiang Cheng, that light comes as a letter of warning written at great risk to its sender, which arrives just in time for him to hold Lotus Pier against the Wen and save most of his sect, if not his parents. For Wen Qing, that light comes as an invaluable voice of support, speaking out for what's left of her family when the entire cultivation world subsequently turns against them."
+
+    nvl clear
+    
+    if xiyao >= 2 and NMJ_gusu == "3zun":
+        ## 3zun ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. \n \n The wishes they speak to each other of the future may be lost underneath the carousing of the students, but the connection they forge that night will not. \n \n And when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember those wishes, and seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+    
+    elif xiyao >= 2:
+        ## xiyao ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+
+    if wangxian >= 3:
+        ## wangxian ship splash screen goes here
+
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
 
     jump end
 
@@ -6625,19 +9246,22 @@ label LT_MY:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
-    ## sangcheng ship splash screen goes here 
+    ## chengyao ship splash screen goes here 
 
-    centered "The relationship between Meng Yao and Jiang Cheng is a newly-lit flame, wavering in the winds of fate but never to be blown out. What wishes they make with each other are lost underneath the laughter and carousing of the other students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for Lotus Pier. And Jiang Cheng, too, will remember this wish, and take in the man who will become Lianfang-zun and not Jin Guangyao. They will rebuild the Jiang sect together with their capable hands, and lift it up once more to preeminence in the cultivation world."
+    let "{vspace=150}The relationship between Meng Yao and Jiang Cheng is a newly-lit flame, wavering in the winds of fate but never to be blown out. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the other students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for Lotus Pier.  \n \n And Jiang Cheng, too, will remember this wish, and take in the man who will become Lianfang-zun and not Jin Guangyao. They will rebuild the Jiang sect together with their capable hands, and lift it up once more to preeminence in the cultivation world."
+
+    nvl clear
 
     if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
+        ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
 
     jump end
 
@@ -6649,23 +9273,26 @@ label LT_LXC:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## xicheng ship splash screen goes here 
 
-    centered "The relationship between Jiang Cheng and Lan Xichen is a newly-lit flame, wavering in the winds of fate but never to be blown out. One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Lan Xichen will reach out to him with both hands and invite him into the warm embrace of sworn brotherhood. These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+    let "{vspace=150}The relationship between Jiang Cheng and Lan Xichen is a newly-lit flame, wavering in the winds of fate but never to be blown out. \n \n One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Lan Xichen will reach out to him with both hands and invite him into the warm embrace of sworn brotherhood. \n \n These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+
+    nvl clear
 
     if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
+        ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
     
     jump end
 
-label LT_WQ:
+label LT_NMJ:
     scene bg lantern2
     with cutfast
     pause(0.8)
@@ -6673,24 +9300,29 @@ label LT_WQ:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n But not every cultivator in Gusu is watching them take flight—in a quiet corner of the Cloud Recesses, Jiang Cheng and Nie Mingjue have their eyes not on the sky but on each other, alight with the joy of a good spar and a new friendship ignited."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
-    ## chengqing ship splash screen goes here 
+    ## canon splash screen goes here...?? 
 
-    centered "A single lantern's light rises between Wen Qing and Jiang Cheng, carrying their unspoken but heartfelt wishes into the night. And though that light wavers in the winds of war, it is never extinguished; a single flame that nevertheless illuminates a way through their darkest times. For Jiang Cheng, that light comes as a letter of warning written at great risk to its sender, which arrives just in time for him to hold Lotus Pier against the Wen and save most of his sect, if not his parents. For Wen Qing, that light comes as an invaluable voice of support, speaking out for what's left of her family when the entire cultivation world subsequently turns against them."
+    let "{vspace=150}This friendship will grow to be a source of strong, unwavering support as the years and tragedies sweep him along. \n \n One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Nie Mingjue will reach out to him with steady hands and pull him into the unstinting bonds of sworn brotherhood. \n \n These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+
+    nvl clear
+
+    if xiyao >= 2:
+        ## xiyao ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
 
     if wangxian >= 3:
         ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
-    
-    if xiyao >= 2:
-        ## xiyao ship splash screen goes here
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+        nvl clear
 
     jump end
 
@@ -6699,11 +9331,8 @@ label end:
     scene bg cover
     with cutslow
     pause(0.5)
-
-    scene bg coverDESAT
-    with Dissolve(0.5)
     
-    centered "{b}CREDITS{/b} \n \n
+    let "{b}CREDITS{/b} \n \n
     
     {b}Writer{/b} {space=50} Nonplussed \n
     {b}Artist{/b} {space=50} Carriecmoney \n \n
@@ -6711,12 +9340,14 @@ label end:
     {b}Nie Huaisang{/b} {space=50} sunkitten_shash \n
     {b}Meng Yao{/b} {space=50} KeriArentikai \n
     {b}Lan Xichen{/b} {space=50} kisahawklin \n
-    {b}Wen Qing{/b} {space=50} Nonplussed \n
+    {b}Wen Qing{/b} {space=50} WonderlandianGeek \n
     {b}Wei Wuxian{/b} {space=50} kisahawklin \n
     {b}Lan Wangji{/b} {space=50} Nonplussed \n
     {b}Wen Ning{/b} {space=50} KeriArentikai"
 
-    centered "{b}Background Art{/b} \n \n
+    nvl clear
+
+    let "{b}Background Art{/b} \n \n
     Mo Dao Zu Shi (donghua) \n
     Lantern Rite Promotional Video | Genshin Impact \n \n
     
@@ -6730,7 +9361,9 @@ label end:
     daisydiversions \n
     Art"
 
-    centered "{b}The End{/b} \n \n
+    nvl clear
+
+    let "{vspace=260}{b}The End{/b} \n \n
     If you've enjoyed this, do drop us a comment on {a=https://archiveofourown.org/works/58119751}AO3{/a} \n
     Thank you for playing!"
 
@@ -6754,4 +9387,3 @@ label end:
     ## This also ends the game
 
     return
-
