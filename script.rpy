@@ -116,6 +116,9 @@ label start: ## this bit exists to help with playtesting
                 "LT_MY":
                     jump LT_MY
                 
+                "LT_NMJ":
+                    jump LT_NMJ
+                
                 "LT_canon":
                     jump LT_canon
         
@@ -268,6 +271,7 @@ label start_real:
     menu:
         "Just admit you want it to be you.":
             $ wangxian += 1
+
             show JC angy
 
             JC "Ugh, Lan Zhan Lan Zhan Lan Zhan...Why are you always talking about him!"
@@ -276,7 +280,11 @@ label start_real:
 
             JC "Do you secretly want to be his date for the lantern lighting festival or something?"
 
+            $ chengxian -= 1
+
             show WWX wat
+            if helpmode:  ## this is purely for tutorial purposes, which means chengxian must start with 1 point already
+                call WWXbad
 
             WWX "What! No I don't! I do not!"
 
@@ -297,6 +305,11 @@ label start_real:
 
             JC "Ugh, Lan Zhan Lan Zhan Lan Zhan...Who cares about him, anyway?"
 
+            $ chengxian -= 1
+            if helpmode:  ## this is purely for tutorial purposes, which means chengxian must start with 1 point already
+                call WWXbad
+
+            show WWX -blush
             show NHS fan
 
             NHS "I wonder if he'll just stand to one side like a statue and not even make anything."
@@ -4884,7 +4897,7 @@ label WBA_3:
 
             JC "UGH, ignore those assholes. Tell me about, er, plant spirits."
 
-        "Ask Meng Yao about Jin Guangshan":
+        "Ask Meng Yao about Jin Guangshan": ## review this menu v dialogue option
 
             $ chengyao -= 2
 
@@ -5043,7 +5056,7 @@ label WBA_3:
 
                 show JC rage
 
-                JC "Jin Guangshan is a philandering low-life who no one wants as a father anyway! And you two are even lower than he is!!"
+                JC "Everyone knows that Jin-zongzhu is a peacock-fathering philanderer who {i}sucks{/i}, and so do you!!" ## come back to this, cut this whole option?
 
             "I don't care who his parents are":
 
@@ -5588,7 +5601,7 @@ label LET_2:
 
             JC "Ah, fuck, I'll just ask about his health, he can't have a problem with that."
 
-            $ let2 = "How has your health been? I'm sure there's nothing wrong with your health."
+            $ let2 = "How is your health? Your brother says you train with Baxia every day so your health must be great."
 
         "Write about the lectures":
 
@@ -5922,9 +5935,23 @@ label GIFT_1:
 
                 $ seen_WQgd = True
 
-                NHS "Chatter chatter chatter about the present here"  ## placeholder text!!
-            
-            NHS "So, Jiang-xiong, do you want to buy this thing WQ will like?" ## change the thing to the actual thing!!
+                WWX "What about this book?"
+
+                NHS "What, noooooo! I came to Caiyi to {i}escape{/i} books, not bring more back with us!"
+
+                JC "Let me see. What kind of book is it?"
+
+                WWX "Hmm, looks like it's medical-related?"
+
+                SHOPK "That's the journal of a famous local physician, chronicling experimental acupuncture techniques with yin energy!"
+
+                SHOPK "A rare find, young masters!"
+
+                show WWX grin
+
+                WWX "Wow, there are people in Gusu actually trying new things? No one tell Old Man Lan!"
+           
+            NHS "So, Jiang-xiong, do you want to buy this tattered old journal?"
 
             menu:
                 "Yes":
@@ -5945,9 +5972,17 @@ label GIFT_1:
 
                 $ seen_LXCgd = True
 
-                NHS "Chatter chatter chatter about the present here"  ## placeholder text!!
-            
-            NHS "So, Jiang-xiong, do you want to buy this thing LXC will like?" ## change the thing to the actual thing!!
+                NHS "Oh, look, it's a cat toy!" ## change this line to JC?
+
+                SHOPK "That's an ornamental tassel, not a toy!"
+
+                SHOPK "It's made of the best silk, sourced from Lanling, and the beads are hand crafted by a local artisan."
+
+                WWX "Pretty!"
+
+                JC "Yeah, maybe..."
+           
+            NHS "So, Jiang-xiong, do you want to buy this pile of strings?"
 
             menu:
                 "Yes":
@@ -6046,9 +6081,39 @@ label GIFT_1:
 
                 $ seen_WQbad = True
 
-                NHS "chatter"
+                WWX "This comb isn't bad." ## change to JC?
+
+                SHOPK "Not bad! That comb is a masterpiece of craftsmanship! It's made of elegant jade with traces of cinnabar and adorned with--"
+
+                WWX "If it's so great, then why haven't you sold it yet?" ## or this line to JC
+
+                SHOPK "Hmph."
+
+                JC "A comb, huh?"
+
+                NHS "Jiang-xiong. Wei-xiong."
+
+                NHS "Do you know that idiom: 'the happy couple will be together until their hair turns white'?"
+
+                WWX "That's right! You're supposed to give a comb to someone you want to marry and grow old with!"
+
+                WWX "Do you know anyone like that, Jiang Cheng?"
+
+                JC "Wei Wuxian!"
             
-            NHS "So, Jiang-xiong, do you want to buy the thing WQ will hate?"
+                NHS "The meaning might be lost on someone unless they are a true romantic like me."
+
+                WWX "Romantic, huh? Your reading habits would suggest you're more a pervert."
+
+                NHS "Why not both?"
+
+                NHS "But, you're right. It's probably better to read about someone else getting a comb than the awkwardness of getting one in real life."
+
+                WWX "And Jiang Cheng doesn't need any more help with being awkward."
+
+                JC "Wei Wuxian!"
+           
+            NHS "So, Jiang-xiong, do you want to buy the comb?"
 
             menu:
                 "Yes":
@@ -6591,12 +6656,14 @@ label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
 
         LWJ "I decline."
 
-        show LWJ right at offscreenleft
-        with move
+        show LWJ right
+        hide LWJ with moveoutleft
 
-        show WWX grin
+    show WWX grin
 
-        WWX "Awww, hate to see you leave, love to watch you go!"
+    WWX "Wait, Lan Zhan, what should I get you next time! What lowly gift is good enough for the esteemed second jade of Lan—hey, Lan Zhan, hey wait—"
+
+    hide WWX with easeoutleft
 
     jump WBA_end
 
@@ -8517,7 +8584,7 @@ label LT:
             ease 0.1 yoffset -100
             ease 0.1 yoffset 0
 
-        NHS "He's looking this way!"
+        NHS "He's looking this way! And he looks mad, oh noooo..."
 
         hide NHS with moveoutbottom
 
@@ -9593,29 +9660,36 @@ label LT_NHS:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## sangcheng ship splash screen goes here 
 
-    centered "The relationship between Nie Huaisang and Jiang Cheng continues to remain joyful and abiding. And one day, when Jiang Cheng should find himself desperately alone and needing support—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—Nie Huaisang will uproot himself from Qinghe to stand by Jiang Cheng's side at Lotus Pier. And when the cultivation world marks the 100th day after the birth of his nephew, it will truly be a cause for celebration instead of tragedy, as Nie Huaisang successfully helps to smuggle Wei Wuxian into Koi Tower for a humble little family gathering."
+    let "{vspace=150}The relationship between Nie Huaisang and Jiang Cheng continues to remain joyful and abiding. \n \n One day, when Jiang Cheng should find himself desperately alone and needing support—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—Nie Huaisang will uproot himself from Qinghe to stand by Jiang Cheng's side at Lotus Pier. \n \n And when the cultivation world marks the 100th day after the birth of his nephew, it will truly be a cause for celebration instead of tragedy, as Nie Huaisang successfully helps to smuggle Wei Wuxian into Koi Tower for a humble little family gathering."
 
-    if wangxian >= 3:
-        ## wangxian ship splash screen goes here
-
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+    nvl clear
     
     if xiyao >= 2 and NMJ_gusu == "3zun":
         ## 3zun ship splash screen goes here
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. The words they speak to each other may be lost underneath the laughter and carousing of the students, but the understanding and connection they forge will not. And when one day Meng Yao emerges from obscurity by right of blood and blade, he will seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. \n \n The wishes they speak to each other of the future may be lost underneath the carousing of the students, but the connection they forge that night will not. \n \n And when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember those wishes, and seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
     
     elif xiyao >= 2:
         ## xiyao ship splash screen goes here
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+
+    if wangxian >= 3:
+        ## wangxian ship splash screen goes here
+
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
 
     jump end
 
@@ -9627,29 +9701,36 @@ label LT_canon:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## canon splash screen goes here...?? 
 
-    centered "The friendships Jiang Cheng made these few months will continue to be a source of small, quiet comfort as the years and tragedies sweep him along. One day, when he finds himself desperately alone and tired—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—he will look back to this moment and find a little more strength, just enough to keep going, in the hopes that future generations of Jiang disciples may one day have a childhood at least as bright as his own once was, if not brighter."
+    let "{vspace=150}The friendships Jiang Cheng made these few months will continue to be a source of small, quiet comfort as the years and tragedies sweep him along. \n \n One day, when he finds himself desperately alone and tired—his sect decimated, his parents dead, his sister married out, his brother trapped in the Burial Mounds by his own principles—he will look back to this moment and find a little more strength, just enough to keep going, in the hopes that future generations of Jiang disciples may one day have a childhood at least as bright as his own once was, if not brighter."
 
-    if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
-
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+    nvl clear
     
     if xiyao >= 2 and NMJ_gusu == "3zun":
         ## 3zun ship splash screen goes here
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. The words they speak to each other may be lost underneath the laughter and carousing of the students, but the understanding and connection they forge will not. And when one day Meng Yao emerges from obscurity by right of blood and blade, he will seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. \n \n The wishes they speak to each other of the future may be lost underneath the carousing of the students, but the connection they forge that night will not. \n \n And when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember those wishes, and seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
     
     elif xiyao >= 2:
         ## xiyao ship splash screen goes here
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+
+    if wangxian >= 3:
+        ## wangxian ship splash screen goes here
+
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
 
     jump end
 
@@ -9661,24 +9742,29 @@ label LT_NMJ:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n But not every cultivator in Gusu is watching them take flight—in a quiet corner of the Cloud Recesses, Jiang Cheng and Nie Mingjue have their eyes not on the sky but on each other, alight with the joy of a good spar and a new friendship ignited."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}But not every cultivator in Gusu is watching them take flight—in a quiet corner of the Cloud Recesses, Jiang Cheng and Nie Mingjue have their eyes not on the sky but on each other, alight with the joy of a good spar and a new friendship ignited."
+    nvl clear
 
     ## canon splash screen goes here...?? 
 
-    centered "This friendship will grow to be a source of strong, unwavering support as the years and tragedies sweep him along. One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Nie Mingjue will reach out to him with steady hands and pull him into the unstinting bonds of sworn brotherhood. These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+    let "{vspace=150}This friendship will grow to be a source of strong, unwavering support as the years and tragedies sweep him along. \n \n One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Nie Mingjue will reach out to him with steady hands and pull him into the unstinting bonds of sworn brotherhood. \n \n These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+
+    nvl clear
+
+    if xiyao >= 2:
+        ## xiyao ship splash screen goes here
+
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
 
     if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
+        ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
-    
-    if xiyao >= 2:
-        ## xiyao ship splash screen goes here 
-        
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
 
     jump end
 
@@ -9691,19 +9777,22 @@ label LT_MY:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## chengyao ship splash screen goes here 
 
-    centered "The relationship between Meng Yao and Jiang Cheng is a newly-lit flame, wavering in the winds of fate but never to be blown out. What wishes they make with each other are lost underneath the laughter and carousing of the other students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for Lotus Pier. And Jiang Cheng, too, will remember this wish, and take in the man who will become Lianfang-zun and not Jin Guangyao. They will rebuild the Jiang sect together with their capable hands, and lift it up once more to preeminence in the cultivation world."
+    let "{vspace=150}The relationship between Meng Yao and Jiang Cheng is a newly-lit flame, wavering in the winds of fate but never to be blown out. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the other students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for Lotus Pier.  \n \n And Jiang Cheng, too, will remember this wish, and take in the man who will become Lianfang-zun and not Jin Guangyao. They will rebuild the Jiang sect together with their capable hands, and lift it up once more to preeminence in the cultivation world."
+
+    nvl clear
 
     if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
+        ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
 
     jump end
 
@@ -9715,19 +9804,22 @@ label LT_LXC:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## xicheng ship splash screen goes here 
 
-    centered "The relationship between Jiang Cheng and Lan Xichen is a newly-lit flame, wavering in the winds of fate but never to be blown out. One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Lan Xichen will reach out to him with both hands and invite him into the warm embrace of sworn brotherhood. These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+    let "{vspace=150}The relationship between Jiang Cheng and Lan Xichen is a newly-lit flame, wavering in the winds of fate but never to be blown out. \n \n One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Lan Xichen will reach out to him with both hands and invite him into the warm embrace of sworn brotherhood. \n \n These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
+
+    nvl clear
 
     if wangxian >= 3:
-        ## wangxian ship splash screen goes here 
+        ## wangxian ship splash screen goes here
 
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
     
     jump end
 
@@ -9739,29 +9831,37 @@ label LT_WQ:
     stop music fadeout 0.8
     play music "audio/lantern2.mp3" fadein 0.8
 
-    scene bg lantern2DESAT
-    with Dissolve(0.5)
+    let "{vspace=150}Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n \n Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n \n But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
 
-    centered "Soon, lanterns begin rising into the evening sky like the personal stars of the cultivators below, burning bright with their joys and hopes. \n{p}Thus marks the end of the Gusu lectures. For some, it will also mark the end of peace, of youth, of innocence. Of friendship and family bonds. \n{p}But not all bonds will be broken. Some forged in this time of childhood idyll might yet grow strong enough to withstand the tests of cruel fate."
+    nvl clear
 
     ## chengqing ship splash screen goes here 
 
-    centered "A single lantern's light rises between Wen Qing and Jiang Cheng, carrying their unspoken but heartfelt wishes into the night. And though that light wavers in the winds of war, it is never extinguished; a single flame that nevertheless illuminates a way through their darkest times. For Jiang Cheng, that light comes as a letter of warning written at great risk to its sender, which arrives just in time for him to hold Lotus Pier against the Wen and save most of his sect, if not his parents. For Wen Qing, that light comes as an invaluable voice of support, speaking out for what's left of her family when the entire cultivation world subsequently turns against them."
+    let "{vspace=150}A single lantern's light rises between Wen Qing and Jiang Cheng, carrying their unspoken but heartfelt wishes into the night. And though that light wavers in the winds of war, it is never extinguished; a single flame that nevertheless illuminates a way through their darkest times. \n \n For Jiang Cheng, that light comes as a letter of warning written at great risk to its sender, which arrives just in time for him to hold Lotus Pier against the Wen and save most of his sect, if not his parents. For Wen Qing, that light comes as an invaluable voice of support, speaking out for what's left of her family when the entire cultivation world subsequently turns against them."
 
-    if wangxian >= 3:
-        ## wangxian ship splash screen goes here
-
-        centered "As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown and bloomed enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+    nvl clear
     
     if xiyao >= 2 and NMJ_gusu == "3zun":
         ## 3zun ship splash screen goes here
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. The words they speak to each other may be lost underneath the laughter and carousing of the students, but the understanding and connection they forge will not. And when one day Meng Yao emerges from obscurity by right of blood and blade, he will seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao, Lan Xichen, and Nie Mingjue strike up a quiet, joyful conversation that continues until daybreak. \n \n The wishes they speak to each other of the future may be lost underneath the carousing of the students, but the connection they forge that night will not. \n \n And when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember those wishes, and seek the recognition not of his father by blood, but of his brothers by bond, and take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
     
     elif xiyao >= 2:
         ## xiyao ship splash screen goes here
 
-        centered "Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+        let "{vspace=150}Even for those who aren't students, the Gusu lectures leave their indelible mark. Under the candlelit sky, Meng Yao turns to Lan Xichen and finds him already looking back, his eyes shining with respect and regard. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for the Cloud Recesses, to take up only the name of Lianfang-zun and not Jin Guangyao."
+
+        nvl clear
+
+    if wangxian >= 3:
+        ## wangxian ship splash screen goes here
+
+        let "{vspace=150}As for Wei Wuxian, lighting a lantern with Lan Wangji is a small moment, a little seed planted early in the rich soil of their slowly developing relationship. \n \n But when one day Lan Wangji asks to bring Wei Wuxian back to Gusu, that seedling will have grown enough that Wei Wuxian will tentatively accept. And between them all, they find a way to quietly save the innocent Wens from their unjust fate."
+
+        nvl clear
+
     jump end
 
 label end:
@@ -9769,11 +9869,8 @@ label end:
     scene bg cover
     with cutslow
     pause(0.5)
-
-    scene bg coverDESAT
-    with Dissolve(0.5)
     
-    centered "{b}CREDITS{/b} \n \n
+    let "{b}CREDITS{/b} \n \n
     
     {b}Writer{/b} {space=50} Nonplussed \n
     {b}Artist{/b} {space=50} Carriecmoney \n \n
@@ -9786,7 +9883,9 @@ label end:
     {b}Lan Wangji{/b} {space=50} Nonplussed \n
     {b}Wen Ning{/b} {space=50} KeriArentikai"
 
-    centered "{b}Background Art{/b} \n \n
+    nvl clear
+
+    let "{b}Background Art{/b} \n \n
     Mo Dao Zu Shi (donghua) \n
     Lantern Rite Promotional Video | Genshin Impact \n \n
     
@@ -9800,7 +9899,9 @@ label end:
     daisydiversions \n
     Art"
 
-    centered "{b}The End{/b} \n \n
+    nvl clear
+
+    let "{vspace=260}{b}The End{/b} \n \n
     If you've enjoyed this, do drop us a comment on {a=https://archiveofourown.org/works/58119751}AO3{/a} \n
     Thank you for playing!"
 
@@ -9824,3 +9925,4 @@ label end:
     ## This also ends the game
 
     return
+
