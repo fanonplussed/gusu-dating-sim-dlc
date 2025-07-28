@@ -2615,7 +2615,7 @@ label LXC_2:
 
     if LWJ_talk_flag >= 1:
         show JC angy
-        
+       
         JC "No! I've had enough of trying to talk to that block of wood!"
 
         show NHS talk
@@ -2637,12 +2637,12 @@ label LXC_2:
         NHS "Well, Wei-xiong's still alive, isn't he?"
 
         JC "That's because that idiot is harder to kill than a cockroach."
-    
+   
     else:
         show JC angy
        
         JC "No! I've had enough of Lan Wangji glaring at me!"
-    
+   
     JC "Besides, didn't you say that homework doesn't matter as long as you pass the tests?"
 
     show NHS pout
@@ -2660,7 +2660,7 @@ label LXC_2:
     NHS "It's fun sneaking around when you're with someone else!"
 
     show NHS talk
-    
+   
     NHS "And anyway, I'm too busy to do any homework, this masterpiece isn't going to paint itself, you know."
 
     JC "Your—"
@@ -2711,252 +2711,580 @@ label LXC_2:
     show NHS talkfan
 
     NHS "Oh, I'm doing great, Xichen-ge! Really great! In fact, you should tell Da-ge how great I'm doing!"
-    
-    NHS "Look, me and Jiang-xiong have been doing homework, we've been writing an essay about..."
 
-    show NHS fan
-
-    NHS "..."
-
-    show JC right talk
-
-    JC "{size=-9} Plant spirits."
-
-    show NHS talkfan
-
-    NHS "Plant spirits!"
-
-    show LXC talk
-
-    LXC "Ah, a complicated subject indeed. I hope you're not having any trouble? If you are, I'd be glad to be of assistance."
-
-    NHS "Oh, no, no trouble at all, I'm so ready to go on all the night hunts and take down all the plant spirits!"
-
-    show LXC -talk
-
-    LXC "How wonderful! So you've both had no problems memorising the eleven classes of plant spirits and their respective elemental affinities and weaknesses?"
-
-    show NHS fan
-
-    NHS "Um...The eleven classes..."
-
+    NHS "Right, Jiang-xiong?  Aren't I doing great?"
+   
     menu:
-        "Make an attempt to list the eleven classes of plant spirits":
+        "Escape on your own!":
 
-            show JC left talk
+            $ sangcheng -= 1
 
-            JC "The eleven classes are Aromatics, Succulents, Evergreens..."
-
-            show NHS talkfan
-
-            NHS "Yes, those!"
-
-            show JC blush
-
-            JC "Er...herbal..."
-
-            show LXC talk
-
-            LXC "Ah, not quite. But that was a very good attempt, Jiang-gongzi."
-
-            show LXC -talk     
-        
-        "Admit to having problems memorising the eleven classes of plant spirits":
-
-            show JC left blush
-
-            JC "I...I think I remember three classes? Maybe four. There's a lot to memorise about plant spirits."
-
-            show LXC smile
-
-            LXC "Indeed there is! But it's better to be aware of the gaps in one's knowledge than to be foolishly overconfident."
-
-            show LXC -smile
-            $ xicheng += 1
-
-    LXC "I do find the way this topic is taught to be perhaps more obscure and dry than some of the others, so there's no shame in having some difficulty with it."
-
-    LXC "Perhaps a mnemonic might help! I've often found that to be a valuable educational aid! In fact, I'd be happy to tutor you both for the rest of the afternoon!"
-
-    LXC "And perhaps the next few afternoons as well—"
-
-    show NHS fan
-
-    NHS "NO no no no, I'm sure Xichen-ge is so very busy, you must have so many more important things to do with your time."
-
-    show NHS talkfan
-
-    NHS "In any case, studies aren't as important as...as what Jiang-xiong wants to talk to you about!"
-
-    LXC "Oh? What does Jiang-gongzi want to talk to me about?"
-
-    menu:
-        "Actually, I wouldn't mind having some help with studying":
-            show JC blush
-
-            JC "Actually, I wouldn't mind having Zewu-jun's help with studying. If Zewu-jun doesn't mind."
+            JC "That depends on your definition of \"great\", I guess."
 
             show NHS pout
 
-            NHS "Nooooo, Jiang-xiong..."
+            NHS "Jiang-xiong!"
 
-            show LXC smile
+            LXC "If you're having any trouble, I'd be glad to be of assistance."
 
-            LXC "Not at all, I'm always glad to help! Besides, it is important to know one's limits and seek assistance when appropriate."
+            NHS "No! I have it completely under control! After all, who would fail the same class three times in a row!"
 
-            $ xicheng += 1
+            JC "..."
 
-            show LXC -smile
+            LXC "..."
 
-            LXC "Now, I came up with a mnemonic for the eleven classes of plant spirits, and another one for their elemental affinities. And another one for..."
+            JC "Anyway, I need to go do...a thing. Over there."
 
-            NHS "{size=-9}Nooooooooooooooooo...."
+            LXC "Excellent. We'll stay here and review the eleven classes of plant spirits and their respective elemental affinities and weaknesses"
 
-            scene bg class ## this is technically the start of MY_2
-            with cutslow
+            NHS "Noooo, Jiang-xiong! Don't leave me!"
 
-            stop music fadeout 1.0
-            play music "audio/fun4.mp3" fadein 1.0
+            jump MY_2
 
-            show bar
-            show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
-            with Dissolve(0.5)
-            pause(2.0)
-            hide text
-            hide bar
-            with Dissolve(0.5)
+        "Ask Meng Yao?":
 
-            show JC right angy at midright
+            JC "Uhhh, actually Meng-gongzi is probably the best person to ask, right?"
 
-            JC "Damn it, how did Nie Huaisang disappear after class so quickly? Did he already make it to Caiyi?"
+            show NHS pout
 
-        "Er. Something very important. Unrelated to studying":
-            show JC left talk
-            
-            JC "Er. Something very important. Unrelated to studying."
+            NHS "Jiang-xiong!"
 
-            NHS "Yes! He was telling me about...about Lan-er-gongzi!"
+            LXC "Oh?"
+
+            show NHS smile
+
+            JC "Nie-xiong has been working hard with Meng-gongzi to review the course materials every day."
+
+            JC "He would definitely be the best person to ask for a progress report on Nie-xiong's effort, since he's been so diligent in helping us both."
+
+            LXC "Well, I'm pleased to hear that you've all been working hard."
+
+            $ xiyao += 1  
+
+            LXC "Maybe I will drop by and offer my special thanks to Meng-gonzi for his assistance. I know Mingjue will be assured as well."
+
+            NHS "Yes, yes! That sounds like a great idea! I think I last saw Meng Yao..."
+
+            JC "In the library! In the very back corner! You know how dedicated and diligent he is."
+
+            NHS "Right!"
+
+            LXC "Very well. I won't disturb your studies any longer."
+
+            hide LXC
+
+            NHS "Whew. That was a close one."
+
+            JC "Let's get out of here before he comes back!"
+
+            NHS "Right behind you!"
 
             $ sangcheng += 1
 
-            show LXC frown
+            jump MY_2     
 
-            LXC "Oh? Has something happened with Wangji?"
+        "Flee together!":
 
-            show NHS talk
+            JC "Yeah. Really great."
 
-            NHS "Oh, I don't know, I've barely spoken to Lan-er-gongzi since I got here. But Jiang-xiong has."
+            NHS "See! Even Jiang-xiong says so! And he'd never lie to the esteemed Zewu-jun!"
 
-            if LWJ_talk_flag >= 1:
-                show LXC -frown
+            JC "Um, sure. Right."
 
-                LXC "That's true, Wangji has mentioned this to me."
+            LXC "Wonderful. So, you wouldn't mind if I—"
 
-                JC "Wait, what? He has???"
+            JC "Actually! Speaking of your brother, Nie-xiong, I forgot that they asked me to tell you that there was a letter for you from your brother!"
 
-                LXC "We have our evening meal together every day, and I always ask if he's making friends with the other guest cultivators."
+            LXC "\"They\"?"
 
-                show LXC smile
-                
-                LXC "He's mentioned making conversation with Jiang-gongzi before, I remember being very pleased to hear it!"
+            JC "Uhh, yeah!  The people who...do the mail things."
 
-                show JC angy
+            LXC "You mean Qinghua-shidi?"
 
-                JC "{i}Making conversation?{/i} Like hell that was—"
+            JC "Uhh, maybe. Probably. Yes."
 
-                show NHS talkfan
+            NHS "Ohhhh, well!"
 
-                NHS "Oh yes! Such conversation! When Jiang-xiong told me about it, I thought they both seemed to be...um...of the same mind!"
+            NHS "I need to go get that letter then, Jiang-xiong!"
 
-                show JC right
+            NHS "What if Da-ge has some important news that cannot wait!"
 
-                JC "..."
+            JC "Or...study tips!"
 
-            else:
-                LXC "Hmm, I don't believe Wangji has mentioned speaking to Jiang-gongzi before."
+            NHS "Yes, the critically important study tips that he promised! Of course!"
 
-                show NHS talkfan
+            LXC "Well, then, I could come as well and we could discuss anything that you're struggling with on the way."
 
-                NHS "Oh, I'm sure they must have."
-            
-            NHS "In any case, Jiang-xiong was telling me about it, and I thought it sounded like Lan-er-gongzi was...Well..."
+            NHS "No need, no need!"
 
-            show LXC right frown
+            JC "I'll go with him! We already have a...system for...quizzing each other."
 
-            LXC "Wangji was what?"
+            NHS "Yes! The all-important quizzing system! Can't disrupt my study rhythm!"
+
+            NHS "Bye, Xichen-ge! Tell Da-ge that I feel smarter already!"
+
+            $ xicheng -= 1
+
+            LXC "..."      
+
+            jump MY_2
+           
+        "Stay and help Nie Huaisang!":
+
+            show NHS smile
+
+            JC "Yeah, he's doing great!"
+
+            NHS "Look, me and Jiang-xiong have been doing homework, we've been writing an essay about..."
 
             show NHS fan
 
-            NHS "Interested in Wei-gongzi. I don't know, I don't really know Lan-er-gongzi that well, but after all Jiang-gongzi knows Wei-gongzi best, so I thought..."
+            NHS "..."
 
-            show LXC talk:
-                ease 0.3 xoffset -800
+            show JC right talk
 
-            LXC "Oh? Yes? What did you think?"
+            JC "{size=-9} Plant spirits."
 
             show NHS talkfan
 
-            NHS "Well, just that Lan-er-gongzi seems awfully keen on dragging Wei-xiong off to be alone in the Library Pavilion all the time, right?"
+            NHS "Plant spirits!"
 
-            show JC right talk
+            show LXC talk
 
-            JC "What? But that's just because Wei Wuxian—"
+            LXC "Ah, a complicated subject indeed. I hope you're not having any trouble? If you are, I'd be glad to be of assistance."
+
+            NHS "Oh, no, no trouble at all, I'm so ready to go on all the night hunts and take down all the plant spirits!"
+
+            show LXC -talk
+
+            LXC "How wonderful! So you've both had no problems memorising the eleven classes of plant spirits and their respective elemental affinities and weaknesses?"
+
+            show NHS fan
+
+            NHS "Um...The eleven classes..."
+
+            menu:
+                "Make an attempt to list the eleven classes of plant spirits":
+
+                    show JC left talk
+
+                    JC "The eleven classes are Aromatics, Succulents, Evergreens..."
+
+                    show NHS talkfan
+
+                    NHS "Yes, those!"
+
+                    show JC blush
+
+                    JC "Er...herbal..."
+
+                    show LXC talk
+
+                    LXC "Ah, not quite. But that was a very good attempt, Jiang-gongzi."
+
+                    show LXC -talk    
+               
+                "Admit to having problems memorising the eleven classes of plant spirits":
+
+                    show JC left blush
+
+                    JC "I...I think I remember three classes? Maybe four. There's a lot to memorise about plant spirits."
+
+                    show LXC smile
+
+                    LXC "Indeed there is! But it's better to be aware of the gaps in one's knowledge than to be foolishly overconfident."
+
+                    show LXC -smile
+                    $ xicheng += 1
+
+            LXC "I do find the way this topic is taught to be perhaps more obscure and dry than some of the others, so there's no shame in having some difficulty with it."
+
+            LXC "Perhaps a mnemonic might help! I've often found that to be a valuable educational aid! In fact, I'd be happy to tutor you both for the rest of the afternoon!"
+
+            LXC "And perhaps the next few afternoons as well—"
+
+            show NHS fan
+
+            NHS "NO no no no, I'm sure Xichen-ge is so very busy, you must have so many more important things to do with your time."
+
+            show NHS talkfan
+
+            NHS "In any case, studies aren't as important as...as what Jiang-xiong wants to talk to you about!"
+
+            LXC "Oh? What does Jiang-gongzi want to talk to me about?"
+
+            menu:
+                "Actually, I wouldn't mind having some help with studying":
+
+                    show JC blush
+
+                    JC "Actually, I wouldn't mind having Zewu-jun's help with studying. If Zewu-jun doesn't mind."
+
+                    show NHS pout
+
+                    NHS "Nooooo, Jiang-xiong..."
+
+                    show LXC smile
+
+                    LXC "Not at all, I'm always glad to help! Besides, it is important to know one's limits and seek assistance when appropriate."
+
+                    $ xicheng += 1
+
+                    show LXC -smile
+
+                    LXC "Now, I came up with a mnemonic for the eleven classes of plant spirits, and another one for their elemental affinities. And another one for..."
+
+                    NHS "{size=-9}Nooooooooooooooooo...."
+
+                    jump MY_2
+
+                "Er. Something very important. Unrelated to studying":
+
+                    show JC left talk
+                   
+                    JC "Er. Something very important. Unrelated to studying."
+
+                    NHS "Yes! He was telling me about...about Lan-er-gongzi!"
+
+                    $ sangcheng += 1
+
+                    show LXC frown
+
+                    LXC "Oh? Has something happened with Wangji?"
+
+                    show NHS talk
+
+                    NHS "Oh, I don't know, I've barely spoken to Lan-er-gongzi since I got here. But Jiang-xiong has."
+
+                    if LWJ_talk_flag >= 1:
+
+                        show LXC -frown
+
+                        LXC "That's true, Wangji has mentioned this to me."
+
+                        JC "Wait, what? He has???"
+
+                        LXC "We have our evening meal together every day, and I always ask if he's making friends with the other guest cultivators."
+
+                        show LXC smile
+                       
+                        LXC "He's mentioned making conversation with Jiang-gongzi before, I remember being very pleased to hear it!"
+
+                        show JC angy
+
+                        JC "{i}Making conversation?{/i} Like hell that was—"
+
+                        show NHS talkfan
+
+                        NHS "Oh yes! Such conversation! When Jiang-xiong told me about it, I thought they both seemed to be...um...of the same mind!"
+
+                        show JC right
+
+                        JC "..."
+
+                    else:
+
+                        LXC "Hmm, I don't believe Wangji has mentioned speaking to Jiang-gongzi before."
+
+                        show NHS talkfan
+
+                        NHS "Oh, I'm sure they must have."
+                   
+                    NHS "In any case, Jiang-xiong was telling me about it, and I thought it sounded like Lan-er-gongzi was...Well..."
+
+                    show LXC right frown
+
+                    LXC "Wangji was what?"
+
+                    show NHS fan
+
+                    NHS "Interested in Wei-gongzi. I don't know, I don't really know Lan-er-gongzi that well, but after all Jiang-gongzi knows Wei-gongzi best, so I thought..."
+
+                    show LXC talk:
+                        ease 0.3 xoffset -800
+
+                    LXC "Oh? Yes? What did you think?"
+
+                    show NHS talkfan
+
+                    NHS "Well, just that Lan-er-gongzi seems awfully keen on dragging Wei-xiong off to be alone in the Library Pavilion all the time, right?"
+
+                    show JC right talk
+
+                    JC "What? But that's just because Wei Wuxian—"
+
+                    show LXC smile
+
+                    LXC "Yes! I thought so too!"
+
+                    NHS "In fact, I think they're both in the Library Pavilion right now! Alone!"            
+
+                    LXC "Oh! Well!"
+
+                    show LXC -smile
+
+                    LXC "Perhaps the two of them might also need some assistance learning about plant spirits."
+
+                    NHS "I bet they would! Wei-xiong's missed so much class because of all his punishments."
+
+                    LXC "Mn, it would be unfair to let him fall further behind in his studies because of this. Excuse me, gentlemen."
+
+                    show LXC left
+                    hide LXC with moveoutright
+                    show NHS pout:
+                        ease 0.5 xoffset 0
+
+                    NHS "Oh thank goodness, he's finally gone. Is nowhere in the Cloud Recesses safe..."
+
+                    show JC right talk
+
+                    JC "I guess next time you'll have to invent a talisman that teleports you from the doors of the lecture hall directly into Caiyi."
+
+                    scene bg class ## this is technically the start of MY_2
+                    with cutslow
+
+                    stop music fadeout 1.0
+                    play music "audio/fun4.mp3" fadein 1.0
+
+                    show bar
+                    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
+                    with Dissolve(0.5)
+                    pause(2.0)
+                    hide text
+                    hide bar
+                    with Dissolve(0.5)
+
+                    show JC right angy at midright
+
+                    JC "Damn it, did Nie Huaisang actually find some way to teleport from the lecture hall to Caiyi? How did he disappear after class so quickly?"
+
+                    show JC hands
+
+                    JC "And how the hell did he manage to stuff this note into my sleeve without me noticing???"
+
+                    jump MY_2a
+
+        "Stay with Lan Xichen":
+
+            $ sangcheng += 1
+
+            JC "We've made some decent headway into reviewing the material."
+
+            LXC "That's wonderful. Incremental progress can be a great study strategy."
+
+            LXC "Are either of you finding a particular topic challenging? I'd be glad to be of assistance."
+
+            JC "Actually, Nie-xiong was just saying that he wanted to reference a book he found in the library the other day on the eleven classes of plant spirits."
+
+            NHS "I was?"
+
+            NHS "Oh, yes, I was! I should definitely leave immediately. To go do...that."
+
+            LXC "Ah, a complicated subject indeed. Perhaps we could start with naming them from memory. Huaisang, would you like to go first?"
+
+            NHS "NO!"
+
+            NHS "I mean...Xichen-ge, my interest in this topic goes beyond rote memorisation. I need the works of the masters on this topic!"
+
+            LXC "The Masters of classifying plant spirits?"
+
+            NHS "Exactly!"
+
+            show NHS fan
+
+            NHS "It's like I can't {i}LEAF{/i} this topic alone."
+
+            show NHS talkfan
+
+            NHS "Get it? Leaf? Plant spirits?"
+
+            show NHS pout
+
+            NHS "Okay, bye."
+
+            hide NHS with moveoutright
+
+            menu:
+                "Huaisang loves the library, huh?":
+
+                    show JC smile
+                    
+                    JC "He, um, really likes the library."
+
+                "What a liar!":
+
+                    JC "Sorry, Zewu-jun, but I don't really think he's going to the library. Nie-xiong just hates studying."
+
+                "I thought he'd never leave...":
+
+                    show JC blush
+
+                    JC "Um, I guess it's just the two of us now."
+
+                    show JC -blush
+
+            show LXC right
+
+            LXC "Jiang-gongzi, I've known Huaisang his entire life. I know very well that sitting quietly and seriously applying himself is not one of his interests or strengths. Much to his older brother's frustration."
 
             show LXC smile
 
-            LXC "Yes! I thought so too!"
+            LXC "But you seem like a very competent tutor and a good friend to Huaisang."
 
-            NHS "In fact, I think they're both in the Library Pavilion right now! Alone!"            
+            LXC "He's very fortunate to have met you here."
 
-            LXC "Oh! Well!"
+            $ xicheng += 1
 
-            show LXC -smile
+            JC "I'm fortunate that he's my friend, too."
 
-            LXC "Perhaps the two of them might also need some assistance learning about plant spirits."
+            menu:
+                "And he'll pass!":
 
-            NHS "I bet they would! Wei-xiong's missed so much class because of all his punishments."
+                    show JC talk
 
-            LXC "Mn, it would be unfair to let him fall further behind in his studies because of this. Excuse me, gentlemen."
+                    JC "And for what it's worth, he is trying hard to pass this year. In his own way."
 
-            show LXC left
-            hide LXC with moveoutright
-            show NHS pout:
-                ease 0.5 xoffset 0
+                "It's good that you care!":
 
-            NHS "Oh thank goodness, he's finally gone. Is nowhere in the Cloud Recesses safe..."
+                    show JC talk
 
-            show JC right talk
+                    JC "And he's fortunate to have you care about him so much. Even if he wants to run away."
 
-            JC "I guess next time you'll have to invent a talisman that teleports you from the doors of the lecture hall directly into Caiyi."
+                "He better appreciate you!":
 
-            scene bg class ## this is technically the start of MY_2
-            with cutslow
+                    show JC angy
 
-            stop music fadeout 1.0
-            play music "audio/fun4.mp3" fadein 1.0
+                    JC "And if he doesn't appreciate your efforts, I'll break his legs for you!"
 
-            show bar
-            show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
-            with Dissolve(0.5)
-            pause(2.0)
-            hide text
-            hide bar
-            with Dissolve(0.5)
+            $ xicheng += 1
 
-            show JC right angy at midright
+            show LXC smile
+            show JC smile
 
-            JC "Damn it, did Nie Huaisang actually find some way to teleport from the lecture hall to Caiyi? How did he disappear after class so quickly?"
+            LXC "Thank you for that."
 
-            show JC hands
+            show JC blush
 
-            JC "And how the hell did he manage to stuff this note into my sleeve without me noticing???"
+            LXC "It's reassuring that I can rely on you, Jiang-gongzi. I'll leave Huaisang in your hands going forward."
 
-    jump MY_2
+            show JC talk
+
+            menu:
+                "I didn't sign up for this!":
+
+                    show JC angy
+
+                    JC "I'm Huaisang's friend. Not his babysitter!"
+
+                    show LXC frown
+                    $ xicheng -= 1
+
+                    JC "He needs to figure out how to pass on his own!"
+
+                    LXC "I see."
+
+                    show LXC flat
+
+                    LXC "My apologies for taking up your time then, Jiang-gongzi. I'll go find Huaisang and we'll work on his next assignment together."
+
+                    jump MY_2
+
+                "You got it!":
+                    $ xicheng += 1
+
+                    show LXC smile
+
+                    JC "I'll take care of it, Zewu-jun. I'm sure you have more important matters to attend to."
+
+                    show JC blush
+
+                    LXC "So dependable."
+
+                    show LXC talk
+
+                    LXC "Yes, I have some regional requests that I need to respond to. Perhaps I've also been procrastinating on my work."
+
+                    show JC smile
+                    show LXC smile
+
+                    JC "I promise not to tell Nie-xiong's Da-ge."
+
+                    LXC "Thank you for that, too."
+                   
+                    menu:
+                        "Why are you putting it off?":
+
+                            JC "Is there a reason why this particular request is troubling you?"
+
+                        "Want some help with that?":
+
+                            JC "I know that you have Lan-xiansheng to support you, but do you want to talk through the issue?"
+
+                    LXC "It's nothing too urgent, but there are some local merchants who want me to mediate a dispute they are having. I won't bore you with the details, but it doesn't seem like any of the parties have ill intentions."
+                   
+                    JC "Sounds like you don't want to hurt either of their feelings by siding against them."
+
+                    LXC "You may be right..."
+
+                    LXC "The resolution each party is requesting would harm the other in some ways, so it's a bit sensitive. I suppose I'm struggling to articulate my answer back to them."
+
+                    JC "And you can't find another solution that works out for everyone equally?"
+
+                    show LXC frown
+
+                    LXC "Not as such."
+
+                    show LXC smile
+
+                    LXC "Jiang-gongzi, do you have experience with resolving this type of petition?"
+
+                    show JC blush
+
+                    JC "My father has been training me on it more lately. Sometimes, he'll let me handle the less complicated complaints, but my sister is better at communicating the decisions back to the affected parties."
+
+                    JC "You're the expert on the area and the relationships involved, but I can take a look at it if you want a second opinion."
+
+                    show LXC talk
+
+                    LXC "That would be very kind, Jiang-gongzi. I would appreciate the help."
+
+                    show JC angy
+                    show LXC smile
+
+                    JC "Or if you need someone to bash their heads in if they complain about your plan."
+
+                    show JC blush
+                    show LXC talk
+
+                    LXC "Hopefully, no head bashing will be required."
 
 label MY_2:
+
+    scene bg class 
+    with cutslow
+
+    stop music fadeout 1.0
+    play music "audio/fun4.mp3" fadein 1.0
+
+    show bar
+    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
+    with Dissolve(0.5)
+    pause(2.0)
+    hide text
+    hide bar
+    with Dissolve(0.5)
+
+    show JC right angy at midright
+
+    JC "Damn it, how did Nie Huaisang disappear after class so quickly? Did he already make it to Caiyi?"
+
     show JC left at midright
 
     JC "Ugh, I need to finish my homework, but joining Huaisang in Caiyi for a bit would be pretty nice..."
+
+    jump MY_2a
+
+label MY_2a:
 
     show MY left at midleft
     with moveinleft
@@ -10580,3 +10908,4 @@ label end:
     ## This also ends the game
 
     return
+
