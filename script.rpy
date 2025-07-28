@@ -122,7 +122,7 @@ label start: ## this bit exists to help with playtesting
                 "LT_canon":
                     jump LT_canon
         
-        "Help mode?":
+        "Help mode/persistent data?":
             menu:
                 "help mode on":
 
@@ -139,6 +139,14 @@ label start: ## this bit exists to help with playtesting
                     "Help mode turned off"
 
                     jump start
+                
+                "clear persistent data":
+                    $ persistent._clear(progress=False)
+
+                    "Persistent data cleared"
+
+                    jump start
+
     
     jump end
 
@@ -280,14 +288,24 @@ label start_real:
 
             JC "Do you secretly want to be his date for the lantern lighting festival or something?"
 
-            $ chengxian -= 1
-
             show WWX wat
-            if helpmode:  ## this is purely for tutorial purposes, which means chengxian must start with 1 point already
-                call WWXbad
+
+            ## the following is purely for tutorial purposes, which means chengxian must start with at least 1 point already
+
+            $ chengxian -= 1
+            if helpmode:  
+                show WWXbad at appFade
 
             WWX "What! No I don't! I do not!"
 
+            if not persistent.playedonce:
+                window hide
+                show first_time
+                pause
+                hide first_time
+                window auto
+                $ persistent.playedonce = True
+            
             show NHS fan
 
             NHS "You know, Wei-xiong, you really do talk about Lan-er-gongzi quite a bit..."
@@ -305,14 +323,24 @@ label start_real:
 
             JC "Ugh, Lan Zhan Lan Zhan Lan Zhan...Who cares about him, anyway?"
 
+            ## the following is purely for tutorial purposes, which means chengxian must start with at least 1 point already
+
             $ chengxian -= 1
-            if helpmode:  ## this is purely for tutorial purposes, which means chengxian must start with 1 point already
-                call WWXbad
+            if helpmode:  
+                show WWXbad at appFade
 
             show WWX -blush
             show NHS fan
 
             NHS "I wonder if he'll just stand to one side like a statue and not even make anything."
+
+            if not persistent.playedonce:
+                window hide
+                show first_time
+                pause
+                hide first_time
+                window auto
+                $ persistent.playedonce = True
 
             show WWX talk
 
@@ -1581,6 +1609,8 @@ label WQ_1:
             JC "Wen Ning has a lot of potential, but even he can't improve without some help." 
 
             $ chengqing += 1
+            if helpmode:  
+                show WQgd at appFade
 
             WQ "He has all of the help he needs from his family.  Good day, Jiang-gongzi.  Nie-gongzi."
 
@@ -1589,6 +1619,8 @@ label WQ_1:
             JC "You don't think that all of the sects can learn something from each other?  Isn't that the point of these lectures– to foster good relations between us?"
 
             $ chengqing += 1
+            if helpmode:  
+                show WQgd at appFade
 
             WQ "The Wens weren't even invited to participate in these lectures.  Don't pretend like you want to play nice.  Stay away from my brother."
 
@@ -1620,6 +1652,8 @@ label WQ_1:
             JC "Fine! Your sect is all evil anyway!" 
 
             $ chengqing -= 2
+            if helpmode:  
+                show WQbad at appFade
 
             $ WenHate_flag = True
 
@@ -2251,6 +2285,8 @@ label WQ_2:
             JC "Yeah, I'm not surprised. I'm a pretty important person."
 
             $ chengqing -= 1
+            if helpmode:  
+                show WQbad at appFade
             
             show WQ sustalk left
 
@@ -2267,6 +2303,8 @@ label WQ_2:
             JC "Why, so you can involve me in whatever schemes you Wens are plotting?"
 
             $ chengqing = 0
+            if helpmode:  
+                show WQbad at appFade
 
             show WQ angy
 
@@ -2292,7 +2330,9 @@ label WQ_2:
                 "We're friends!":
                     JC "Yeah, Wen Ning is pretty great." 
                     
-                    $ chengqing =+1
+                    $ chengqing += 1
+                    if helpmode:  
+                        show WQgd at appFade
 
                     show WQ smile
                     pause 0.5
@@ -2306,7 +2346,10 @@ label WQ_2:
                     show JC roll
 
                     JC "Yeah, he keeps hanging around us. It's pretty annoying."
+
                     $ chengqing -= 1
+                    if helpmode:  
+                        show WQbad at appFade
 
                     show WQ angy
                     pause 0.5
@@ -2375,6 +2418,8 @@ label WQ_2:
                             
             $ WenHate_flag = True
             $ chengqing -= 1
+            if helpmode:  
+                show WQbad at appFade
 
             show WQ sustalk
 
@@ -2429,6 +2474,8 @@ label WQ_2:
             JC "The bruises on Wei Wuxian's knees will get bruises if he's made to kneel for any more punishments."
                                 
             $ chengqing += 1
+            if helpmode:  
+                show WQgd at appFade
 
             show WQ smile
             pause 0.5
@@ -3190,6 +3237,10 @@ label MY_2:
 
 label WBA_start:
 
+    ## this is a testing thing just for approval page text thingy
+    $ stats_arc1_done = True 
+    call statstext from _call_statstext
+
     scene bg gates
     with cutslow
 
@@ -3752,7 +3803,7 @@ label WBA_1:
 
     JC "...You sure you're not getting paid for this?"
 
-    jump WBA_end
+    jump LET_1
 
 label WBA_2:
 
@@ -4163,7 +4214,7 @@ label WBA_postchat:
 
     ## add new scene background? Nonplussed to source from donghua
 
-    show JC smile
+    show JC left smile at midleft
 
     JC "What an idiot."
 
@@ -4178,7 +4229,7 @@ label WBA_postchat:
            
             JC "Time to go back and see if Nie-xiong survived studying all day."
 
-            jump WBA_end
+            jump LET_1
 
         "Talk to Lan Xichen":
 
@@ -4189,7 +4240,7 @@ label WBA_postchat:
 
             JC "I'll go find Zewu-jun..."
 
-            show LXC smile
+            show LXC right smile at midright
 
             JC "Zewu-jun, thank you for your guidance today. I've never seen anyone use a xiao like that before."
             
@@ -4197,7 +4248,7 @@ label WBA_postchat:
 
             LXC "Thank you for your assistance today, Jiang-gongzi. Your skill in the water is truly remarkable."
 
-            show LXC flat
+            show LXC -talk
             show JC talk
 
             JC "Thank you, Zewu-jun."
@@ -4224,7 +4275,7 @@ label WBA_postchat:
             show JC blush
             show LXC talk
 
-            LXC "Maybe you can demonstrate the foot work you used to me another time?"
+            LXC "Maybe you can demonstrate your footwork to me another time?"
 
             show JC angy
             show LXC smile
@@ -4258,7 +4309,7 @@ label WBA_postchat:
 
             scene art_LXC1
 
-            jump WBA_end
+            jump LET_1
 
 
         "Talk to Wen Qing and Wen Ning":
@@ -4266,8 +4317,8 @@ label WBA_postchat:
             JC "I see the Wens over there, so maybe I'll just..."
 
             if WenHate_flag == True:
-                show WQ angy
-                show WN
+                show WQ right angy at midright
+                show WN right at right
 
                 WN "Hello, Jiang-gongzi!"
 
@@ -4285,13 +4336,13 @@ label WBA_postchat:
 
                 JC "Fine. I didn't want to talk to you anyway!"
 
-                jump WBA_end
+                jump LET_1
 
             else:
 
                 if Wenboatsave_flag == False:
-                    show WQ hmm
-                    show WN smile
+                    show WQ right hmm at midright
+                    show WN right smile at right
 
                     WN "Hello, Jiang-gongzi!"
 
@@ -4317,7 +4368,7 @@ label WBA_postchat:
 
                             WN "Thanks, Jiang-gongzi! You looked really cool today!"
 
-                            jump WBA_end
+                            jump LET_1
 
                         "Are you both okay?":
 
@@ -4334,7 +4385,7 @@ label WBA_postchat:
 
                             WN "Thanks, Jiang-gongzi! You looked really cool today!"
 
-                            jump WBA_end
+                            jump LET_1
 
                         "You shouldn't have come!":
                             show JC hands
@@ -4379,14 +4430,14 @@ label WBA_postchat:
 
                             WQ "We wouldn't want to be \"underfoot\" any longer than needed and some of these villagers still need medical care."
                             
-                            jump WBA_end
+                            jump LET_1
 
                 else:
 
                     #Path available if JC saves Wen Ning from WBA
 
-                    show WQ smile
-                    show WN smile
+                    show WQ right smile at midright
+                    show WN right smile at right
 
                     WN "Jiang-gongzi!"
 
@@ -4428,6 +4479,8 @@ label WBA_postchat:
 
                             WQ "I see. I'll keep that in mind for next time. Come on, A-Ning."
 
+                            jump LET_1
+
                     if WQApothecary_flag == True:
 
                         WQ "Jiang-gongzi, I believe that you mentioned that there was an apothecary in town. Would you like to accompany A-Ning and me there before we go back to Cloud Recesses?"
@@ -4458,7 +4511,7 @@ label WBA_postchat:
 
                                 WQ "I see."
 
-    jump WBA_end
+    jump LET_1
 
 label WBA_3:
 
@@ -5802,6 +5855,9 @@ label LET_2:
     [let5]
 
     """
+
+    nvl clear
+
     scene bg indoors 
     with cutfast
 
@@ -6079,11 +6135,11 @@ label GIFT_1:
 
                 $ seen_WQbad = True
 
-                WWX "This comb isn't bad." ## change to JC?
+                WWX "This comb isn't bad."
 
-                SHOPK "Not bad! That comb is a masterpiece of craftsmanship! It's made of elegant jade with traces of cinnabar and adorned with--"
+                SHOPK "Not bad! That comb is a masterpiece of craftsmanship! It's made of elegant jade, adorned with cinnabar beads and—"
 
-                WWX "If it's so great, then why haven't you sold it yet?" ## or this line to JC
+                JC "If it's so great, then why haven't you sold it yet?"
 
                 SHOPK "Hmph."
 
@@ -6132,9 +6188,17 @@ label GIFT_1:
 
                 $ seen_LXCbad = True
 
-                NHS "chatter"
-            
-            NHS "So, Jiang-xiong, do you want to buy the thing LXC will hate?"
+                NHS "Looks like some cured meats!"
+
+                JC "Hmm. They probably aren't spiced as well as the ones from Yunmeng."
+
+                SHOPK "My mother made that!"
+
+                WWX "How is her spice tolerance?"
+
+                SHOPK "You—!"
+           
+            NHS "So, Jiang-xiong, do you want to buy the cured meat?"
 
             menu:
                 "Yes":
@@ -6223,11 +6287,75 @@ label GIFT_2:
     NHS "Well, you've already paid for it. If you don't want to keep it, why not give it to someone else?"
 
     menu:
-        "Give it to Lan Xichen": ## edit this text later
+        "Give it to Lan Xichen":
+           
+            show JC blush
+
+            JC "It's for Zewu-jun, okay."
+
+            show NHS talkfan
+
+            NHS "Xichen-ge?"
+
+            show NHS fan
+            show WWX talk
+
+            WWX "Whoa, aiming for the stars, Jiang Cheng!"
+
+            show NHS talkfan
+            show JC blush
+
+            NHS "If Jiang-xiong marries Xichen-ge..."
+
+            show WWX blush
+
+            extend "and Wei-xiong marries Lan-er-gongzi..."
+
+            show NHS fan
+
+            extend "do you think you'll have a double wedding?"
+
+            show NHS talkfan
+
+            NHS "And would you call each other brother-in-law?"
+
+            show JC rage
+
+            JC "STOP MARRYING ME OFF! I HAVEN'T EVEN GIVEN HIM THE GIFT YET!"
+
+            show WWX -blush
+
+            WWX "Wait, why would Lan Zhan and I get married?"
 
             jump GIFT_LXC
 
-        "Give it to Wen Qing": ## edit this text later
+        "Give it to Wen Qing":
+            
+            show JC blush
+           
+            JC "I bought this for Wen Qing actually."
+
+            show NHS fan
+
+            NHS "Oh ho ho!"
+
+            WWX "Wow, Jiang Cheng. I didn't know you had it in you. She's kind of scary."
+
+            show JC angy
+            show NHS smile
+
+            JC "Yeah, well, your face is scary."
+
+            show JC blush      
+            show NHS fan
+
+            JC "Besides, I think I kind of like that about her."
+
+            show WWX grin
+
+            WWX "Kinky!"
+
+            JC "Shut up, Wei Wuxian!"
 
             jump GIFT_WQ
 
@@ -6347,21 +6475,170 @@ label GIFT_2:
 
     jump WBA_end
 
-label GIFT_LXC: ## edit everything including bg and music!
+label GIFT_LXC: 
 
-    scene bg library
+    scene bg class ## this might need a new background?
     with cutslow
 
     stop music fadeout 1.0
     play music "audio/fun3.mp3" fadein 1.0
 
-    show LXC left at midleft
-    with None
+    show JC left at midright
+    with moveinleft
 
-    show JC right at midright
-    with moveinright
+    JC "Okay, I'll just bring the gift to my usual training session with Zewu-jun and...that'll be fine."
 
-    JC "Hi Zewu-jun, here have [giftbought] as a present"
+    show LXC left smile at midleft
+    with moveinleft
+
+    JC "Right? Right."
+
+    show LXC talk
+
+    LXC "Right."
+
+    show JC right:
+        ease 0.1 yoffset -100
+        ease 0.1 yoffset 0
+    
+    show LXC smile
+
+    JC "Zewu-jun!"
+
+    show JC -talk
+    show LXC talk
+
+    LXC "Jiang-gongzi."
+
+    show JC blush
+    show LXC smile
+
+    JC "I. Um."
+
+    show LXC talk
+
+    LXC "Yes?"
+
+    show LXC smile
+    show JC angy
+
+    JC "I GOT YOU THIS IN CAIYI. I SAW IT AND THOUGHT OF YOU."
+
+    show JC blush
+    show LXC talk
+
+    LXC "Oh?"
+
+    ## Add an unwrapping soundeffect
+
+    if giftbought == "LXCgd":
+
+        $ xicheng += 1
+        
+        show LXC smile
+
+        LXC "Oh, Jiang-gongzi."
+
+        LXC "This is truly lovely."
+
+        JC "It's a decorative tassel. For your xiao."
+
+        JC "It's blue."
+
+        JC "Like the Gusu Lan colors."
+
+        LXC "Indeed. Thank you so much. This is very generous."
+
+        JC "You're welcome."
+
+        JC "It brings out the color of your eyes."
+
+        show LXC smile
+        show JC angy
+
+        JC "Wait, what."
+
+        show LXC talk
+        show JC blush
+
+        LXC "Jiang-gongzi is so sweet."
+
+        show LXC smile
+        show JC angy
+
+        JC "Sweet—!"
+
+        show LXC blush
+        show JC blush
+
+        LXC "Perhaps you'd like to come to the Hanshi sometime for a private performance?"
+
+        JC "I!!!"
+
+        show LXC talk
+
+        LXC "You could see your gift properly installed and I could pay you back for your kindness."
+
+        menu:
+            "Yes!":
+
+                $ xicheng += 1
+
+                show JC blush
+                show LXC blush
+
+                JC "I would be honored."
+
+                show LXC smile
+
+                LXC "Wonderful. You can set the date."
+
+                jump WBA_end
+
+            "No thanks...":
+
+                JC "Thanks for the offer, Zewu-jun, but..."
+
+                JC "Maybe after the guest lectures are over."
+
+                LXC "Of course."
+
+                LXC "Let's meet again then as sect heirs and equals."
+
+                jump WBA_end
+
+
+    elif giftbought == "LXCbad":
+
+        $ xicheng -= 1
+
+        LXC "Oh."
+        
+        JC "What do you think?  Do you like it?"
+
+        LXC "Jiang-gongzi. My apologies. I just remembered that I have an appointment that I must keep. Good day."
+
+        JC "Uhhh."
+
+        hide LXC
+
+        JC "Shit."
+
+        jump WBA_end
+
+    else:
+        
+        LXC "Oh. What a kind and thoughtful gift."
+
+        JC "I thought you might like it!"
+
+        LXC "Thank you for thinking of me, Jiang-gongzi."
+
+        JC "You're welcome!"
+
+        LXC "Shall we walk together the rest of the way? I'm eager to start our spar after a long day of grinding ink and writing letters."
+
+        jump WBA_end
 
     jump WBA_end
 
@@ -6373,15 +6650,180 @@ label GIFT_WQ: ## edit everything including bg and music!
     stop music fadeout 1.0
     play music "audio/fun3.mp3" fadein 1.0
 
-    show WQ left at midleft
-    with None
-
     show JC right at midright
     with moveinright
 
-    JC "Hi Wen Qing, here have [giftbought] as a present"
+    JC "Okay, Wen Ning said she was on a walk, so she's probably somewhere here in the backhills..."
+    
+    show JC at center
+    with move
 
-    jump WBA_end
+    JC "And this bush has a stray thread that's the same shade of red that the Wens use in their daily robes..."
+
+    show JC at midleft
+    with move
+
+    JC "And this tree branch looks like it was broken somewhat recently by someone around Wen Qing's height, so..."
+
+    show WQ right sustalk at center
+    with moveinright
+
+    WQ "I hope you're as good at tracking yao as you are tracking me."
+
+    show WQ angy
+
+    show JC left hands:
+        ease 0.1 yoffset -100
+        ease 0.1 yoffset 0
+    
+    show WQ at midright
+    with ease
+
+    JC "Wen-guniang!"
+
+    show WQ smile
+
+    WQ "Yes, here I am. You were looking for me?"
+
+    show JC blush
+
+    JC "Yes! I, uh, well."
+
+    show JC smile
+
+    JC "I GOT YOU THIS IN CAIYI. I SAW IT AND THOUGHT OF YOU."
+
+    show WQ -smile
+    show JC blush
+
+    WQ "Oh?"
+
+    ## Add an unwrapping soundeffect
+
+    if giftbought == "WQgd":
+
+        show WQ smile
+
+        WQ "A medical text. I've not seen this one before."
+
+        JC "The proprietor said it was written by a local specialist and not many copies likely made it out of Gusu Lan territory."
+
+        ## add soundeffects for WQ flipping through the pages
+
+        show JC talk
+
+        JC "I thought."
+
+        show JC blush
+
+        ## move JC closer to WQ to show her the passage
+
+        JC "I'm no expert, but this section here sounds similar to your brother's condition, right?"
+
+        $ chengqing += 2
+
+        show WQ blush
+        show JC talk
+
+        JC "I thought...it couldn't hurt?"
+
+        JC "Worse care scenario, it's a boring, useless read and we only wasted a day."
+
+        show WQ smile
+
+        WQ "We?"
+
+        show JC blush
+
+        JC "Well, not to...impose..."
+
+        show WQ love
+
+        WQ "No. Jiang-gongzi isn't imposing at all."
+
+        show WQ smile
+
+        WQ "Thank you. Let's try it."
+
+        show JC smile
+
+        JC "Great!"
+
+        show JC blush
+
+        JC "Do you have any more time today? We could talk some more."
+
+        show WQ blush
+
+        WQ "I do have time. Let's walk back together."
+
+        jump WBA_end
+
+    elif giftbought == "WQbad":
+
+        WQ "..."
+
+        show JC talk
+
+        $ chengqing -= 1
+
+        JC "It's a comb!"
+    
+        show JC blush
+
+        JC "I've heard that girls like to get them as gifts from their—well. To get them as gifts."
+
+        show JC smile
+        show WQ sustalk
+
+        WQ "I see."
+
+        show WQ angy
+        show JC blush
+
+        JC "It symbolizes—"
+
+        show WQ sustalk
+        show JC flat
+
+        WQ "Jiang-gongzi, I'm sorry, but. I don't think I can accept this."
+
+        WQ "It was kind of you to think of me, but..."
+
+        WQ "I'm just not in the position to..."
+
+        WQ "A commitment of this..."
+
+        WQ "The timing is..."
+
+        show WQ angy
+
+        WQ "Good day, Jiang-gongzi."
+
+        hide WQ
+        show JC angy
+
+        JC "Shit."
+
+        jump WBA_end
+
+    else:
+
+        WQ "Oh."
+
+        WQ "How. Nice."
+
+        JC "I thought you might like it."
+
+        WQ "Thank you for thinking of me, Jiang-gongzi."
+
+        JC "You're welcome!"
+
+        WQ "I have some more herbs that I need to gather out here, but you should head back."
+
+        JC "Oh. Yeah. I can do that."
+
+        jump WBA_end
 
 label GIFT_MY: ## edit music and maybe bg?
 
@@ -6685,17 +7127,19 @@ label WBA_end:
 
     let "Some other students, however, are staying up past sunset for slightly different reasons..."
 
-    scene bg indoorsnight
-    with cutfast
+    nvl clear
 
+    scene bg indoorsnight
+    with cutfast 
+    
     show NHS right at right
     show WWX right at center
     show JC left at left
     with dissolve
 
-    show WWX talk
-
     WWX "Since we're in Gusu, we have to drink Emperor's Smile!"
+
+    show WWX talk
 
     WWX "Its scent is subtle, yet the flavour is rich. Pure, yet smooth. Strong, yet not overwhelming. Ahhh."
 
@@ -6748,12 +7192,14 @@ label WBA_end:
 
         NHS "Why, I overheard Xichen-ge and Meng Yao talking about how wonderful they thought Jiang-xiong was."
 
-        if chengqing >= 3:
+        if Wenboatsave_flag == True:
 
             NHS "And even Wen-guniang smiled at him when she walked by, just the other day!"
-        
-    
-    elif xicheng >= 3 and chengqing >= 3:
+       
+        else:
+            pass
+   
+    elif xicheng >= 3 and Wenboatsave_flag == True:
         show NHS smile
 
         NHS "It's going so smoothly, Wei-xiong. Just like this wine!"
@@ -6777,8 +7223,8 @@ label WBA_end:
         NHS "Why, I overheard Zewu-jun telling Lan-er-gongzi how diligent and responsible he thought Jiang-xiong was."
 
         NHS "And even Wen-guniang smiled at him when she walked by, just the other day!"
-        
-    elif chengyao >= 3 and chengqing >= 3:
+       
+    elif chengyao >= 3 and Wenboatsave_flag == True:
         show NHS smile
 
         NHS "It's going so smoothly, Wei-xiong. Just like this wine!"
@@ -6802,10 +7248,11 @@ label WBA_end:
         NHS "Why, Meng Yao was telling me that I should learn from Jiang-xiong's good example, because Jiang-xiong was so polite and sensible."
 
         NHS "And even Wen-guniang smiled at him when she walked by, just the other day!"
-    
-    elif sangcheng >= 6 and chengyao <= 2 and chengqing <= 2 and xicheng <= 2:
+   
+    elif sangcheng >= 6 and chengyao <= 2 and Wenboatsave_flag == False and xicheng <= 2:
 
         jump WBA_end_B
+
 
     elif sangcheng >= 6:
         show NHS smile
@@ -6834,9 +7281,9 @@ label WBA_end:
     WWX "Wow, I could never have imagined my shidi could be so suave! So charming! So, who do you like best?"
 
     menu:
-        "Wen Qing" if chengqing >= 3:
-            
-            $ chengqing += 2
+        "Wen Qing" if Wenboatsave_flag == True:
+           
+            $ chengqing += 1
 
             show JC blush
 
@@ -6882,10 +7329,10 @@ label WBA_end:
                 ease 0.5 xoffset 100
 
             NHS "Jiang-xiong, don't kill him—"
-            
+           
         "Lan Xichen" if xicheng >= 3:
 
-            $ xicheng += 2
+            $ xicheng += 1
 
             show JC blush
 
@@ -6948,7 +7395,7 @@ label WBA_end:
             NHS "Wait, what requirements? Why wasn't I told about these requirements?"
 
             show WWX left grin
-
+            
             WWX "Oho, Nie-xiong, I'll have you know my shidi came up with a stringent list of requirements for a partner back when he was only ten!"
 
             show JC angy
@@ -6991,7 +7438,7 @@ label WBA_end:
                 ease 0.5 xoffset 100
 
             NHS "Jiang-xiong, don't kill him—"
-            
+           
         "None of them":
 
             show JC angy
@@ -7011,7 +7458,7 @@ label WBA_end:
                 JC "Ugh, you guys are fine. I guess. At least, you are."
 
                 show JC hands
-                
+               
                 JC "Wei Wuxian is another matter."
 
                 show WWX talk
@@ -7024,11 +7471,11 @@ label WBA_end:
 
             else:
                 show NHS pout
-                
+               
                 NHS "No one? But I've been trying so hard...Jiang-xiong, is no one in the Cloud Recesses to your taste?"
 
                 show WWX left grin
-            
+           
                 WWX "Ah, I should have warned you, Nie-xiong, my shidi has a stringent list of requirements for a partner. In fact, he came up with it when he was only ten!"
 
             show NHS talkfan
@@ -7066,7 +7513,8 @@ label WBA_end:
 
     jump WBA_end_C
 
-label WBA_end_B: 
+
+label WBA_end_B:
 
     if chengyao >= 3:
         $ chengyao += 2
@@ -7135,9 +7583,9 @@ label WBA_end_B:
             ease 0.5 xoffset 100
 
         NHS "Jiang-xiong, don't kill him—"
-    
+   
     elif xicheng >= 3:
-        $ xicheng += 2
+        $ xicheng += 1
 
         show NHS pout
 
@@ -7162,7 +7610,7 @@ label WBA_end_B:
         show WWX left grin
 
         WWX "Oho, Nie-xiong, I'll have you know my shidi came up with a stringent list of requirements for a partner back when he was only ten!"
-        
+       
         show JC angy
 
         JC "Shut up, Wei Wuxian! We're not talking about that!"
@@ -7192,8 +7640,8 @@ label WBA_end_B:
 
         NHS "Jiang-xiong, don't kill him—"
 
-    elif chengqing >= 3:
-        $ chengqing += 2
+    elif Wenboatsave_flag == True:
+        $ chengqing += 1
 
         show NHS pout
 
@@ -7247,7 +7695,7 @@ label WBA_end_B:
             ease 0.5 xoffset 100
 
         NHS "Jiang-xiong, don't kill him—"
-    
+   
     elif sangcheng >= 6:
         $ sangcheng += 4
 
@@ -7258,7 +7706,7 @@ label WBA_end_B:
         show NHS smile
 
         NHS "Well, to me, I suppose! Since you're always stuck in the Library Pavilion with Lan-er-gongzi, Wei-xiong."
-        
+       
         show JC hands
 
         JC "I wouldn't want to talk to him anyway."
@@ -7309,7 +7757,7 @@ label WBA_end_B:
             ease 0.5 xoffset 100
 
         NHS "Jiang-xiong, don't kill him—"
-    
+   
     else:
         show NHS pout
 
@@ -7363,8 +7811,9 @@ label WBA_end_B:
             ease 0.5 xoffset 100
 
         NHS "Jiang-xiong, don't kill him—"
-    
+   
     jump WBA_end_C
+
 
 label WBA_end_C:
 
@@ -7426,7 +7875,7 @@ label WBA_end_C:
     JC "Oh. Urk. Me too, so sick..."
 
     NHS "I'm...I think I'm gonna throw up. Outside."
-    
+   
     hide NHS with moveoutleft
 
     JC "Yes, me too."
@@ -7439,7 +7888,7 @@ label WBA_end_C:
 
     scene bg dormnight
     with cutfast
-    
+   
     show JC right angy at midright
     show NHS left pout at midleft
 
@@ -7462,7 +7911,7 @@ label WBA_end_C:
     NHS "I don't know, maybe Wei-xiong convinced him not to."
 
     JC "...Yeah, I can't imagine how."
-    
+   
     JC "I have a feeling that idiot is somehow getting into more trouble now, not less. Maybe we should go back to check..."
 
     show NHS pout
@@ -7470,6 +7919,7 @@ label WBA_end_C:
     NHS "What, no! How could Wei-xiong possibly get into more trouble, anyway? Look, why don't we hide out in my rooms, and ask him about it tomorrow?"
 
     jump CSC_1
+
 
 label CSC_1:
     scene bg indoors
@@ -7479,6 +7929,8 @@ label CSC_1:
     play music "audio/CSC_1.mp3" fadein 1.0
 
     let "{vspace=260}It is, of course, entirely possible for Wei Wuxian to get into more trouble, and so the next day finds these four young masters hauled up for punishment. Thankfully, they have the day after the punishment set aside for rest and reflection."
+
+    nvl clear
 
     scene bg indoors
     show bar
@@ -7766,7 +8218,7 @@ label CSC_2:
     show LXC frown
 
     LXC "That would not explain where Wangji has gone. I find it doubtful that he is also napping."
-    
+   
     show MY talk
 
     MY "Nie-er-gongzi has a point, however. It is likely that they—or at least Wei-gongzi—is nearby. He would not have planned to go far without shoes."
@@ -7779,23 +8231,23 @@ label CSC_2:
 
     if chengyao >= 5:      
         MY "Perhaps Jiang-gongzi could join me?"
-    
+   
     show WQ talk
 
     WQ "Ah, I don't know the back hills very well either. Maybe I could—"
 
     LXC "I'd prefer if Wen-guniang didn't stray too far from this area. And it would be best if you were partnered up with someone else."
 
-    if chengqing >= 5:
+    if chengqing >= 10:
         show WQ -talk
 
         WQ "...Of course. Ah, Jiang-gongzi, would you accompany me then?"
-    
+   
     else:
         show WQ hmm
 
         WQ "...Of course."
-    
+   
     show NHS talkfan
 
     NHS "What about the area downstream of here? Or deeper into the back hills?"
@@ -7804,7 +8256,7 @@ label CSC_2:
         NHS "Jiang-xiong and I could search one of those places together, maybe?"
 
     show LXC talk
-    
+   
     LXC "Hmm, I do believe I know the area deeper into the back hills best, so I should be the one to search there."
 
     if xicheng >= 5:
@@ -7813,7 +8265,7 @@ label CSC_2:
     show JC talk
 
     JC "In that case, I'll..."
-    
+   
     menu:
         "Join Meng Yao" if chengyao >= 5:
             JC "Okay, I'll search along the path to Cloud Recesses with Meng-gongzi."
@@ -7821,31 +8273,31 @@ label CSC_2:
             $ chengyao += 3
 
             jump CSC_MY
-        
-        "Join Wen Qing" if chengqing >= 5:
+       
+        "Join Wen Qing" if chengqing >= 8:
             JC "Okay, I'll search this area with Wen-guniang."
 
-            $ chengqing += 3
+            $ chengqing += 1
 
             jump CSC_WQ
-        
+       
         "Join Nie Huaisang" if sangcheng >= 10:
             JC "Okay, I'll search the area downstream with Nie-gongzi."
 
             $ sangcheng += 4
 
             jump CSC_NHS
-        
+       
         "Join Lan Xichen" if xicheng >= 5:
             JC "Okay, I'll search the deeper part of the back hills with Zewu-jun."
 
-            $ xicheng += 3
+            $ xicheng += 1
 
             jump CSC_LXC
 
         "Head back to the Cloud Recesses":
             pass
-    
+   
     JC "Maybe I should go back to the Cloud Recesses and see if Lan-xiansheng's search party has found anything."
 
     jump CSC_JC
@@ -8003,12 +8455,14 @@ label CSC_WQ:
 
     show LXC talk
 
+    $ xiyao += 1
+
     LXC "In that case, perhaps Meng-gongzi and I will search the rest of the back hills."
 
     show MY smile
 
     MY "Of course, Zewu-jun."
-    
+   
     LXC "And Nie-gongzi could go back to the Cloud Recesses for now. Maybe Shufu's search party has found something."
 
     show NHS talk
@@ -8016,8 +8470,6 @@ label CSC_WQ:
     NHS "Sure, Zewu-jun, I'll go back to check!"
 
     LXC "Alright then. Let us meet back here in a shichen, and hopefully one of us will have good news to share."
-
-    $ xiyao += 1
 
     hide WQ
     hide JC
@@ -8044,113 +8496,314 @@ label CSC_WQ:
 
     show WQ talk
 
-    WQ "If he {i}was{/i} napping, he certainly couldn't be now."
+    WQ "If he {i}was{/i} napping, he certainly couldn't be now after all that yelling."
 
     show JC left hands
 
     JC "Do you really think Wei Wuxian's around here somewhere?"
 
-    WQ "I can't imagine where he would go without his shoes."
-    
-    WQ "Then again, Jiang-guniang was just telling me a story about him running around Lotus Pier barefoot and with no pants on, so..."
-
+    WQ "I can't imagine how far he'd get without his shoes."
+   
     show JC smile
+    show WQ smile
 
-    JC "Hah, A-jie says she's never going to stop telling that story. She'll tell it to her children. Her grandchildren."
+    JC "You'd be surprised..."
+
+    WQ "He does seem to defy expectations."
+
+    show WQ hmm
+
+    WQ "The expectations of how annoying a person can be."
 
     show WQ smile
 
-    WQ "Of course she is, it's the prerogative of older siblings. I have several stories like that about A-Ning myself."
+    JC "Haha! Good one!"
 
-    show JC talk
+    show JC -smile
 
-    JC "Do you? Like what?"
+    JC "Wen-guniang, if you don't mind me asking...why are you helping us?"
+   
+    JC "I thought you didn't like to {i}\"get involved\"?{/i}"
 
-    show WQ talk
+    if Wenboatsave_flag == True:
 
-    WQ "Well now, there was the time he spat up on the back of Wen Chao's robes, and Wen Chao didn't notice for an entire day."
+        WQ "You helped {i}my{/i} brother. I couldn't stand by without doing the same for you."
+
+    elif LWJboatsave_flag == True: ## not sure this matters if the path to enough WQ points is gated by Wenboatsave being true anyway as per WBA?
+
+        show WQ sustalk
+
+        WQ "Lan-er-gongzi saved my brother from the Waterborne Abyss. I owe him."
+
+    else:
+
+        show WQ sustalk
+   
+        WQ "Maybe I have an ulterior motive... "
+
+        show WQ hmm
+        pause 0.5
+        show WQ sustalk
+       
+        WQ "Or maybe I just don't want to see anyone else needlessly hurt."
+
+    menu:
+        "You're a good person.":
+            show JC smile
+
+            JC "Sounds like you're making a lot of excuses to cover up that you're a kind person who cares about others, Wen-guniang."
+
+            show WQ smile
+
+            WQ "Sounds like you're familiar with the technique, Jiang-gongzi."
+           
+        "Sounds logical.":
+
+            show JC smile
+
+            JC "That makes it sound so calculated."
+
+            JC "What's wrong with just doing the right thing because it's the right thing?"
+
+            WQ "The world isn't always that black and white. Who gets to decide what version of \"right\" is the right one?"
+
+            show JC -smile
+
+            WQ "I hope you never have to choose between what is \"right\" for your sect and what is \"right\" for your family."
 
     show JC smile
+ 
+    JC "Regardless, I appreciate your assistance."
 
-    JC "Hah, serves that asshole right, bet he was swaggering around with—"
-
-    show JC blush
-    
-    JC "Not that he's...I mean, he {i}is{/i} an asshole, but he's your cousin, and I...I just mean that..."
-    
-    JC "Hey, so, did you know Wei Wuxian threw up on three sect leaders once? Did A-jie tell you about that?"
-
-    show WQ -talk
-
-    WQ "She did, yes. Quite a remarkable storyteller, your sister."
-
-    show JC smile
-
-    JC "Yeah, she's great. She used to tell us so many stories when we were younger, especially when she wasn't feeling well and had to stay in bed..."
-
-    show JC blush
-
-    JC "Thank you for looking out for her, by the way. She says you've been making her medicine and checking up on her health."
+    JC "Jie also tells me that you've been checking in on her regularly as well. It's a huge relief to know that you're watching out for her."
 
     show WQ smile
 
-    WQ "No thanks necessary. It's my duty as a physician."
+    WQ "Jiang-guniang is a delightful and easy patient. I'm happy to give a second opinion when needed."
 
-    JC "I suppose. Well, it wasn't your duty to let us know that you found Wei Wuxian's shoes out here, but I'm...I'm very grateful you did so anyway. Thank you, Wen-guniang."
+    WQ "Especially as she pays me in soup."
+
+    menu:
+        "Typical Jiang Yanli.":
+
+            JC "Yeah, that sounds like her."
+
+        "Wait, she did what?":
+
+            JC "Hey, that soup is more precious than jade!"
+
+            WQ "Of course. I wish all of my patients paid me so well."
+
+            JC "Don't tell Wei Wuxian that you're getting Jie's soup on the side or he'll find a way to rob you of all your earnings."
+
+            WQ "Thanks. I'll try to stay vigilant."
+
+        "There's more where that came from!":
+
+            JC "Jie's soup is the best, but..."
+
+            JC "You don't have to stick her with a bunch of needles to get it."
+
+            WQ "Oh?"
+
+            JC "Next time that you're free, you should join us for a meal."
+
+            show JC blush
+
+            JC "Jie would love to see more of you in a non-professional capacity."
+
+            show WQ smile
+
+            WQ "Oh, well, if {i}Jiang Yanli{/i} is the one asking."
+
+            show JC smile
+
+            JC  "Of course."
+
+    show WQ blush
+    show JC blush
+
+    WQ "Besides, you have been so kind to A-Ning."
+
+    show WQ smile
+    show JC smile
+
+    WQ "He told me yesterday that you and Wei-gongzi make him feel {i}safe{/i}."
+
+    show WQ sustalk
+
+    WQ "That's not such an easy thing where we come from."
+
+    JC "How is his illness these days?"
+
+    if giftbought == "WQgd":
+
+        JC "He looks like he isn't as pale lately."
+
+        show WQ -sustalk
+
+        WQ "Yes. The text that Jiang-gongzi provided has been helpful in finding new treatment paths."
+
+        show WQ smile
+
+        WQ "We are both so grateful."
+
+        show JC blush
+
+        JC "Oh, it was nothing. I'm glad that you're putting it to use."
+
+        show WQ -smile
+
+        JC "Even If you can't tell anyone back home where you got it from."
+
+        show JC -blush
+
+    else:
+
+        show WQ smile
+
+        WQ "He's doing the best he can."
+
+        show JC smile
+
+        WQ "It seems simple, but I think just having friends that he can talk to other than me is doing him a lot of good."
+
+        show JC angy
+
+        JC "I'd extend an invitation for you both to visit Lotus Pier after these lectures if I thought you'd be able to come."
+
+        show WQ sustalk
+
+        WQ "It's a nice thought."
+
+        WQ "But I don't think that would work, Jiang-gongzi."
+
+        show JC -angy
+
+    JC "I hope that we're not putting you in a difficult position."
+
+    show WQ hmm
+
+    WQ "..."
+
+    show JC hands
+
+    JC "You don't have to tell me anything, but..."
+
+    show JC angy
+
+    JC "I hope your family...{i}situation{/i} isn't..."
+
+    show WQ sustalk
+
+    WQ "Jiang-gongzi, I appreciate your consideration, but..."
+
+    WQ "There's a lot you don't know about my family {i}\"situation\"{/i} as you call it."
+
+    menu:
+        "Same!":
+
+            JC "I could say the same."
+
+            JC "Probably in a different way, but things are still fucked up sometimes."
+
+            show JC angy
+
+            JC "And it feels like I'm helpless to fix it."
+
+            show JC hands
+
+            JC "WHY CAN'T EVERYONE JUST SHUT UP AND BE {i}BE NORMAL{/i} FOR FIVE MINUTES AT A TIME?!"
+
+            show WQ sustalk
+            show JC smile
+
+            WQ "TELL ME ABOUT IT! SOMETIMES I WANT TO TELL EVERYONE TO COME TALK TO ME AFTER THEY'VE TAKEN A NAP!"
+
+            JC "Hah! I'm sure Lan-xiansheng would love that."
+
+            show WQ smile
+ 
+            WQ "About as much as my sect leader would."
+
+            JC "I wish I could see that. Preferably from a really good hiding spot."
+
+        "Yikes!":
+
+            JC "I can only imagine what you've been going through. It sounds hard."
+
+            WQ "Some days more than others..."
+
+            JC "I'm sorry that you've had to deal with all of this on your own."
+
+            JC "If you ever do want to talk about it, you know where to find me."
+
+            show WQ smile
+
+            WQ "Thanks."
+
+    show WQ hmm
+
+    WQ "It {i}is{/i} complicated."
+
+    show WQ blush
+   
+    WQ "But some things are worth the risk."
+
+    show JC hands
+
+    JC "There's a bravery in that that I admire, Wen-guniang."
+
+    show WQ sustalk
+
+    WQ "If it were only myself that I risked, I wouldn't have even come to these lectures."
+
+    menu:
+        "Same!":
+           
+            show JC smile
+            show WQ smile
+
+            JC "Yeah, they are pretty boring, huh?"
+
+        "I'm glad you did":
+
+            show JC smile
+
+            JC "For what it's worth, I'm glad you came."
+
+            show WQ smile
+
+            JC "Meeting you has been the best thing about coming here."
 
     show WQ blush
 
-    WQ "Ah. No thanks necessary for that too, it's my duty as...as a sibling."
+    WQ "It feels like there were no good choices, but..."
 
-    show JC talk
+    show WQ love
 
-    JC "Wen-guniang seems like someone who takes her duties very seriously."
-
-    JC "And look, I don't know why your asshole cousin wanted you here in the Cloud Recesses in the first place—Wei Wuxian thinks you're up to something in the back hills—but if there's something I can help with, I..."
+    WQ "I can't regret having met you, Wanyin."
 
     show JC blush
 
-    JC "I mean, I can't promise I'll help, but I'll—"
+    JC "Even if we end up on opposite sides of a war tomorrow?"
 
-    show WQ right
+    show WQ blush
 
-    WQ "Don't."
-
-    show JC talk
-
-    JC "What?"
-
-    WQ "Don't promise to help. Not with that."
-
-    show WQ left hmm
-    
-    WQ "I won't tell you more, and my duty is to my sect, of course, but I..."
-
-    show JC -talk
-
-    JC "Can't turn your back on your sect even if they're assholes, right? Yeah, I get it. You just have to do your best to honour your family name anyway."
-
-    show WQ right
-
-    WQ "...To honour my family name? Hm. Yes, I ought try my best to do that, shouldn't I. Jiang-gongzi is quite right."
-
-    show JC blush
-
-    JC "Um, yes? Yes."
-
-    show JC smile
-    
-    JC "Anyway, I won't ask about that, but if you did need help with something else, for yourself—or for your brother—then I'll try my best."
+    WQ "Even then."
 
     show WQ smile
 
-    WQ "I see. In that case, thank you, Jiang-gongzi."
+    WQ "Plus, you're pretty cute when you're angry."
+
+    show WQ hmm
 
     WQ "Now, let's get back to our search, shall we?"
 
     JC "Right, yes, of course."
 
     show JC right angy
+    show WQ smile
 
     JC "WEI WUXIAN YOU LITTLE SHIT, SHOW YOURSELF!"
 
@@ -8515,12 +9168,16 @@ label CSC_JC:
     jump CSC_end
 
 label CSC_end:
-    scene bg gatesDESAT
+    scene bg gates
     with cutfast
 
-    centered "While these cultivators search the back hills, the Cloud Recesses itself is in a state of restrained not-quite-uproar. Many white-robed cultivators walk with haste—though not so hastily that it could be called running—through its hallways and rooms, searching for the two missing young men. \n {p}Thankfully, they show up just before the shichen is up, tumbling out from a hidden place in the back hills onto the grass, with wet robes and bright eyes and a dark secret entrusted to their care. \n {p}They do not speak of that secret, or explain their mysterious disappearance, to any of their fellow students. Fortunately, their peers quickly become preoccupied with more important matters: their examinations begin the very next day."
+    let "{vspace=100}While these cultivators search the back hills, the Cloud Recesses itself is in a state of restrained not-quite-uproar. Many white-robed cultivators walk with haste—though not so hastily that it could be called running—through its hallways and rooms, searching for the two missing young men. \n \nThankfully, they show up just before the shichen is up, tumbling out from a hidden place in the back hills onto the grass, with wet robes and bright eyes and a dark secret entrusted to their care. \n \nThey do not speak of that secret, or explain their mysterious disappearance, to any of their fellow students. Fortunately, their peers quickly become preoccupied with more important matters: their examinations begin the very next day."
+
+    nvl clear
     
-    centered "And even after the examinations are over, this mystery is the last thing on anyone's minds. Because finally, the lectures are over.\n {p}It is the Qixi lantern lighting festival, the last day of the Gusu Lectures; a celebration of months of hard work that have finally come to a close."
+    let "{vspace=260}And even after the examinations are over, this mystery is the last thing on anyone's minds. Because finally, the lectures are over. \n \nIt is the Qixi lantern lighting festival, the last day of the Gusu Lectures; a celebration of months of hard work that have finally come to a close."
+
+    nvl clear
 
     jump LT
 
@@ -9923,4 +10580,3 @@ label end:
     ## This also ends the game
 
     return
-
