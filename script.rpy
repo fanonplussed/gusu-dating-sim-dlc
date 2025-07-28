@@ -1563,7 +1563,7 @@ label WQ_1:
     with moveinleft
 
     show NHS right:
-        ease 0.1 xoffset 800
+        ease 0.1 xoffset 960
 
     show WWX right:
         ease 0.1 xoffset -300
@@ -2192,7 +2192,7 @@ label WQ_2:
 
     NHS "Someone's coming!"
 
-    if sangcheng > 3:  ## hiding behind JC
+    if sangcheng >= 4:  ## hiding behind JC
 
         show NHS right fan at right
         with move
@@ -2395,7 +2395,7 @@ label WQ_2:
 
     show JC hands
 
-    JC "Why are you so suspicious anyway?  Did we really do anything to make you distrust us so much?"
+    JC "Why are you so suspicious anyway? Did we really do anything to make you distrust us so much?"
 
     show WQ rage
 
@@ -2403,7 +2403,7 @@ label WQ_2:
 
     show JC rage
 
-    JC "I could say the same about you!  Why are you always creeping around in the back hills anyway!" 
+    JC "I could say the same about you! Why are you always creeping around in the back hills anyway!" 
 
     WQ "Who says I'm doing anything other than trying to get away from everyone whispering about us!"  
 
@@ -2412,9 +2412,9 @@ label WQ_2:
     JC "You–!"
                     
     menu:
-        "That's different!":
+        "You're a Wen! That's different!":
                             
-            JC "You're a Wen!  We know that you're up to no good back here!"
+            JC "You're a Wen! We know that you're up to no good back here!"
                             
             $ WenHate_flag = True
             $ chengqing -= 1
@@ -2425,7 +2425,7 @@ label WQ_2:
 
             WQ "Prove it."
 
-            WQ "Goodbye, Jiang-gongzi.  Remember to stay away from my brother."
+            WQ "Goodbye, Jiang-gongzi. Remember to stay away from my brother."
                             
             hide WQ with moveoutleft
 
@@ -2443,33 +2443,33 @@ label WQ_2:
 
             show WQ angy
 
-            WQ "Which is against the rules of Cloud Recesses.  Whereas I was looking for medicinal herbs and took a wrong turn."
+            WQ "Which is against the rules of Cloud Recesses. Whereas I was looking for medicinal herbs and took a wrong turn."
 
             show JC hands
 
-            JC "You took a wrong turn?  The same one every day this week?!"
+            JC "You took a wrong turn? The same one every day this week?!"
 
             show JC angy
 
             show WQ sustalk
 
-            WQ "These mountain paths are very confusing.  It could happen to anyone."
+            WQ "These mountain paths are very confusing. It could happen to anyone."
 
             JC "Right."
 
             show WQ angy
 
-            WQ "Anyway, my point still stands.  Please stay away from my brother and we'll stay away from you."
+            WQ "Anyway, my point still stands. Please stay away from my brother and we'll stay away from you."
 
             WQ "Good day, Jiang-gongzi."
                                 
             hide WQ with moveoutleft
 
-        "Maybe you have a point…":
+        "Maybe you have a point...":
 
             show JC hands
 
-            JC "Okay, I get it.  We're all breaking the rules, so we'll keep it quiet from Lan-xiansheng if you do the same."
+            JC "Okay, I get it. We're all breaking the rules, so we'll keep it quiet from Lan-xiansheng if you do the same."
 
             JC "The bruises on Wei Wuxian's knees will get bruises if he's made to kneel for any more punishments."
                                 
@@ -2481,7 +2481,7 @@ label WQ_2:
             pause 0.5
             show WQ sustalk
 
-            WQ "Agreed.  As a doctor, I try to prevent others from feeling pain."
+            WQ "Agreed. As a doctor, I try to prevent others from feeling pain."
 
             WQ "Even if they are as troublesome as Wei-gongzi."
 
@@ -2491,7 +2491,7 @@ label WQ_2:
             pause 0.5
             show JC angy
 
-            JC "Troublesome is one word for it.  Impossible is another."
+            JC "Troublesome is one word for it. Impossible is another."
 
             show WQ sustalk
 
@@ -2503,7 +2503,7 @@ label WQ_2:
 
             show JC -angy
 
-            JC "Right…"
+            JC "Right..."
 
             WQ "Good day, Jiang-gongzi."
 
@@ -2514,7 +2514,7 @@ label WQ_2:
     show NHS left at left
     with moveinleft
 
-    NHS "Soooo….."
+    NHS "Soooo..."
 
     show NHS fan
 
@@ -2522,13 +2522,13 @@ label WQ_2:
 
     show JC -angy
 
-    JC "Why do you keep leaving me alone with people?  I'm not good at talking to strangers."
+    JC "Why do you keep leaving me alone with people? I'm not good at talking to strangers."
 
     NHS "All the more reason to practice!"
 
     show NHS -fan
                     
-    NHS "Look.  No one is expecting you to negotiate peace terms with the Wen sect, but…"
+    NHS "Look. No one is expecting you to negotiate peace terms with the Wen sect, but..."
 
     show NHS fan
 
@@ -2536,7 +2536,7 @@ label WQ_2:
 
     show JC blush
 
-    JC "Well…"
+    JC "Well..."
 
     menu:
         "Yes!":
@@ -2547,9 +2547,9 @@ label WQ_2:
 
             NHS "That sounds like a good start to me!"
 
-        "Who knows…":
+        "Who knows...":
 
-            JC "I barely know her…"
+            JC "I barely know her..."
 
             show JC -blush
 
@@ -2563,17 +2563,17 @@ label WQ_2:
 
             JC "To be honest, I'd rather hang out with you and Wei Wuxian."
 
-            NHS "Aww, Jiang-xiong!  You do care!"
+            NHS "Aww, Jiang-xiong! You do care!"
 
             show JC angy
 
             JC "Ugh, shut up."
 
-            NHS "Let's not leave Wei-xiong waiting then!  Let's head back."
+            NHS "Let's not leave Wei-xiong waiting then! Let's head back."
 
             ##WWX yelling from off screen##
 
-    WWX "Jiang Cheng! Nie-xiong!  Did you know that the tips of Lan Zhan's ears blush red when he's embarrassed!"
+    WWX "Jiang Cheng! Nie-xiong! Did you know that the tips of Lan Zhan's ears blush red when he's embarrassed!"
 
     show NHS fan
 
@@ -2739,7 +2739,7 @@ label LXC_2:
 
             NHS "Noooo, Jiang-xiong! Don't leave me!"
 
-            jump MY_2
+            jump MY_2pre
 
         "Ask Meng Yao?":
 
@@ -2781,7 +2781,7 @@ label LXC_2:
 
             $ sangcheng += 1
 
-            jump MY_2     
+            jump MY_2pre     
 
         "Flee together!":
 
@@ -2827,7 +2827,7 @@ label LXC_2:
 
             LXC "..."      
 
-            jump MY_2
+            jump MY_2pre
            
         "Stay and help Nie Huaisang!":
 
@@ -2936,7 +2936,7 @@ label LXC_2:
 
                     NHS "{size=-9}Nooooooooooooooooo...."
 
-                    jump MY_2
+                    jump MY_2pre
 
                 "Er. Something very important. Unrelated to studying":
 
@@ -3062,7 +3062,7 @@ label LXC_2:
 
                     JC "And how the hell did he manage to stuff this note into my sleeve without me noticing???"
 
-                    jump MY_2a
+                    jump MY_2
 
         "Stay with Lan Xichen":
 
@@ -3183,11 +3183,11 @@ label LXC_2:
 
                     LXC "I see."
 
-                    show LXC flat
+                    show LXC -frown
 
                     LXC "My apologies for taking up your time then, Jiang-gongzi. I'll go find Huaisang and we'll work on his next assignment together."
 
-                    jump MY_2
+                    jump MY_2pre
 
                 "You got it!":
                     $ xicheng += 1
@@ -3258,7 +3258,7 @@ label LXC_2:
 
                     LXC "Hopefully, no head bashing will be required."
 
-label MY_2:
+label MY_2pre:
 
     scene bg class 
     with cutslow
@@ -3282,9 +3282,9 @@ label MY_2:
 
     JC "Ugh, I need to finish my homework, but joining Huaisang in Caiyi for a bit would be pretty nice..."
 
-    jump MY_2a
+    jump MY_2
 
-label MY_2a:
+label MY_2:
 
     show MY left at midleft
     with moveinleft
@@ -3588,9 +3588,9 @@ label WBA_start:
     with None
    
     WWX "There he is! Zewu-jun! Wangji-xiong!"
-   
-    show WWX right at center
-    show JC right at midright
+    
+    show JC right at right
+    show WWX right at midright
     with moveinright
 
     show LXC talk
@@ -3601,7 +3601,6 @@ label WBA_start:
     LXC "Jiang-gongzi. Wei-gongzi."
 
     show LXC talk
-
     show WWX talk
 
     WWX "Zewu-jun, we heard you're planning to head down to Biling Lake to deal with some water ghouls. Could we also come along? I'm sure it will be educational!"
@@ -3628,13 +3627,19 @@ label WBA_start:
 
     LWJ "..."
 
-    show WQ right at right
-    with moveinright
+    show WWX left cheeky:
+        pause 0.2
+        ease 0.2 xoffset 50
+        ease 0.1 xoffset 0
+        ease 0.2 xoffset 50
+        ease 0.1 xoffset 0
 
     WWX "Look, Jiang Cheng! It's Wen-guniang! Should we invite her too?"
 
     menu:
         "I'll go.":
+
+            show JC roll
 
             JC "Let me handle it. You'll just embarrass our sect."
 
@@ -3644,33 +3649,72 @@ label WBA_start:
 
             JC "Like I need your help!"
 
-            show JC -angy
+            show JC left angy
+            hide JC with moveoutright
+            hide WWX with moveoutright
+
+            scene bg gates
+            with cutfast
+
+            show WQ right at right
+            with dissolve
+
+            show JC left at center
+            show WWX left at left
+            with moveinleft
+
+            show JC talk
 
             JC "Um, Wen-guniang. Hello."
 
-            show JC smile
+            show JC blush
 
             JC "How are your—we're going to—the water ghouls are—the weather is—studies going?"
 
+            show WWX left talk
+
             WWX "Yeah, you're right. You definitely don't need my help at all!"
 
-            show JC rage
+            show JC right rage
 
             JC "Shut up, Wei Wuxian!"
 
-            show JC -rage
+            show WWX cheeky
 
             WWX "It's okay. I've got you!"
 
+            show WWX at center
+            show JC left angy at midleft
+            with ease
+
         "Go ask her yourself.":
+
+            show JC hands
 
             JC "If you want Wen-guniang to join so badly, ask her yourself!"
 
             WWX "I was just trying to wingman you, but.."
 
-            show WWX grin
+            show WWX cheeky
 
             WWX "If you insist!"
+
+            hide WWX with easeoutright
+
+            JC "Ugh."
+
+            show JC left angy
+            hide JC with moveoutright
+
+            scene bg gates
+            with cutfast
+
+            show WQ right at right
+            with dissolve
+
+            show JC left at midleft
+            show WWX left at center
+            with moveinleft
 
         "Pass.":
 
@@ -3680,15 +3724,34 @@ label WBA_start:
 
             JC "You just want a bigger crowd to show off to."
 
-            show WWX smile
+            show WWX cheeky
 
             WWX "Hey, it's not my fault that I'm so charismatic and charming and everyone wants to be my friend!"
 
+            hide WWX with easeoutright
+
             JC "Ugh."
+
+            show JC left angy
+            hide JC with moveoutright
+
+            scene bg gates
+            with cutfast
+
+            show WQ right at right
+            with dissolve
+
+            show JC left at midleft
+            show WWX left at center
+            with moveinleft
 
     WWX "Hey! Hey, Wen-guniang! Hey! Want to come catch water ghouls with us??"
 
+    show JC roll
+
     JC "You are embarrassing to know."
+
+    show WWX right grin
 
     WWX "At least you admit to knowing me!"
 
@@ -3696,19 +3759,27 @@ label WBA_start:
 
         "You don't need to come.":
 
+            show JC talk
+
             JC "It's just a night hunt, Wen Qing. It's not that serious."
             $ chengqing -= 1
            
         "We need all of the help we can get.":
 
+            show JC talk
+
             JC "With this joker dragging us down, we need all of the help we can get."
  
         "We could use a doctor.":
+
+            show JC smile
    
             JC "I think we'd all feel better having a doctor with us, just in case."
             $ chengqing += 1
 
         "You could visit the apothecary while we're in town.":
+
+            show JC smile
 
             JC "I heard that there's an apothecary in Caiyi. You could visit while we're there if you're interested."
             $ chengqing += 1
@@ -3717,6 +3788,16 @@ label WBA_start:
     show WQ talk
 
     WQ "I see."
+
+    show LXC left at midleft
+    show LWJ left at left
+    with moveinleft
+
+    show WWX right at midright
+    show JC right at center
+    with move
+
+    LXC "Ah. Wen-guniang."
 
     WQ "Zewu-jun, if I may, I too would like to join you all."
 
@@ -4254,7 +4335,134 @@ label WBA_2:
 
     JC "Wait, but—"
 
-    jump WBA_boatchoice
+    call WBA_boatchoice
+
+    scene bg caiyi
+    with cutfast
+
+    stop music fadeout 1.0
+    play music "audio/fun3.mp3" fadein 1.0
+
+    show WWX right at midright
+    show JC left at midleft
+
+    if Wenboatchoice == "LXC":
+
+        WWX "Man, I thought it would be more fun than that."
+
+        show JC talk
+
+        JC "What, was splashing water at Lan Wangji not fun enough for you? Chattering his ear off the entire night hunt after he joined our boat not fun enough for you?"
+
+        show WWX talk
+
+        WWX "I figured we'd get to do more than just watch Zewu-jun do his thing. Though seeing what's-his-face flail in panic before Lan Zhan rescued him was kinda funny."
+
+        JC "You mean Su She?"
+
+        WWX "Dunno, I can never tell all the Lans apart, they all have the same white robes and judgey faces."
+
+        show JC angy
+
+        JC "{i}Lan Wangji{/i} has the same damn white robes and judgey face and you seem to be able to recognise him just fine!"
+
+        show WWX grin
+
+        WWX "Oh, speaking of, I think that's him over there!"
+
+        hide WWX with moveoutleft
+    
+        WWX "Lan Zhan, hey Lan Zhan, d'you want a loquat..."
+
+        jump WBA_postchat
+    
+    elif Wenboatchoice == "WQ":
+
+        WWX "Man, I thought it would be more fun than that."
+
+        show JC talk
+
+        JC "What, was splashing water at Lan Wangji not fun enough for you? Chattering his ear off the entire night hunt not fun enough for you?"
+
+        show WWX talk
+
+        WWX "At least {i}you{/i} got to play hero in front of Wen Qing and rescue her brother."
+
+        show JC blush
+
+        JC "I wasn't playing at anything! He was sick!"
+
+        show WWX -talk
+
+        WWX "Weird time to fall sick, huh?"
+        
+        WWX "Ah, I just figured we'd get to do more than watch Zewu-jun do his thing. Though seeing what's-his-face flail in panic before Lan Zhan rescued him was kinda funny."
+
+        show JC talk
+
+        JC "You mean Su She?"
+
+        WWX "Dunno, I can never tell all the Lans apart, they all have the same white robes and judgey faces."
+
+        show JC angy
+
+        JC "{i}Lan Wangji{/i} has the same damn white robes and judgey face and you seem to be able to recognise him just fine!"
+
+        show WWX grin
+
+        WWX "Oh, speaking of, I think that's him over there!"
+
+        hide WWX with moveoutleft
+        
+        WWX "Lan Zhan, hey Lan Zhan, d'you want a loquat..."
+
+        jump WBA_postchat
+
+    else:
+
+        WWX "Ah, Jiang Cheng, that was fun, wasn't it?"
+
+        show JC angy
+
+        JC "Fun? What part of being attacked by a {i}surprise waterborne abyss{/i} was fun???"
+
+        show WWX grin
+
+        WWX "All of it! Too bad Nie-xiong didn't come along, aha I bet he'd have wet his pants!"
+
+        show WWX right talk
+
+        WWX "Hey, Lan Zhan! There you are!"
+
+        show LWJ left at left
+        with moveinleft
+        
+        WWX "Have a loquat!"
+
+        show LWJ angy
+
+        LWJ "...No."
+
+        WWX "Ah, he really has no taste."
+
+        show WWX left talk
+        
+        WWX "Here, Jiang Cheng, catch!"
+
+        hide WWX
+        hide JC
+        with moveoutright
+
+        LWJ "..."
+
+        show LXC right at center
+        with moveinright
+
+        LXC "Wangji, if you want loquats, I can buy a basket back home."
+
+        LWJ "No."
+
+        jump WBA_postchat
 
 label WBA_boatchoice:
 
@@ -4304,42 +4512,11 @@ label WBA_boatchoice:
 
             "The water ghouls turn out to be something far more sinister: a waterborne abyss. Thankfully, no one is injured during this surprise discovery, and the group of young cultivators return to Caiyi Town, soaking wet but triumphant."
 
-            scene bg caiyi
-            with cutfast
+            $ Wenboatchoice = "LXC"
 
-            stop music fadeout 1.0
-            play music "audio/fun3.mp3" fadein 1.0
+            return
 
-            show WWX right at midright
-            show JC left at midleft
-
-            WWX "Man, I thought it would be more fun than that."
-
-            show JC talk
-
-            JC "What, was splashing water at Lan Wangji not fun enough for you? Chattering his ear off the entire night hunt after he joined our boat not fun enough for you?"
-
-            show WWX talk
-
-            WWX "I figured we'd get to do more than just watch Zewu-jun do his thing. Though seeing what's-his-face flail in panic before Lan Zhan rescued him was kinda funny."
-
-            JC "You mean Su She?"
-
-            WWX "Dunno, I can never tell all the Lans apart, they all have the same white robes and judgey faces."
-
-            show JC angy
-
-            JC "{i}Lan Wangji{/i} has the same damn white robes and judgey face and you seem to be able to recognise him just fine!"
-
-            show WWX grin
-
-            WWX "Oh, speaking of, I think that's him over there!"
-
-            hide WWX with moveoutleft
-           
-            WWX "Lan Zhan, hey Lan Zhan, d'you want a loquat..."
-
-        "Ask Wen Qing if you can share a boat with her and Wen Ning": ## may want to gate this choice off instead of repeating it
+        "Ask Wen Qing if you can share a boat with her and Wen Ning" if Wenboatkick_flag == False:
 
             JC "Ugh, this is stupid."
 
@@ -4357,114 +4534,65 @@ label WBA_boatchoice:
 
             show WQ talk
 
-            if Wenboatkick_flag == True:
+            if WenHate_flag == True:
 
-                show WQ angy
-                $ chengqing -= 1
+                WQ "Thank you for the offer, Jiang-gongzi, but maybe you should find another boat."
+    
+                show JC hands
 
-                WQ "Didn't I already tell you that you weren't wanted here?"
+                JC "Listen, someone needs to protect you! These water ghouls are seriously dangerous."
 
-                WQ "If you don't have anything else to say, then leave."
+                WQ "Are you sure you aren't trying to protect everyone else from us 'evil Wens'?"
+
+                WQ "We can take care of ourselves."
+
+                $ Wenboatkick_flag = True
+
+                show JC -hands
+                show WQ left
+                show WN left
+                with None
+
+                hide WQ
+                hide WN
+                with moveoutright
 
                 jump WBA_boatchoice
-           
+
             else:
+                WQ "Hm? There's still a spare boat, if Jiang-gongzi would prefer."
 
-                if WenHate_flag == True:
+                show JC blush
 
-                    WQ "Thank you for the offer, Jiang-gongzi, but maybe you should find another boat."
-       
-                    show JC hands
+                JC "Yes, I know. But just in case there's any trouble, if you and your brother need help..."
 
-                    JC "Listen, someone needs to protect you! These water ghouls are seriously dangerous."
-   
-                    WQ "Are you sure you aren't trying to protect everyone else from us 'evil Wens'?"
+                $ chengqing += 3
+                $ Wenboatsave_flag = True
 
-                    WQ "We can take care of ourselves."
+                show WQ -talk
 
-                    $ Wenboatkick_flag = True
+                WQ "Ah, I see."
 
-                    jump WBA_boatchoice
+                show WQ smile
+                
+                WQ "Thank you, Jiang-gongzi, we'd appreciate it."
 
-                else:
-                    WQ "Hm? There's still a spare boat, if Jiang-gongzi would prefer."
+                scene bg biling
+                with cutfast
 
-                    show JC blush
+                "Once everyone is ready, the group sets off onto the dark waters in their rented boats. As an unnatural mist rolls in, Wei Wuxian discovers that what they thought were water ghouls is actually something far more sinister: a waterborne abyss."
 
-                    JC "Yes, I know. But just in case there's any trouble, if you and your brother need help..."
+                scene art_WQ1
+                #splash art for Wen Qing's romance line
 
-                    $ chengqing += 3
-                    $ Wenboatsave_flag = True
+                "Jiang Cheng nearly gets injured, but Wen Qing's sharp eyes spot the attack before it lands. And so when Wen Ning suddenly takes ill—eyes filming over white and body going weak—Jiang Cheng easily carries him up to safety."
 
-                    show WQ -talk
+                "Lan Xichen finally eradicates the abyss, and the group of young cultivators return to Caiyi Town, soaking wet but triumphant."
 
-                    WQ "Ah, I see."
+                $ Wenboatchoice = "WQ"
 
-                    show WQ smile
-                   
-                    WQ "Thank you, Jiang-gongzi, we'd appreciate it."
+                return
 
-            scene bg biling
-            with cutfast
-
-            "Once everyone is ready, the group sets off onto the dark waters in their rented boats. As an unnatural mist rolls in, Wei Wuxian discovers that what they thought were water ghouls is actually something far more sinister: a waterborne abyss."
-
-            scene art_WQ1
-            #splash art for Wen Qing's romance line
-
-            "Jiang Cheng nearly gets injured, but Wen Qing's sharp eyes spot the attack before it lands. And so when Wen Ning suddenly takes ill—eyes filming over white and body going weak—Jiang Cheng easily carries him up to safety."
-
-            "Lan Xichen finally eradicates the abyss, and the group of young cultivators return to Caiyi Town, soaking wet but triumphant."
-
-            scene bg caiyi
-            with cutfast
-
-            stop music fadeout 1.0
-            play music "audio/fun3.mp3" fadein 1.0
-
-            show WWX right at midright
-            show JC left at midleft
-
-            WWX "Man, I thought it would be more fun than that."
-
-            show JC talk
-
-            JC "What, was splashing water at Lan Wangji not fun enough for you? Chattering his ear off the entire night hunt not fun enough for you?"
-
-            show WWX talk
-
-            WWX "At least {i}you{/i} got to play hero in front of Wen Qing and rescue her brother."
-
-            show JC blush
-
-            JC "I wasn't playing at anything! He was sick!"
-
-            show WWX -talk
-
-            WWX "Weird time to fall sick, huh?"
-           
-            WWX "Ah, I just figured we'd get to do more than watch Zewu-jun do his thing. Though seeing what's-his-face flail in panic before Lan Zhan rescued him was kinda funny."
-
-            show JC talk
-
-            JC "You mean Su She?"
-
-            WWX "Dunno, I can never tell all the Lans apart, they all have the same white robes and judgey faces."
-
-            show JC angy
-
-            JC "{i}Lan Wangji{/i} has the same damn white robes and judgey face and you seem to be able to recognise him just fine!"
-
-            show WWX grin
-
-            WWX "Oh, speaking of, I think that's him over there!"
-
-            hide WWX with moveoutleft
-           
-            WWX "Lan Zhan, hey Lan Zhan, d'you want a loquat..."
-
-            jump WBA_postchat
-       
         "Take the last boat":
             $ wangxian += 2
 
@@ -4474,66 +4602,16 @@ label WBA_boatchoice:
             with cutfast
 
             "Once everyone is ready, the group sets off onto the dark waters in their rented boats. As an unnatural mist rolls in, Wei Wuxian discovers that what they thought were water ghouls is actually something far more sinister: a waterborne abyss."
-           
+            
             "Jiang Cheng gets injured, and Lan Wangji has to enact a heroic rescue of Wen Ning, Su She, and Wei Wuxian."
-           
+            
             "Thankfully, Lan Xichen manages to eradicate the abyss, and the group of young cultivators finally return to Caiyi Town, soaking wet but triumphant."
 
             $ LWJboatsave_flag = True
 
-            scene bg caiyi
-            with cutfast
+            $ Wenboatchoice = "JC"
 
-            stop music fadeout 1.0  ## double check music
-            play music "audio/fun3.mp3" fadein 1.0
-
-            show WWX left at center
-            show JC right at right
-            with dissolve
-
-            WWX "Ah, Jiang Cheng, that was fun, wasn't it?"
-
-            show JC angy
-
-            JC "Fun? What part of being attacked by a {i}surprise waterborne abyss{/i} was fun???"
-
-            show WWX grin
-
-            WWX "All of it! Too bad Nie-xiong didn't come along, aha I bet he'd have wet his pants!"
-
-            show WWX right talk
-
-            WWX "Hey, Lan Zhan! There you are!"
-
-            show LWJ left at left
-            with moveinleft
-           
-            WWX "Have a loquat!"
-
-            show LWJ angy
-
-            LWJ "...No."
-
-            WWX "Ah, he really has no taste."
-
-            show WWX left talk
-           
-            WWX "Here, Jiang Cheng, catch!"
-
-            hide WWX
-            hide JC
-            with moveoutright
-
-            LWJ "..."
-
-            show LXC right at center
-            with moveinright
-
-            LXC "Wangji, if you want loquats, I can buy a basket back home."
-
-            LWJ "No."
-
-            jump WBA_postchat
+            return
 
 label WBA_postchat:
 
@@ -4613,7 +4691,7 @@ label WBA_postchat:
             show LXC talk
             show JC blush
 
-            LXC "Or perhaps you'd be ammenable to a spar? It would be an honor to measure my skills against yours, Jiang-gongzi."
+            LXC "Or perhaps you'd be amenable to a spar? It would be an honor to measure my skills against yours, Jiang-gongzi."
 
             show JC talk  
             show LXC -talk
@@ -4635,10 +4713,9 @@ label WBA_postchat:
 
             LXC "I may not be opposed to that either, Jiang-gongzi, depending on the circumstances."
 
-            scene art_LXC1
+            ## scene art_LXC1
 
             jump LET_1
-
 
         "Talk to Wen Qing and Wen Ning":
 
@@ -6637,11 +6714,11 @@ label GIFT_2:
 
             show WWX blush
 
-            extend "and Wei-xiong marries Lan-er-gongzi..."
+            NHS "And Wei-xiong marries Lan-er-gongzi..."
 
             show NHS fan
 
-            extend "do you think you'll have a double wedding?"
+            NHS "Do you think you'll have a double wedding?"
 
             show NHS talkfan
 
@@ -8526,6 +8603,14 @@ label CSC_2:
     show MY right at right
     show WQ right at midright
     show JC right at center
+    with None
+
+    ## below offset is because JC's sprite is too fat and WQ and MY need to give him some space
+
+    show MY:
+        xoffset 50
+    show WQ:
+        xoffset 110
 
     show LXC frown
 
@@ -10908,4 +10993,3 @@ label end:
     ## This also ends the game
 
     return
-
