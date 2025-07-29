@@ -4335,7 +4335,7 @@ label WBA_2:
 
     JC "Wait, but—"
 
-    call WBA_boatchoice
+    call WBA_boatchoice from _call_WBA_boatchoice
 
     scene bg caiyi
     with cutfast
@@ -10444,7 +10444,7 @@ label .choseWQ:
    
     show WQ love
 
-    "So if Jiang-gongzi understands, and still wants to make a lantern with this Wen Qing of Qishan Wen, then yes."
+    WQ "So if Jiang-gongzi understands, and still wants to make a lantern with this Wen Qing of Qishan Wen, then yes."
 
     show WQ blush
 
