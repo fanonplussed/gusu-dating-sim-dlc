@@ -9459,7 +9459,7 @@ label CSC_LXC:
     show LXC smile
 
     LXC "I'm glad."
-    
+   
     show JC smile
 
     JC "Maybe you should punch your own tree, Zewu-jun. Might help you feel better too."
@@ -9553,8 +9553,33 @@ label CSC_LXC:
     LXC "Well, then. Perhaps the both of them aren't so much missing, as not yet ready to be found."
 
     show JC angy
+    show LXC -smile
 
-    JC "Well too damn bad, if they didn't want people looking, they should have left a note!"
+    JC "Well, too damn bad! I can't imagine being that {i}thoughtless!{/i} Half the sect is going to be out here, looking for them!"
+
+    show LXC smile
+
+    LXC "Until recently, I would have agreed with you, but..."
+
+    show LXC blush
+    show JC blush
+
+    LXC "I have to admit that the idea of not wanting to be found has its appeal...if you're lost with the right person."
+
+    show JC angy
+    show LXC smile
+
+    JC "ZEWU-JUN!"
+
+    show LXC talk
+    show JC blush
+
+    LXC "But, perhaps, now is not the time with two runaways out there already."
+
+    show JC angy
+    show LXC smile
+
+    JC "The only thing Wei Wuxian is going to be running away from is my {i}fist{/i} when I find him and punch him in the {i}face{/i}!"
 
     show JC right rage
 
@@ -10969,28 +10994,3 @@ label end:
     Ghosthouses \n
     daisydiversions \n
     Art"
-
-    nvl clear
-
-    let "{vspace=260}{b}The End{/b} \n \n
-    If you've enjoyed this, do drop us a comment on {a=https://archiveofourown.org/works/58119751}AO3{/a} \n
-    Thank you for playing!"
-
-    return
-    ## the above ends the game; comment it out the above to see the points screen below
-
-    "Sangcheng points: [sangcheng] \n
-    Xicheng points: [xicheng] \n
-    Chengyao points: [chengyao] \n
-    Chengqing points: [chengqing]"
-
-    "Wangxian points: [wangxian] \n
-    Xiyao points: [xiyao]"
-
-    "And your flags were\n \n
-
-    LXC_1_flag: [LXC_1_flag] \n
-    LWJ_talk_flag: [LWJ_talk_flag] \n
-    WQ_1_flag: [WQ_1_flag]"
-
-    ## This also ends the game
