@@ -468,6 +468,8 @@ label start_real:
             JC "Ugh, fine. Stop wailing about your brother already."
 
             $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             show NHS smile
 
@@ -615,6 +617,8 @@ label LXC_1:
             JC "He's, um, not doing too badly...?"
 
             $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             show bush_nod at center
             play sound "audio/rustle.mp3"
@@ -630,13 +634,15 @@ label LXC_1:
 
             JC "He's, er, not doing that great, I guess."
 
-            $ xicheng += 1
-
             hide bush_nod
             show bush_shakelots at center
             play sound "audio/rustle.mp3"
 
             show LXC smile
+
+            $ xicheng += 1
+            if helpmode:  
+                show LXCgd at appFade
 
             LXC "Thank you for your honesty, Jiang-gongzi."
 
@@ -716,9 +722,12 @@ label LXC_1:
 
             show LXC smile
 
+            $ xicheng += 1
+            if helpmode:  
+                show LXCgd at appFade
+
             LXC "I'm grateful for Jiang-gongzi's sincerity and dedication. And I'm sure Mingjue will be grateful too."
 
-            $ xicheng += 1
             $ LXC_1_flag = 1
 
             show LXC -smile
@@ -920,6 +929,10 @@ label LWJ_1:
 
             show NHS smile
 
+            $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
+
             NHS "No problem, I'm great at giving people bad news and then running away! Thanks, Jiang-xiong!"
 
             show JC right talk
@@ -927,9 +940,6 @@ label LWJ_1:
             with moveoutbottom
 
             JC "...this is stupid this is stupid this is stupid..."
-
-            $ sangcheng += 1
-            $ LWJ_talk_flag += 1
 
             show JC right:
                 ease 0.25 xoffset -100
@@ -942,6 +952,12 @@ label LWJ_1:
             JC "Greetings, Lan-gongzi."
 
             show LWJ left
+
+            $ LWJ_talk_flag += 1
+
+            $ zhancheng -= 1
+            if helpmode:
+                show LWJbad at appFade
 
             LWJ "...Jiang-gongzi."
 
@@ -1125,9 +1141,13 @@ label MY_1:
 
             show MY smile
 
+            $ chengyao += 1
+            if helpmode:  
+                show MYgd at appFade
+
             MY "Oh. A good afternoon to you too, Jiang-gongzi. And you as well, Wei-gongzi."
 
-            $ chengyao += 1
+            
     
     show MY talk
 
@@ -1206,9 +1226,11 @@ label MY_1:
 
             show NHS smile
 
-            NHS "See? You two keep each other company, we'll be back real quick!"
-
             $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
+
+            NHS "See? You two keep each other company, we'll be back real quick!"
 
             show WWX talk
 
@@ -1271,9 +1293,11 @@ label MY_1:
 
             show MY smile
 
-            MY "Not at all. Thank you for your concern, Jiang-gongzi."
-
             $ chengyao += 1
+            if helpmode:  
+                show MYgd at appFade
+
+            MY "Not at all. Thank you for your concern, Jiang-gongzi."
 
             show MY -smile
 
@@ -1377,6 +1401,8 @@ label WQ_1:
             JC "The Jiang sect weapons training is clearly superior. Right, Wei Wuxian?"
 
             $ chengxian += 1
+            if helpmode:  
+                show WWXgd at appFade
 
             show WWX grin
 
@@ -1410,13 +1436,16 @@ label WQ_1:
 
     menu:
         "Leave with Nie Huaisang":
-            $ sangcheng += 1
 
             show JC talk
 
             JC "Yeah, let's go. Wei Wuxian can catch up with us once he's done with his nonsense."
 
             show NHS smile
+
+            $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             NHS "Yes! Jiang-xiong, you're sure you can catch enough fish for the both of us, right?"
 
@@ -1789,7 +1818,8 @@ label LWJ_2:
                 JC "{size=-9}Damn it, fine, damn it!"
 
             $ sangcheng += 1
-            $ LWJ_talk_flag += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             show NHS -pout
             show JC right:
@@ -1801,6 +1831,12 @@ label LWJ_2:
             show JC talk
 
             JC "Lan-er-gongzi."
+
+            $ LWJ_talk_flag += 1
+
+            $ zhancheng -= 1
+            if helpmode:
+                show LWJbad at appFade
 
             LWJ "..."
 
@@ -1992,9 +2028,11 @@ label XY_1:
 
             show NHS left smile 
 
-            NHS "{size=-9}I'm always happy to be caught if it's you chasing me, Jiang-xiong!"
-
             $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
+
+            NHS "{size=-9}I'm always happy to be caught if it's you chasing me, Jiang-xiong!"
 
             show NHS right
 
@@ -2717,11 +2755,13 @@ label LXC_2:
     menu:
         "Escape on your own!":
 
-            $ sangcheng -= 1
-
             JC "That depends on your definition of \"great\", I guess."
 
             show NHS pout
+
+            $ sangcheng -= 1
+            if helpmode:  
+                show NHSbad at appFade
 
             NHS "Jiang-xiong!"
 
@@ -2777,9 +2817,11 @@ label LXC_2:
 
             JC "Let's get out of here before he comes back!"
 
-            NHS "Right behind you!"
-
             $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
+
+            NHS "Right behind you!"
 
             jump MY_2pre     
 
@@ -2824,6 +2866,8 @@ label LXC_2:
             NHS "Bye, Xichen-ge! Tell Da-ge that I feel smarter already!"
 
             $ xicheng -= 1
+            if helpmode:  
+                show LXCbad at appFade
 
             LXC "..."      
 
@@ -2892,10 +2936,13 @@ label LXC_2:
 
                     show LXC smile
 
+                    $ xicheng += 1
+                    if helpmode:  
+                        show LXCgd at appFade
+
                     LXC "Indeed there is! But it's better to be aware of the gaps in one's knowledge than to be foolishly overconfident."
 
                     show LXC -smile
-                    $ xicheng += 1
 
             LXC "I do find the way this topic is taught to be perhaps more obscure and dry than some of the others, so there's no shame in having some difficulty with it."
 
@@ -2926,9 +2973,11 @@ label LXC_2:
 
                     show LXC smile
 
-                    LXC "Not at all, I'm always glad to help! Besides, it is important to know one's limits and seek assistance when appropriate."
-
                     $ xicheng += 1
+                    if helpmode:  
+                        show LXCgd at appFade
+
+                    LXC "Not at all, I'm always glad to help! Besides, it is important to know one's limits and seek assistance when appropriate."
 
                     show LXC -smile
 
@@ -2944,9 +2993,11 @@ label LXC_2:
                    
                     JC "Er. Something very important. Unrelated to studying."
 
-                    NHS "Yes! He was telling me about...about Lan-er-gongzi!"
-
                     $ sangcheng += 1
+                    if helpmode:  
+                        show NHSgd at appFade
+
+                    NHS "Yes! He was telling me about...about Lan-er-gongzi!"
 
                     show LXC frown
 
@@ -3066,23 +3117,33 @@ label LXC_2:
 
         "Stay with Lan Xichen":
 
-            $ sangcheng += 1
-
             JC "We've made some decent headway into reviewing the material."
 
             LXC "That's wonderful. Incremental progress can be a great study strategy."
 
             LXC "Are either of you finding a particular topic challenging? I'd be glad to be of assistance."
 
+            show JC blush
+
             JC "Actually, Nie-xiong was just saying that he wanted to reference a book he found in the library the other day on the eleven classes of plant spirits."
 
             NHS "I was?"
+
+            show NHS fan:
+                ease 0.1 yoffset -100
+                ease 0.1 yoffset 0
+
+            $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             NHS "Oh, yes, I was! I should definitely leave immediately. To go do...that."
 
             LXC "Ah, a complicated subject indeed. Perhaps we could start with naming them from memory. Huaisang, would you like to go first?"
 
             NHS "NO!"
+
+            show NHS talkfan
 
             NHS "I mean...Xichen-ge, my interest in this topic goes beyond rote memorisation. I need the works of the masters on this topic!"
 
@@ -3133,8 +3194,6 @@ label LXC_2:
 
             LXC "He's very fortunate to have met you here."
 
-            $ xicheng += 1
-
             JC "I'm fortunate that he's my friend, too."
 
             menu:
@@ -3156,10 +3215,12 @@ label LXC_2:
 
                     JC "And if he doesn't appreciate your efforts, I'll break his legs for you!"
 
-            $ xicheng += 1
-
             show LXC smile
             show JC smile
+
+            $ xicheng += 1
+            if helpmode:  
+                show LXCgd at appFade
 
             LXC "Thank you for that."
 
@@ -3177,9 +3238,12 @@ label LXC_2:
                     JC "I'm Huaisang's friend. Not his babysitter!"
 
                     show LXC frown
-                    $ xicheng -= 1
 
                     JC "He needs to figure out how to pass on his own!"
+
+                    $ xicheng -= 1
+                    if helpmode:  
+                        show LXCbad at appFade
 
                     LXC "I see."
 
@@ -3190,13 +3254,16 @@ label LXC_2:
                     jump MY_2pre
 
                 "You got it!":
-                    $ xicheng += 1
 
                     show LXC smile
 
                     JC "I'll take care of it, Zewu-jun. I'm sure you have more important matters to attend to."
 
                     show JC blush
+
+                    $ xicheng += 1
+                    if helpmode:  
+                        show LXCgd at appFade
 
                     LXC "So dependable."
 
@@ -3313,6 +3380,8 @@ label MY_2:
             JC "Er, sure."
 
             $ chengyao += 1
+            if helpmode:  
+                show MYgd at appFade
 
             show MY smile
 
@@ -3348,6 +3417,8 @@ label MY_2:
             JC "Right. Okay. Now, where on earth did Huaisang say he was going to be in Caiyi..."
 
             $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             jump WBA_start
     
@@ -3359,11 +3430,14 @@ label MY_2:
 
     menu: 
         "Yes":
-            $ sangcheng += 1 ## seems a bit weird to get sangcheng points when NHS isn't around, but then NHS is probably hiding in a bush eavesdropping or something
 
             show JC blush
 
             JC "Er, yeah I hope so? We're...we're pretty good friends, I guess."
+
+            $ sangcheng += 1
+            if helpmode:  
+                show NHSgd at appFade
 
             if sangcheng >= 5:
 
@@ -3434,13 +3508,15 @@ label MY_2:
 
         "Sure, if you mean bribery":
 
-            $ chengyao += 1
-
             show JC talk
 
             JC "So you want me to...what? Convince him to study? Won't you have better luck just bribing him?"
 
             show MY happy
+
+            $ chengyao += 1
+            if helpmode:  
+                show MYgd at appFade
 
             MY "Ah, I could never!"
 
@@ -3520,6 +3596,8 @@ label MY_2:
             JC "She's great!!"
 
             $ chengyao += 1
+            if helpmode:  
+                show MYgd at appFade
 
             show MY smile
 
@@ -3760,7 +3838,7 @@ label WBA_start:
         "You don't need to come.":
 
             show JC talk
-
+            
             JC "It's just a night hunt, Wen Qing. It's not that serious."
             $ chengqing -= 1
            
@@ -3773,7 +3851,7 @@ label WBA_start:
         "We could use a doctor.":
 
             show JC smile
-   
+
             JC "I think we'd all feel better having a doctor with us, just in case."
             $ chengqing += 1
 
@@ -4582,8 +4660,8 @@ label WBA_boatchoice:
 
                 "Once everyone is ready, the group sets off onto the dark waters in their rented boats. As an unnatural mist rolls in, Wei Wuxian discovers that what they thought were water ghouls is actually something far more sinister: a waterborne abyss."
 
-                scene art_WQ1
-                #splash art for Wen Qing's romance line
+                scene cutscene_chengqing1 with dissolve
+                $ persistent.unlock_WQ1 = True
 
                 "Jiang Cheng nearly gets injured, but Wen Qing's sharp eyes spot the attack before it lands. And so when Wen Ning suddenly takes ill—eyes filming over white and body going weak—Jiang Cheng easily carries him up to safety."
 
@@ -4713,7 +4791,9 @@ label WBA_postchat:
 
             LXC "I may not be opposed to that either, Jiang-gongzi, depending on the circumstances."
 
-            ## scene art_LXC1
+            scene cutscene_xicheng1 with dissolve
+            $ persistent.unlock_LXC1 = True
+            pause
 
             jump LET_1
 
@@ -4922,9 +5002,9 @@ label WBA_3:
 
     show MY smile
 
-    MY "Yes, that would be very much appreciated, Jiang-gongzi."
-
     $ chengyao += 1
+
+    MY "Yes, that would be very much appreciated, Jiang-gongzi."
 
     show NHS pout
 
@@ -4973,11 +5053,11 @@ label WBA_3:
     menu:
         "This is engaging enough":
 
-            $ chengyao += 1
-
             JC "Nah, it's fine. This is way more engaging than how Old Man Lan teaches it, actually. Less painful."
 
             show MY smile
+
+            $ chengyao += 1
 
             MY "Well, high praise indeed. Thank you, Jiang-gongzi, let's continue"
 
@@ -5023,8 +5103,6 @@ label WBA_3:
     menu:
         "He deserves a break":
 
-            $ chengyao -= 1
-
             show JC smile
 
             JC "He's probably about to pass out or something. You made him study more today than he has in the whole of last month."
@@ -5033,11 +5111,11 @@ label WBA_3:
 
             show MY -frowny
 
+            $ chengyao -= 1
+
             MY "Do you find it so, Jiang-gongzi? Somehow, I'm not sure that I agree."
 
         "You deserve a break":
-
-            $ chengyao += 1
 
             show JC smile
 
@@ -5090,13 +5168,13 @@ label WBA_3:
 
                 "He has a plan to cheat":
 
-                    $ chengyao += 2
-
                     JC "He, um, has a plan to cheat."
 
                     MY "...Is that so."
 
                     show MY smile
+
+                    $ chengyao += 2
 
                     MY "Well, thank you for your honesty, Jiang-gongzi. Let me be honest in return, and say that I'm relieved that he {i}has{/i} a plan at all."
 
@@ -5278,8 +5356,6 @@ label WBA_3:
 
         "We could keep studying":
 
-            $ chengyao += 1
-
             show JC talk
 
             JC "We could keep studying? You're pretty great at teaching things."
@@ -5290,6 +5366,8 @@ label WBA_3:
 
             show MY smile
 
+            $ chengyao += 1
+
             MY "Jiang-gongzi is certainly the more apt pupil. It would be my pleasure."
 
             show MY talk
@@ -5297,8 +5375,6 @@ label WBA_3:
             MY "Now, where were we—"
 
         "What do you want to do?":
-
-            $ chengyao += 2
 
             JC "What would {i}you{/i} like to do now, Meng-gongzi? You're always running after Nie Huaisang, but now that he's run away—"
 
@@ -5315,6 +5391,8 @@ label WBA_3:
             JC "Whatever. Do whatever you want."
 
             show MY blush
+
+            $ chengyao += 2
 
             MY "Perhaps I will, Jiang-gongzi."
 
@@ -5349,15 +5427,13 @@ label WBA_3:
 
         "Tell Meng Yao to ignore them":
 
-            $ chengyao -= 1
-
             show JC left angy
 
             JC "UGH, ignore those assholes. Tell me about, er, plant spirits."
 
-        "Ask Meng Yao about Jin Guangshan": ## review this menu v dialogue option
+            $ chengyao -= 1
 
-            $ chengyao -= 2
+        "Ask Meng Yao about Jin Guangshan": ## review this menu v dialogue option
 
             show JC left talk
 
@@ -5368,6 +5444,8 @@ label WBA_3:
             MY "Yes."
 
             JC "That sucks."
+
+            $ chengyao -= 2
 
             MY "You could say that."
 
@@ -5502,9 +5580,10 @@ label WBA_3:
 
             "Don't talk about him like that":
 
-                ## mid-arc romance splash screen here?
+                scene cutscene_chengyao1 with dissolve
+                $ persistent.unlock_MY1 = True
 
-                show JC rage
+                ## show JC rage                ## commented out if cutscene indeed lives above (and sprites below also commented out)
 
                 JC "How dare you talk about Meng-gongzi like that! You watch your mouth, or Sandu will watch it for you!"
 
@@ -5518,31 +5597,39 @@ label WBA_3:
 
             "I don't care who his parents are":
 
-                ## mid-arc romance splash screen here also? or only here? If it's only here might be a good idea to beef up the dialogue some more
+                scene cutscene_chengyao1 with dissolve
+                $ persistent.unlock_MY1 = True
 
-                $ chengyao += 1
+                $ chengyao += 1   
 
-                show JC rage
+                ## show JC rage   ## commented out if cutscene indeed lives above (and sprites below also commented out)
 
                 JC "I don't give a shit who his parents are! And I don't give a shit who {i}your{/i} parents are either, I can beat you up all the same!"
 
-        show NPC1:
-            ease 0.1 yoffset -100
-            ease 0.1 yoffset 0
-            pause 0.2
-            ease 0.5 xoffset -200
+        ## show NPC1:
+        ##    ease 0.1 yoffset -100
+        ##    ease 0.1 yoffset 0
+        ##    pause 0.2
+        ##    ease 0.5 xoffset -200
 
-        show NPC2:
-            ease 0.1 yoffset -100
-            ease 0.1 yoffset 0
-            pause 0.2
-            ease 0.5 xoffset -200
+        ## show NPC2:
+        ##    ease 0.1 yoffset -100
+        ##    ease 0.1 yoffset 0
+        ##    pause 0.2
+        ##    ease 0.5 xoffset -200
 
         NPC1 "Whoa, okay, chill out, Jiang-gongzi. Just thought you ought to know."
 
         NPC2 "Yeah, not trying to pick a fight or anything. We were just leaving anyway."
 
         JC "Good! Leave!"
+
+        ## following block added because to fade back from cutscene 
+        scene bg library
+        show JC right angy at right
+        show NPC1 at midleft
+        show NPC2 at left
+        with dissolve
 
         show NPC1 at offscreenleft
         show NPC2 at offscreenleft
@@ -5765,6 +5852,8 @@ label LET_1:
         "Fine, you're a genius":
 
             $ chengxian += 1
+            if helpmode:  
+                show WWXgd at appFade
 
             show JC roll
 
@@ -6380,7 +6469,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "MYgd"
+                    $ giftbought = "bought_MYgd"
 
                     jump giftbought
 
@@ -6415,7 +6504,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "WQgd"
+                    $ giftbought = "bought_WQgd"
 
                     jump giftbought
 
@@ -6446,7 +6535,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "LXCgd"
+                    $ giftbought = "bought_LXCgd"
 
                     jump giftbought
 
@@ -6485,7 +6574,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "LWJgd"
+                    $ giftbought = "bought_LWJgd"
 
                     jump giftbought
 
@@ -6524,7 +6613,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "MYbad"
+                    $ giftbought = "bought_MYbad"
 
                     jump giftbought
 
@@ -6577,7 +6666,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "WQbad"
+                    $ giftbought = "bought_WQbad"
 
                     jump giftbought
 
@@ -6608,7 +6697,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "LXCbad"
+                    $ giftbought = "bought_LXCbad"
 
                     jump giftbought
 
@@ -6643,7 +6732,7 @@ label GIFT_1:
             menu:
                 "Yes":
 
-                    $ giftbought = "LWJbad"
+                    $ giftbought = "bought_LWJbad"
 
                     jump giftbought
 
@@ -6839,7 +6928,7 @@ label GIFT_2:
 
             JC "Is there nothing in your brain but Lan Wangji?! Why would you give something like this to him!"
 
-            if giftbought == "LWJgd":
+            if giftbought == "bought_LWJgd":
                 show WWX right talk
 
             else:
@@ -6936,7 +7025,7 @@ label GIFT_LXC:
 
     ## Add an unwrapping soundeffect
 
-    if giftbought == "LXCgd":
+    if giftbought == "bought_LXCgd":
 
         $ xicheng += 1
         
@@ -7013,7 +7102,7 @@ label GIFT_LXC:
                 jump WBA_end
 
 
-    elif giftbought == "LXCbad":
+    elif giftbought == "bought_LXCbad":
 
         $ xicheng -= 1
 
@@ -7105,7 +7194,7 @@ label GIFT_WQ: ## edit everything including bg and music!
 
     ## Add an unwrapping soundeffect
 
-    if giftbought == "WQgd":
+    if giftbought == "bought_WQgd":
 
         show WQ smile
 
@@ -7164,7 +7253,7 @@ label GIFT_WQ: ## edit everything including bg and music!
 
         jump WBA_end
 
-    elif giftbought == "WQbad":
+    elif giftbought == "bought_WQbad":
 
         WQ "..."
 
@@ -7260,7 +7349,7 @@ label GIFT_MY: ## edit music and maybe bg?
 
     JC "JUST TAKE THIS, ALRIGHT?! IT'S NOT A COURTING GIFT JUST A REGULAR GIFT!"
 
-    if giftbought == "MYgd":
+    if giftbought == "bought_MYgd":
 
         $ chengyao += 2
 
@@ -7306,7 +7395,7 @@ label GIFT_MY: ## edit music and maybe bg?
         
         MY "That you tried to give me something I could use to help myself...well, that's worth more to me than the best jade in the world."
 
-    elif giftbought == "MYbad":
+    elif giftbought == "bought_MYbad":
 
         $ chengyao -= 2
 
@@ -7424,7 +7513,7 @@ label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
 
     WWX "Here, look!"
 
-    if giftbought == "LWJbad": 
+    if giftbought == "bought_LWJbad": 
 
         $ wangxian -= 1
 
@@ -7461,7 +7550,7 @@ label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
         show LWJ right angy
         hide LWJ with moveoutleft
     
-    elif giftbought == "LWJgd": 
+    elif giftbought == "bought_LWJgd": 
 
         $ wangxian += 1
 
@@ -9051,7 +9140,7 @@ label CSC_WQ:
 
     JC "How is his illness these days?"
 
-    if giftbought == "WQgd":
+    if giftbought == "bought_WQgd":
 
         JC "He looks like he isn't as pale lately."
 
@@ -10877,7 +10966,8 @@ label LT_MY:
 
     nvl clear
 
-    ## chengyao ship splash screen goes here 
+    scene cutscene_chengyao2 with dissolve
+    $ persistent.unlock_MY2 = True
 
     let "{vspace=150}The relationship between Meng Yao and Jiang Cheng is a newly-lit flame, wavering in the winds of fate but never to be blown out. \n \n What wishes they make with each other are lost underneath the laughter and carousing of the other students. But when one day Meng Yao emerges from obscurity by right of blood and blade, he will remember this wish, and leave the Nightless City not for Koi Tower but for Lotus Pier.  \n \n And Jiang Cheng, too, will remember this wish, and take in the man who will become Lianfang-zun and not Jin Guangyao. They will rebuild the Jiang sect together with their capable hands, and lift it up once more to preeminence in the cultivation world."
 
@@ -10904,7 +10994,8 @@ label LT_LXC:
 
     nvl clear
 
-    ## xicheng ship splash screen goes here 
+    scene cutscene_xicheng2 with dissolve
+    $ persistent.unlock_LXC2 = True
 
     let "{vspace=150}The relationship between Jiang Cheng and Lan Xichen is a newly-lit flame, wavering in the winds of fate but never to be blown out. \n \n One day, when the dust settles on the Sunshot Campaign and Jiang Cheng finds himself desperately alone and needing support, Lan Xichen will reach out to him with both hands and invite him into the warm embrace of sworn brotherhood. \n \n These sworn brothers will soon be known through the cultivation world as men of great honour and skill, and out of sight of the cultivation world, they will draw much comfort and strength from each other no matter how dark and difficult the years."
 
@@ -10931,7 +11022,8 @@ label LT_WQ:
 
     nvl clear
 
-    ## chengqing ship splash screen goes here 
+    scene cutscene_chengqing2 with dissolve
+    $ persistent.unlock_WQ2 = True
 
     let "{vspace=150}A single lantern's light rises between Wen Qing and Jiang Cheng, carrying their unspoken but heartfelt wishes into the night. And though that light wavers in the winds of war, it is never extinguished; a single flame that nevertheless illuminates a way through their darkest times. \n \n For Jiang Cheng, that light comes as a letter of warning written at great risk to its sender, which arrives just in time for him to hold Lotus Pier against the Wen and save most of his sect, if not his parents. For Wen Qing, that light comes as an invaluable voice of support, speaking out for what's left of her family when the entire cultivation world subsequently turns against them."
 
@@ -10994,3 +11086,31 @@ label end:
     Ghosthouses \n
     daisydiversions \n
     Art"
+
+    nvl clear
+
+    let "{vspace=260}{b}The End{/b} \n \n
+    If you've enjoyed this, do drop us a comment on {a=https://archiveofourown.org/works/58119751}AO3{/a} \n
+    Thank you for playing!"
+
+    return
+    ## the above ends the game; comment it out the above to see the points screen below
+
+    "Sangcheng points: [sangcheng] \n
+    Xicheng points: [xicheng] \n
+    Chengyao points: [chengyao] \n
+    Chengqing points: [chengqing]"
+
+    "Wangxian points: [wangxian] \n
+    Xiyao points: [xiyao]"
+
+    "And your flags were\n \n
+
+    LXC_1_flag: [LXC_1_flag] \n
+    LWJ_talk_flag: [LWJ_talk_flag] \n
+    WQ_1_flag: [WQ_1_flag]"
+
+    ## This also ends the game
+
+    return
+
