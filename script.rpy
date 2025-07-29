@@ -7189,7 +7189,7 @@ label GIFT_WQ: ## edit everything including bg and music!
         JC "It symbolizes—"
 
         show WQ sustalk
-        show JC flat
+        show JC -blush
 
         WQ "Jiang-gongzi, I'm sorry, but. I don't think I can accept this."
 
@@ -7495,6 +7495,8 @@ label GIFT_LWJ: ## edit music and maybe bg? also needs new audio clip!
         show WWX grin
 
         WWX "You do! I knew you would, you like my present sooooo much! Is it 'cause of the bunnies, or 'cause it's the most boring textbook I've ever read? I bet it's both, it takes a real talented writer to make even bunnies boring, you know, and..."        
+
+        jump WBA_end
 
     else:
         LWJ "..."
@@ -10387,7 +10389,7 @@ label .choseWQ:
     WQ "That's..."
 
     JC "You don't have to. If...if you don't want to."
-    
+   
     show WQ left talk:
         ease 0.3 xoffset 150
 
@@ -10397,21 +10399,27 @@ label .choseWQ:
 
     WQ "But I..."
 
-    show WQ talk
-    
-    WQ "Jiang-gongzi once pointed out that I take my duties very seriously. Especially to my family, my sect. And that..."
+    show WQ sustalk
+   
+    WQ "I once told you that things were complicated and that hasn't changed..."
 
+    show JC angy
     show WQ hmm
-
-    WQ "And that there are assholes in that sect. So—"
-
-    show JC talk
 
     JC "No, I get it. Sorry, I won't—"
 
     show WQ talk
+    show JC -angy
 
-    WQ "Let me finish. So if Jiang-gongzi understands, and still wants to make a lantern with this Wen Qing of Qishan Wen, then yes."
+    WQ "Let me finish."
+
+    show WQ blush
+
+    WQ "But I also told you that some things are worth the risk."
+   
+    show WQ love
+
+    "So if Jiang-gongzi understands, and still wants to make a lantern with this Wen Qing of Qishan Wen, then yes."
 
     show WQ blush
 
@@ -10422,12 +10430,7 @@ label .choseWQ:
     JC "Yeah, that's...I'd like that. To light a single lantern with Wen-guniang today."
 
     show JC smile
-
-    JC "Thank you, Wen-guniang."
-
-    show WQ smile
-
-    WQ "No. Thank {i}you{/i}, Jiang-gongzi."
+    show WQ love
 
     jump LT_WQ
 
@@ -10991,5 +10994,3 @@ label end:
     WQ_1_flag: [WQ_1_flag]"
 
     ## This also ends the game
-
-    return
