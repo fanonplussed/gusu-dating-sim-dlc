@@ -6131,7 +6131,7 @@ label LET_2:
 
             $ let1 = "Dear Da-ge,"
     
-    let "[let1]" ## this nvl shit needs fixing the spacing is weird, but also wait for actual bg letter before you start on that
+    let "{cps=30}{vspace=20}[let1]"
 
     JC "Now some kind of opening paragraph...thing..."
 
@@ -6154,7 +6154,7 @@ label LET_2:
 
             JC "He keeps sending Nie Huaisang here for the lectures, clearly he must give a shit about it."
 
-            $ let2 = "The Cloud Recesses lectures are happening right now. There are classes almost every day."
+            $ let2 = "The Cloud Recesses lectures are {s}boring{/s} {s}great{/s} happening." ## changed this, is it funnier...
 
         "Skip the opening pargraph":
 
@@ -6162,16 +6162,16 @@ label LET_2:
 
             JC "Ah, fuck, who cares about the opening, I always skip reading it anyway."
 
-            $ let2 = "Greetings.{p=0.1}{p=0.1}"
+            $ let2 = "Greetings."
     
     nvl clear
     scene bg letter
 
     let """
 
-    [let1]
+    {vspace=20}[let1]
 
-    [let2]
+    {cps=30}[let2]
 
     """
 
@@ -6190,7 +6190,7 @@ label LET_2:
 
             JC "Can't go wrong with the weather."
 
-            if let2 == "Greetings.{p=0.1}{p=0.1}":
+            if let2 == "Greetings.":
                 $ let3 = "The weather in Gusu is quite warm. I thought it would be colder, but it's not."
             else:
                 $ let3 = "Also, the weather in Gusu is quite warm. I thought it would be colder, but it's not."
@@ -6229,9 +6229,11 @@ label LET_2:
     scene bg letter
     let """
 
-    [let1] {nw}
+    {vspace=20}[let1] {nw}
 
-    [let2] {w}[let3]
+    [let2]
+    
+    {cps=30} [let3]
 
     """
 
@@ -6245,7 +6247,7 @@ label LET_2:
 
             JC "Nie Huaisang you better thank me for this..."
 
-            $ let4 = "Nie Huaisang is doing really well in his studies. I know, because I have been studying with him."
+            $ let4 = "Nie Huaisang is doing really well in his studies. I know because I have seen him smile at his books." ## changed this, is it funnier...
 
         "Nie Huaisang is doing fine":
 
@@ -6254,23 +6256,25 @@ label LET_2:
 
             JC "As if he'd believe Nie Huaisang is doing great."
 
-            $ let4 = "Nie Huaisang is doing fine. Not great, but not terrible. I know, because I have been studying with him."
+            $ let4 = "Nie Huaisang is doing fine. Not great, but not terrible. It's important to find balance in all things." ## changed this, is it funnier...
 
         "Nie Huaisang is...doing...":
 
             JC "Better not lie to Chifeng-zun..."
 
-            $ let4 = "Nie Huaisang is doing. Stuff. Like calligraphy, which is one of the four great arts. Also painting. Which is another of the four great arts."
+            $ let4 = "Nie Huaisang is doing stuff. Like calligraphy, which is one of the four great arts. Also painting. Which is another of the four great arts." ## changed this, punctuation felt a bit awkward for written text and not spoken
     
     nvl clear
     scene bg letter
     let """
 
-    [let1] {nw}
+    {vspace=20}[let1] {nw}
 
-    [let2] [let3]
+    [let2]{nw}
+    
+    [let3]
 
-    [let4]
+    {cps=30}[let4]
 
     """
 
@@ -6326,7 +6330,7 @@ label LET_2:
 
             JC "I guess...he might also know...Wen Qing...?"
 
-            $ let5 = "By the way, did you know Wen Qing is also here in the Cloud Recesses? Her brother, Wen Ning, is also with us. Her cousin, Wen Chao, was here at first, but is thankfully no longer with us. {w}I mean he left, not that he's dead."
+            $ let5 = "By the way, did you know Wen Qing is also here in the Cloud Recesses? Wen Ning is also with us. Wen Chao was here at first, but is thankfully no longer with us. {w}I mean he left, not that he's dead." ## made it shorter, don't think that making it long was particularly funny anyway
 
         "Skip the closing paragraph":
 
@@ -6340,13 +6344,15 @@ label LET_2:
     scene bg letter
     let """
 
-    [let1] {nw}
+    {vspace=20}[let1] {nw}
 
-    [let2] [let3] {nw}
+    [let2] {nw}
+    
+    [let3] {nw}
 
-    [let4]
+    [let4] 
 
-    [let5]
+    {cps=30}[let5]
 
     """
 
@@ -11108,9 +11114,3 @@ label end:
 
     LXC_1_flag: [LXC_1_flag] \n
     LWJ_talk_flag: [LWJ_talk_flag] \n
-    WQ_1_flag: [WQ_1_flag]"
-
-    ## This also ends the game
-
-    return
-
