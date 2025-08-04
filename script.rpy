@@ -507,7 +507,7 @@ label LXC_1:
     play music "audio/fun4.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Fifty-nine days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Fifty-nine days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -1079,7 +1079,7 @@ label MY_1:
     play music "audio/fun3.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Fifty-one days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Fifty-one days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -1320,7 +1320,7 @@ label WQ_1:
     play music "audio/fun1.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Forty-six days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Forty-six days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -1718,7 +1718,7 @@ label LWJ_2:
     play music "audio/fun4.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Thirty-nine days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Thirty-nine days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -1940,7 +1940,7 @@ label XY_1:
     play music "audio/funny.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Thirty days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Thirty days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -2633,7 +2633,7 @@ label LXC_2:
     play music "audio/fun3.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty-one days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Twenty-one days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -3098,7 +3098,7 @@ label LXC_2:
                     play music "audio/fun4.mp3" fadein 1.0
 
                     show bar
-                    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
+                    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
                     with Dissolve(0.5)
                     pause(2.0)
                     hide text
@@ -3334,7 +3334,7 @@ label MY_2pre:
     play music "audio/fun4.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Twenty days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -3643,10 +3643,6 @@ label MY_2:
 
 label WBA_start:
 
-    ## this is a testing thing just for approval page text thingy
-    $ stats_arc1_done = True 
-    call statstext from _call_statstext
-
     scene bg gates
     with cutslow
 
@@ -3654,7 +3650,7 @@ label WBA_start:
     play music "audio/WBA.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Ten days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Ten days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -5820,7 +5816,7 @@ label LET_1:
     play music "audio/fun3.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Ten days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Ten days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -6526,11 +6522,11 @@ label GIFT_1:
 
                 $ seen_LXCgd = True
 
-                NHS "Oh, look, it's a cat toy!" ## change this line to JC?
+                JC "Oh, look, it's a cat toy!"
 
                 SHOPK "That's an ornamental tassel, not a toy!"
 
-                SHOPK "It's made of the best silk, sourced from Lanling, and the beads are hand crafted by a local artisan."
+                SHOPK "It's made of the best silk, sourced from Lanling, and the beads are high quality jade."
 
                 WWX "Pretty!"
 
@@ -7618,7 +7614,7 @@ label WBA_end:
     play music "audio/fun2.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Seven days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Seven days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -8436,7 +8432,7 @@ label CSC_1:
 
     scene bg indoors
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} Five days to Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} Five days to Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -9724,7 +9720,7 @@ label LT:
     play music "audio/lantern1.mp3" fadein 1.0
 
     show bar
-    show text "{size=+10}{font=PrincessSofia.ttf}{color=#610000} The evening of Qixi{/color}{/font}" at truecenter
+    show text "{size=+10}{font=KapsalonBrush.otf}{color=#610000} The evening of Qixi{/color}{/font}" at truecenter
     with Dissolve(0.5)
     pause(2.0)
     hide text
@@ -9847,8 +9843,8 @@ label LT:
         stop music fadeout 1.0
         play music "audio/lantern1.mp3" fadein 1.0
 
-        show NMJ left talk at midleft
-        show JC right at midright
+        show NMJ right talk at midright
+        show JC left at midleft
         with dissolve
 
         NMJ "Jiang-gongzi, I'll be frank, I was surprised to receive a letter from you."
@@ -10038,8 +10034,8 @@ label LT:
 
                 NMJ "Right, good talk, Jiang-gongzi."
 
-                show NMJ right
-                hide NMJ with moveoutleft
+                show NMJ left
+                hide NMJ with moveoutright
             
             "Suggest he look for Meng Yao":
 
@@ -10063,8 +10059,8 @@ label LT:
 
                 NMJ "Right, good talk, Jiang-gongzi."
 
-                show NMJ right
-                hide NMJ with moveoutleft
+                show NMJ left
+                hide NMJ with moveoutright
             
             "Suggest he look for Nie Huaisang in Caiyi":
 
@@ -10090,8 +10086,8 @@ label LT:
 
                 NMJ "Right, I'm heading to Caiyi now. Good talk, Jiang-gongzi."
 
-                show NMJ right
-                hide NMJ with moveoutleft
+                show NMJ left
+                hide NMJ with moveoutright
 
             "Suggest he stay":
 
@@ -10111,8 +10107,8 @@ label LT:
 
                     NMJ "I think we've talked enough, Jiang-gongzi. I'll head back now, and you should too. Good to meet you."
 
-                    show NMJ right
-                    hide NMJ with moveoutleft
+                    show NMJ left
+                    hide NMJ with moveoutright
                 
                 else:
 
@@ -10151,8 +10147,8 @@ label LT:
 
                 NMJ "Right, good talk, Jiang-gongzi."
 
-                show NMJ right
-                hide NMJ with moveoutleft
+                show NMJ left
+                hide NMJ with moveoutright
 
         JC "..."
 
@@ -11114,3 +11110,9 @@ label end:
 
     LXC_1_flag: [LXC_1_flag] \n
     LWJ_talk_flag: [LWJ_talk_flag] \n
+    WQ_1_flag: [WQ_1_flag]"
+
+    ## This also ends the game
+
+    return
+
