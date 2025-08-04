@@ -1401,7 +1401,7 @@ label WQ_1:
             JC "The Jiang sect weapons training is clearly superior. Right, Wei Wuxian?"
 
             $ chengxian += 1
-            if helpmode:  
+            if helpmode:   ## new changes!
                 show WWXgd at appFade
 
             show WWX grin
